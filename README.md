@@ -11,7 +11,7 @@
 2. 下载模型
    - ChatGLM-6b-int: [HuggingFace](https://huggingface.co/THUDM/chatglm-6b-int4)
    - text2vec-base-chinese: [HuggingFace](https://huggingface.co/shibing624/text2vec-base-chinese)
-   - 模型下载好之后，放到`models`目录下即可
+   - 模型下载好之后，放到`models`目录下，对应更改`webui.py`中初始化模型的路径即可。
 3. 运行
     ```bash
     streamlit run webui.py --server.port 8888
