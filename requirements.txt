@@ -3,3 +3,4 @@ streamlit>=1.20.0
 transformers>=4.27.0.dev0
 faiss
 text2vec
+streamlit_chat
