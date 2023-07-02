@@ -5,6 +5,14 @@
   - 借鉴[如何用大语言模型构建一个知识问答系统](https://mp.weixin.qq.com/s/movaNCWjJGBaes6KxhpYpg)中思路，尝试以为作为实践。
 - 整个项目为模块化配置，不依赖`lanchain`库，各部分可轻易替换。
 
+#### TODO
+- [x] 完善解析office文档接口及单元测试
+- [ ] 完善PDF提取接口及单元测试
+- [ ] 完善图像内容提取接口及单元测试
+- [ ] 完善LLM接口
+- [ ] 完善UI
+
+
 #### 整体框架
 1. 解析文档并存入数据库
     ```mermaid
@@ -17,7 +25,7 @@
 2. 检索并回答问题
     ```mermaid
     flowchart LR
-    E([问题]) --Embedding--> F([Embeddings]) --Search--> H[(Database)] --> G([Context])
+    E([Query]) --Embedding--> F([Embeddings]) --Search--> H[(Database)] --> G([Context])
     E --> I([Prompt])
     G --> I --> J([LLM]) --> K([Answer])
     ```

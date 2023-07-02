@@ -2,5 +2,7 @@ numpy>=1.21.6
 streamlit>=1.20.0
 transformers>=4.27.0.dev0
 faiss
-text2vec
 streamlit_chat
+filetype
+extract-office-content>=0.0.6
+sentence_transformers
