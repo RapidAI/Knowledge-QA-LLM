@@ -8,7 +8,7 @@
 #### 整体框架
 1. 解析文档并存入数据库
     ```mermaid
-    flowchart TD
+    flowchart LR
 
     A(["文档（*.txt, *.pdf, *.docx, *.pptx, *.excel）"]) --ExtractText--> B([sentences])
     B --Embedding--> C([Embeddings])
