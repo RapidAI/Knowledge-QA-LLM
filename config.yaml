@@ -1,0 +1,24 @@
+DEFAULT_PROMPT: 文章：$context\n从上面文章里，找出能回答以下问题的答案。如果文中没有答案，回答“没找到答案”。问题是：$query\n
+llm_api_url: your_api
+vector_db_path: db/DefaultVector.db
+version: 0.0.1
+
+Parameter:
+  max_length:
+    min_value: 0
+    max_value: 4096
+    default: 1024
+    step: 1
+    tip: 输入input_ids的最大长度
+  top_p:
+    min_value: 0.0
+    max_value: 1.0
+    default: 0.7
+    step: 0.01
+    tip: 限制模型为仅考虑最可能的前p个标记
+  temperature:
+    min_value: 0.01
+    max_value: 1.0
+    default: 0.01
+    step: 0.01
+    tip: 控制模型输出的随机性，温度越低将导致输出更加可预测和重复，越高将更富创意和自发的输出。

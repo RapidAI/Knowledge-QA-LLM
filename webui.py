@@ -7,10 +7,12 @@ from pathlib import Path
 import streamlit as st
 from streamlit_chat import message
 
-from config import DEFAULT_PROMPT
 from llm import ChatGLM26B
-from llm.utils import make_prompt
+from utils import make_prompt, read_yaml
 from vector_utils import DBUtils, EncodeText
+
+config = read_yaml("config.yaml")
+
 
 st.set_page_config(
     page_title="QA-LocalKnowledge-LLM",
@@ -21,35 +23,40 @@ st.set_page_config(
 
 def init_sidebar():
     st.sidebar.title("🛠参数设置")
+    param = config.get("Parameter")
+
+    param_max_length = param.get("max_length")
     max_length = st.sidebar.slider(
         "max_length",
-        min_value=0,
-        max_value=4096,
-        value=1024,
-        step=1,
-        help="输入input_ids的最大长度",
+        min_value=param_max_length.get("min_value"),
+        max_value=param_max_length.get("max_value"),
+        value=param_max_length.get("default"),
+        step=param_max_length.get("step"),
+        help=param_max_length.get("tip"),
     )
 
     st.session_state["params"] = {}
     st.session_state["params"]["max_length"] = max_length
 
+    param_top = param.get("top_p")
     top_p = st.sidebar.slider(
         "top_p",
-        min_value=0.0,
-        max_value=1.0,
-        value=0.7,
-        step=0.01,
-        help="限制模型为仅考虑最可能的前p个标记",
+        min_value=param_top.get("min_value"),
+        max_value=param_top.get("max_value"),
+        value=param_top.get("value"),
+        step=param_top.get("step"),
+        help=param_top.get("tip"),
     )
     st.session_state["params"]["top_p"] = top_p
 
+    param_temp = param.get("temperature")
     temperature = st.sidebar.slider(
         "temperature",
-        min_value=0.01,
-        max_value=1.0,
-        value=0.01,
-        step=0.01,
-        help="控制模型输出的随机性，温度越低将导致输出更加可预测和重复，越高将更富创意和自发的输出。",
+        min_value=param_temp.get("min_value"),
+        max_value=param_temp.get("max_value"),
+        value=param_temp.get("value"),
+        step=param_temp.get("stemp"),
+        help=param_temp.get("tip"),
     )
     st.session_state["params"]["temperature"] = temperature
 
@@ -125,7 +132,7 @@ def predict(
             is_user=False,
         )
 
-        print('提取问题的embedding')
+        print("提取问题的embedding")
         query_embedding = embedding_extract(text)
 
         s_context = time.perf_counter()
@@ -133,7 +140,7 @@ def predict(
             context, which_file = db_tools.search_local(query_embedding)
         context_elapse = time.perf_counter() - s_context
         res_cxt = f"**从文档中检索到的相关内容Top5\n(相关性从高到低，耗时:{context_elapse:.5f}s):** \n\n"
-        res_cxt += f'**来自{Path(str(which_file[0])).name}**\n\n{context}'
+        res_cxt += f"**来自{Path(str(which_file[0])).name}**\n\n{context}"
         print(context)
         message(res_cxt, avatar_style="bottts", key=f"{len(history)}_context")
 
@@ -179,15 +186,14 @@ def clear_history():
 
 
 if __name__ == "__main__":
-    db_tools = DBUtils('db/Vector.db')
+    db_tools = DBUtils(config["vector_db_path"])
     embedding_extract = EncodeText()
-
-    chatglm26b = ChatGLM26B()
+    chatglm26b = ChatGLM26B(config["llm_api_url"])
 
     init_sidebar()
     init_state()
 
-    version = "0.0.1"
+    version = config.get("version", "0.0.1")
     st.markdown(
         f"<h3 style='text-align: center;'>QA-LocalKnowledge-LLM v{version}</h3><br/>",
         unsafe_allow_html=True,
@@ -220,9 +226,8 @@ if __name__ == "__main__":
                 max_chars=500,
                 height=200,
                 label_visibility="hidden",
-                value=DEFAULT_PROMPT,
+                value=config.get("DEFAULT_PROMPT"),
                 key="input_prompt",
-                disabled=True,
             )
 
     with input_container:
