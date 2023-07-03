@@ -22,6 +22,27 @@
 - [x] 完善LLM接口
 - [ ] 完善UI
 
+#### 整体步骤
+1. 解析文档并存入数据库
+    ```mermaid
+    flowchart LR
+
+    A(["文档（*.txt, *.pdf, *.docx, *.pptx, *.excel）"]) --ExtractText--> B([sentences])
+    B --Embedding--> C([Embeddings])
+    C --Store--> D[(DataBase)]
+    ```
+2. 检索并回答问题
+    ```mermaid
+    flowchart LR
+    E([Query]) --Embedding--> F([Embeddings]) --Search--> H[(Database)] --> G([Context])
+    E --> I([Prompt])
+    G --> I --> J([LLM]) --> K([Answer])
+    ```
+
+#### UI
+<div align="center">
+  <img src="./assets/ui.png" width="65%" height="65%"/>
+</div>
 
 #### 🛠 所用工具
 - 文档解析：[`extract_office_content`](https://github.com/SWHL/ExtractOfficeContent), [`rapidocr_pdf`](https://github.com/RapidAI/RapidOCRPDF)
@@ -47,20 +68,3 @@
 ├── vector_utils  # embedding的存取和搜索
 └── webui.py      # 基于streamlit的UI实现
 ```
-
-#### 整体步骤
-1. 解析文档并存入数据库
-    ```mermaid
-    flowchart LR
-
-    A(["文档（*.txt, *.pdf, *.docx, *.pptx, *.excel）"]) --ExtractText--> B([sentences])
-    B --Embedding--> C([Embeddings])
-    C --Store--> D[(DataBase)]
-    ```
-2. 检索并回答问题
-    ```mermaid
-    flowchart LR
-    E([Query]) --Embedding--> F([Embeddings]) --Search--> H[(Database)] --> G([Context])
-    E --> I([Prompt])
-    G --> I --> J([LLM]) --> K([Answer])
-    ```
