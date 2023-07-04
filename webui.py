@@ -8,7 +8,7 @@ import streamlit as st
 from streamlit_chat import message
 
 from llm import ChatGLM26B
-from utils import make_prompt, read_yaml
+from utils import get_timestamp, make_prompt, mkdir, read_yaml
 from vector_utils import DBUtils, EncodeText
 
 config = read_yaml("config.yaml")
@@ -17,7 +17,6 @@ config = read_yaml("config.yaml")
 st.set_page_config(
     page_title="QA-LocalKnowledge-LLM",
     page_icon=":robot:",
-    initial_sidebar_state="collapsed",
 )
 
 
@@ -60,6 +59,31 @@ def init_sidebar():
     )
     st.session_state["params"]["temperature"] = temperature
 
+    st.sidebar.title("👆🏻上传文档")
+    uploaded_files = st.sidebar.file_uploader("1.选择文档", accept_multiple_files=True)
+
+    col1, col2, col3 = st.sidebar.columns([4, 3, 1])
+    btn_upload = col1.button("2.上传到仓库")
+    tip_empty = col2.empty()
+
+    if btn_upload:
+        time_stamp = get_timestamp()
+        save_dir = Path("db") / time_stamp
+        st.session_state["upload_dir"] = save_dir
+
+        for file in uploaded_files:
+            bytes_data = file.getvalue()
+
+            mkdir(save_dir)
+            save_path = save_dir / file.name
+            with open(save_path, "wb") as f:
+                f.write(bytes_data)
+        tip_empty.write("上传完毕！")
+
+    btn_parse = st.sidebar.button("3.解析文档到向量数据库")
+    if btn_parse:
+        pass
+
 
 def init_state():
     if "state" not in st.session_state:
@@ -70,6 +94,11 @@ def init_state():
 
     if "input_txt" not in st.session_state:
         st.session_state["input_txt"] = ""
+
+
+@st.cache_resource
+def init_encoder():
+    return EncodeText()
 
 
 def predict_only_llm(text, model, history=[]):
@@ -185,9 +214,20 @@ def clear_history():
     st.session_state["state"] = []
 
 
+def upload_file():
+    uploaded_file = st.file_uploader("Choose a file")
+    print(uploaded_file)
+    if uploaded_file:
+        print("not ok")
+        bytes_data = uploaded_file.getvalue()
+        print(uploaded_file.name)
+        with open(uploaded_file.name, "wb") as f:
+            f.write(bytes_data)
+
+
 if __name__ == "__main__":
     db_tools = DBUtils(config["vector_db_path"])
-    embedding_extract = EncodeText()
+    embedding_extract = init_encoder()
     chatglm26b = ChatGLM26B(config["llm_api_url"])
 
     init_sidebar()
@@ -249,7 +289,7 @@ if __name__ == "__main__":
         llm = MODEL_OPTIONS[select_model]
 
         if not input_prompt:
-            input_prompt = DEFAULT_PROMPT
+            input_prompt = config.get("DEFAULT_PROMPT")
 
         if plugin_id == 3:
             clear_history()
@@ -260,7 +300,8 @@ if __name__ == "__main__":
                 input_prompt,
                 st.session_state["state"],
             )
-        elif plugin_id == 0:
+
+        if plugin_id == 0:
             tips("该插件下，定制prompt功能将会失效", tips_empty, 1.5)
             predict_only_llm(input_txt, llm, st.session_state["state"])
 

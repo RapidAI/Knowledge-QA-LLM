@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 # @Author: SWHL
 # @Contact: liekkaskono@163.com
+from datetime import datetime
+from pathlib import Path
 from string import Template
 
 import yaml
@@ -19,3 +21,11 @@ def read_yaml(yaml_path):
     with open(yaml_path, "rb") as f:
         data = yaml.load(f, Loader=yaml.Loader)
     return data
+
+
+def mkdir(dir_path):
+    Path(dir_path).mkdir(parents=True, exist_ok=True)
+
+
+def get_timestamp():
+    return datetime.strftime(datetime.now(), "%Y-%m-%d-%H-%M-%S")
