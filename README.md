@@ -22,6 +22,7 @@
 - [x] 完善LLM接口
 - [ ] 完善UI
 - [ ] 增加上传文档接口
+- [ ] 调研[milvus](https://github.com/milvus-io/milvus)
 
 #### 整体步骤
 1. 解析文档并存入数据库
