@@ -9,7 +9,7 @@
 - 基于本地知识库+LLM的问答。该项目的思路是由[langchain-ChatGLM](https://github.com/imClumsyPanda/langchain-ChatGLM)而来。
 - 缘由：
   - 之前使用过这个项目，感觉不是太灵活，部署不太友好。
-  - 借鉴[如何用大语言模型构建一个知识问答系统](https://mp.weixin.qq.com/s/movaNCWjJGBaes6KxhpYpg)中思路，尝试以为作为实践。
+  - 借鉴[如何用大语言模型构建一个知识问答系统](https://mp.weixin.qq.com/s/movaNCWjJGBaes6KxhpYpg)中思路，尝试以此作为实践。
 - 整个项目为模块化配置，不依赖`lanchain`库，各部分可轻易替换。
 - ⚠️注意：使用之前要做的事情：
   1. 下载`moka-ai/m3e-small`的`pytorch_model.bin`模型到`models/m3e-small`目录下
