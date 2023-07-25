@@ -34,7 +34,7 @@ class DBUtils:
     ) -> None:
         self.db_path = db_path
 
-        self.table_name = 'embedding_texts'
+        self.table_name = "embedding_texts"
         self.vector_nums = 0
 
         self.top_k = 5
@@ -48,7 +48,7 @@ class DBUtils:
         con = sqlite3.connect(self.db_path, detect_types=sqlite3.PARSE_DECLTYPES)
         cur = con.cursor()
         cur.execute(
-            f'create table if not exists {self.table_name} (file_name TEXT, embeddings array, texts TEXT)'
+            f"create table if not exists {self.table_name} (file_name TEXT, embeddings array, texts TEXT)"
         )
         return cur, con
 
@@ -57,7 +57,7 @@ class DBUtils:
     ):
         cur, _ = self.connect_db()
 
-        cur.execute(f'select file_name, embeddings, texts from {self.table_name}')
+        cur.execute(f"select file_name, embeddings, texts from {self.table_name}")
         all_vectors = cur.fetchall()
 
         self.file_names = np.vstack([v[0] for v in all_vectors]).squeeze()
@@ -73,7 +73,7 @@ class DBUtils:
     ):
         cur, _ = self.connect_db()
 
-        cur.execute(f'select file_name from {self.table_name}')
+        cur.execute(f"select file_name from {self.table_name}")
         all_vectors = cur.fetchall()
         return len(all_vectors)
 
@@ -103,18 +103,18 @@ class DBUtils:
 
         from_file_names = [self.file_names[idx] for idx in new_I]
         from_file_names = list(set(from_file_names))
-        return '\n'.join(self.all_texts[new_I]), from_file_names
+        return "\n".join(self.all_texts[new_I]), from_file_names
 
     def insert(self, file_name: str, embeddings: np.ndarray, texts: List):
         cur, con = self.connect_db()
 
         file_names = [file_name] * len(embeddings)
 
-        print('插入数据中')
+        print("插入数据中")
         t1 = time.perf_counter()
-        insert_sql = f'insert or replace into {self.table_name} (file_name, embeddings, texts) values (?, ?, ?)'
+        insert_sql = f"insert or replace into {self.table_name} (file_name, embeddings, texts) values (?, ?, ?)"
         cur.executemany(insert_sql, list(zip(file_names, embeddings, texts)))
-        print(f'insert {len(embeddings)} data cost: {time.perf_counter() - t1}s')
+        print(f"insert {len(embeddings)} data cost: {time.perf_counter() - t1}s")
         con.commit()
 
     def is_exist(self, embeddings, texts):

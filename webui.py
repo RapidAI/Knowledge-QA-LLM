@@ -7,15 +7,15 @@ from pathlib import Path
 import streamlit as st
 from streamlit_chat import message
 
-from llm import ChatGLM26B
-from utils import get_timestamp, make_prompt, mkdir, read_yaml
-from vector_utils import DBUtils, EncodeText
+from knowledge_qa_llm.llm import ChatGLM26B
+from knowledge_qa_llm.utils import get_timestamp, make_prompt, mkdir, read_yaml
+from knowledge_qa_llm.vector_utils import DBUtils, EncodeText
 
 config = read_yaml("config.yaml")
-
+upload_dir = config.get("upload_dir")
 
 st.set_page_config(
-    page_title="QA-LocalKnowledge-LLM",
+    page_title=config.get("title"),
     page_icon=":robot:",
 )
 
@@ -68,7 +68,7 @@ def init_sidebar():
 
     if btn_upload:
         time_stamp = get_timestamp()
-        save_dir = Path("db") / time_stamp
+        save_dir = Path(upload_dir) / time_stamp
         st.session_state["upload_dir"] = save_dir
 
         for file in uploaded_files:
@@ -97,8 +97,8 @@ def init_state():
 
 
 @st.cache_resource
-def init_encoder():
-    return EncodeText()
+def init_encoder(model_path: str):
+    return EncodeText(model_path)
 
 
 def predict_only_llm(text, model, history=[]):
@@ -226,16 +226,21 @@ def upload_file():
 
 
 if __name__ == "__main__":
-    db_tools = DBUtils(config["vector_db_path"])
-    embedding_extract = init_encoder()
-    chatglm26b = ChatGLM26B(config["llm_api_url"])
+    db_path = config.get("vector_db_path")
+    db_tools = DBUtils(db_path)
+
+    encoder_model_path = config.get("encoder_model_path")
+    embedding_extract = init_encoder(encoder_model_path)
+
+    chatglm26b = ChatGLM26B(config.get("llm_api_url"))
 
     init_sidebar()
     init_state()
 
+    title = config.get("title")
     version = config.get("version", "0.0.1")
     st.markdown(
-        f"<h3 style='text-align: center;'>QA-LocalKnowledge-LLM v{version}</h3><br/>",
+        f"<h3 style='text-align: center;'>{title} v{version}</h3><br/>",
         unsafe_allow_html=True,
     )
 

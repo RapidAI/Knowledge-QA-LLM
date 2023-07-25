@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 # @Author: SWHL
 # @Contact: liekkaskono@163.com
-from file_loader import ExtractOfficeLoader
-from llm import ChatGLM26B
-from utils import make_prompt, read_yaml
-from vector_utils import DBUtils, EncodeText
+from knowledge_qa_llm.file_loader import ExtractOfficeLoader
+from knowledge_qa_llm.llm import ChatGLM26B
+from knowledge_qa_llm.utils import make_prompt, read_yaml
+from knowledge_qa_llm.vector_utils import DBUtils, EncodeText
 
 config = read_yaml("config.yaml")
 

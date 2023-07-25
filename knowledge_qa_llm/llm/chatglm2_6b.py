@@ -21,7 +21,7 @@ class ChatGLM26B:
             data.update(
                 {"temperature": temperature, "top_p": top_p, "max_length": max_length}
             )
-        req = requests.post(self.api_url, data=json.dumps(data))
+        req = requests.post(self.api_url, data=json.dumps(data), timeout=60)
         try:
             rdata = req.json()
             if rdata["status"] == 200:

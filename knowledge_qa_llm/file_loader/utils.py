@@ -17,7 +17,7 @@ class FilePreProcess:
     """该类主要用来对传入的file_path作处理，包括是目录还是文件，以及格式是否满足要求。"""
 
     def __init__(self) -> None:
-        self.OfficeSuffix = ['docx', 'doc', 'ppt', 'pptx', 'xlsx', 'xlx']
+        self.OfficeSuffix = ["docx", "doc", "ppt", "pptx", "xlsx", "xlx"]
 
     def __call__(self, file_path: INPUT_TYPE):
         file_list = self.get_file_list(file_path)
@@ -32,7 +32,7 @@ class FilePreProcess:
 
         if file_path.is_dir():
             # 获取目录下所有文件的全路径
-            return list(file_path.rglob('*.*'))
+            return list(file_path.rglob("*.*"))
         return [file_path]
 
     @staticmethod
