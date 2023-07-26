@@ -1,81 +1,80 @@
+English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/docs/README_zh.md)
+
 ## Knowledge QA LLM
 <p>
-    <a href=""><img src="https://img.shields.io/badge/Python->=3.6,<3.12-aff.svg"></a>
-    <a href=""><img src="https://img.shields.io/badge/OS-Linux%2C%20Win%2C%20Mac-pink.svg"></a>
-    <a href=""><img src="https://img.shields.io/github/v/tag/RapidAI/QA-LocalKnowledge-LLM?logo=github"></a>
-    <a href="https://semver.org/"><img alt="SemVer2.0" src="https://img.shields.io/badge/SemVer-2.0-brightgreen"></a>
-    <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+     <a href=""><img src="https://img.shields.io/badge/Python->=3.6,<3.12-aff.svg"></a>
+     <a href=""><img src="https://img.shields.io/badge/OS-Linux%2C%20Win%2C%20Mac-pink.svg"></a>
+     <a href=""><img src="https://img.shields.io/github/v/tag/RapidAI/QA-LocalKnowledge-LLM?logo=github"></a>
+     <a href="https://semver.org/"><img alt="SemVer2.0" src="https://img.shields.io/badge/SemVer-2.0-brightgreen"></a>
+     <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 </p>
 
-- 基于本地知识库+LLM的问答。该项目的思路是由[langchain-ChatGLM](https://github.com/imClumsyPanda/langchain-ChatGLM)而来。
-- 缘由：
-  - 之前使用过这个项目，感觉不是太灵活，部署不太友好。
-  - 借鉴[如何用大语言模型构建一个知识问答系统](https://mp.weixin.qq.com/s/movaNCWjJGBaes6KxhpYpg)中思路，尝试以此作为实践。
-- 整个项目为模块化配置，不依赖`lanchain`库，各部分可轻易替换。
-- 除需要单独部署大模型接口外，其他部分用CPU即可。
+- Q&A based on local knowledge base + LLM. The idea of this project comes from [langchain-ChatGLM](https://github.com/imClumsyPanda/langchain-ChatGLM).
+- Reason:
+   - I have used this project before, but it is not very flexible and deployment is not very friendly.
+   - Learn from the ideas in [How to build a knowledge question answering system with a large language model](https://mp.weixin.qq.com/s/movaNCWjJGBaes6KxhpYpg), and try to use this as a practice.
+- The whole project is a modular configuration, does not depend on the `lanchain` library, and each part can be easily replaced.
+- In addition to the large model interface that needs to be deployed separately, other parts can use CPU.
 
 #### TODO
-- [x] 完善解析office文档接口及单元测试
-- [ ] 完善PDF提取接口及单元测试
-- [ ] 完善图像内容提取接口及单元测试
-- [x] 完善LLM接口
-- [ ] 完善UI
-- [ ] 增加上传文档接口
+- [x] Improve parsing office document interface and unit test
+- [ ] Improve PDF extraction interface and unit test
+- [ ] Improve image content extraction interface and unit test
+- [x] Improve the LLM interface
+- [ ] Improve the UI
+- [ ] Add interface for uploading documents
 
-#### 整体步骤
-1. 使用之前要做的事情：
-   1. 下载[`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-small/tree/main)模型，放到`assets/models/m3e-small`目录下
-   2. 单独配置好`chatglm2-6b`的接口，接口启动参考：[ChatGLM2-6B API](https://github.com/THUDM/ChatGLM2-6B/blob/main/api.py)，具体使用方式参考：`knowledge_qa_llm/llm/chatglm2_6b.py`
-   3. 将部署好的llm_api写到配置文件`config.yaml`中的`llm_api_url`字段下。
-2. 解析文档并存入数据库
-    ```mermaid
-    flowchart LR
+#### overall steps
+1. Things to do before using:
+    1. Download the [`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-small/tree/main) model and put it in the `assets/models/m3e-small` directory
+    2. Separately configure the interface of `chatglm2-6b`, interface startup reference: [ChatGLM2-6B API](https://github.com/THUDM/ChatGLM2-6B/blob/main/api.py), the specific usage method Reference: `knowledge_qa_llm/llm/chatglm2_6b.py`
+    3. Write the deployed llm_api to the `llm_api_url` field in the configuration file `config.yaml`.
+2. Parse the document and store it in the database
+     ```mermaid
+     flowchart LR
 
-    A(["文档（*.txt, *.pdf, *.docx, *.pptx, *.excel）"]) --ExtractText--> B([sentences])
-    B --Embedding--> C([Embeddings])
-    C --Store--> D[(DataBase)]
-    ```
-3. 检索并回答问题
-    ```mermaid
-    flowchart LR
-    E([Query]) --Embedding--> F([Embeddings]) --Search--> H[(Database)] --> G([Context])
-    E --> I([Prompt])
-    G --> I --> J([LLM]) --> K([Answer])
-    ```
+     A(["Documents (*.txt, *.pdf, *.docx, *.pptx, *.excel)"]) --ExtractText--> B([sentences])
+     B --Embeddings--> C([Embeddings])
+     C --Store--> D[(DataBase)]
+     ```
+3. Retrieve and answer questions
+     ```mermaid
+     flowchart LR
+     E([Query]) --Embedding--> F([Embeddings]) --Search--> H[(Database)] --> G([Context])
+     E --> I([Prompt])
+     G --> I --> J([LLM]) --> K([Answer])
+     ```
 
-#### UI
-
-
-#### 🛠 所用工具
-- 文档解析：[`extract_office_content`](https://github.com/SWHL/ExtractOfficeContent), [`rapidocr_pdf`](https://github.com/RapidAI/RapidOCRPDF)
-- 提取特征向量：[`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-base)
-- 向量存储：`sqlite`
-- 向量检索：[`faiss`](https://github.com/facebookresearch/faiss)
+#### 🛠 Tools Used
+- Document analysis: [`extract_office_content`](https://github.com/SWHL/ExtractOfficeContent), [`rapidocr_pdf`](https://github.com/RapidAI/RapidOCRPDF)
+- Extract feature vector: [`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-base)
+- Vector storage: `sqlite`
+- Vector retrieval: [`faiss`](https://github.com/facebookresearch/faiss)
 
 
-#### 📂 文件结构
-```text
+#### 📂 File structure
+```python
 .
 ├── assets
-│   ├── db                  # 存放向量数据库
-│   ├── models              # 放置提取embedding的模型
-│   └── raw_upload_files
+│ ├── db # store vector database
+│ ├── models # place the model for extracting embedding
+│ └── raw_upload_files
 ├── cli.py
-├── config.yaml             # 配置文件
+├── config.yaml # configuration file
 ├── knowledge_qa_llm
-│   ├── __init__.py
-│   ├── file_loader         # 处理各种格式的文档
-│   ├── llm                 # 大模型接口，大模型需要单独部署，以接口方式调用
-│   ├── utils
-│   └── vector_utils        # embedding的存取和搜索
+│ ├── __init__.py
+│ ├── file_loader # Handle documents in various formats
+│ ├── llm #Large model interface, the large model needs to be deployed separately and called by interface
+│ ├── utils
+│ └── vector_utils # embedding access and search
 ├── LICENSE
 ├── README.md
 ├── requirements.txt
 ├── tests
-└── webui.py                # 基于streamlit的UI实现
+└── webui.py # UI implementation based on streamlit
 ```
 
-#### 更新日志
+#### Update Log
 - 2023-07-25 v0.0.2 update:
-  - 规范现有目录结构，更加紧凑，提取部分变量到`config.yaml`中
-  - 完善说明文档
+   - Standardize the existing directory structure, more compact, extract some variables into `config.yaml`
+   - Perfect documentation
