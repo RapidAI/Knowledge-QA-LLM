@@ -9,13 +9,7 @@ import filetype
 INPUT_TYPE = Union[str, Path]
 
 
-def mkdir(dir_path):
-    Path(dir_path).mkdir(parents=True, exist_ok=True)
-
-
-class FilePreProcess:
-    """该类主要用来对传入的file_path作处理，包括是目录还是文件，以及格式是否满足要求。"""
-
+class FileLoader:
     def __init__(self) -> None:
         self.OfficeSuffix = ["docx", "doc", "ppt", "pptx", "xlsx", "xlx"]
 

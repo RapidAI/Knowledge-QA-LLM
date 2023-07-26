@@ -82,6 +82,8 @@ def init_sidebar():
 
     btn_parse = st.sidebar.button("3.解析文档到向量数据库")
     if btn_parse:
+        # 传入上传文档的路径
+        # 解析，返回
         pass
 
 

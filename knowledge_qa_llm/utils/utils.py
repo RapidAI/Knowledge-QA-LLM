@@ -4,6 +4,7 @@
 from datetime import datetime
 from pathlib import Path
 from string import Template
+from typing import List, Union
 
 import yaml
 
@@ -28,4 +29,13 @@ def mkdir(dir_path):
 
 
 def get_timestamp():
-    return datetime.strftime(datetime.now(), "%Y-%m-%d-%H-%M-%S")
+    return datetime.strftime(datetime.now(), "%Y-%m-%d")
+
+
+def read_txt(txt_path: Union[Path, str]) -> List[str]:
+    if not isinstance(txt_path, str):
+        txt_path = str(txt_path)
+
+    with open(txt_path, "r", encoding="utf-8") as f:
+        data = list(map(lambda x: x.rstrip("\n"), f))
+    return data
