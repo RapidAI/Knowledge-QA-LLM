@@ -24,12 +24,8 @@
 - [ ] 完善UI
 - [ ] 增加上传文档接口
 
-#### 整体步骤
-1. 使用之前要做的事情：
-   1. 下载[`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-small/tree/main)模型，放到`assets/models/m3e-small`目录下
-   2. 单独配置好`chatglm2-6b`的接口，接口启动参考：[ChatGLM2-6B API](https://github.com/THUDM/ChatGLM2-6B/blob/main/api.py)，具体使用方式参考：`knowledge_qa_llm/llm/chatglm2_6b.py`
-   3. 将部署好的llm_api写到配置文件`config.yaml`中的`llm_api_url`字段下。
-2. 解析文档并存入数据库
+#### 整体框架
+- 解析文档并存入数据库
     ```mermaid
     flowchart LR
 
@@ -37,7 +33,7 @@
     B --Embedding--> C([Embeddings])
     C --Store--> D[(DataBase)]
     ```
-3. 检索并回答问题
+- 检索并回答问题
     ```mermaid
     flowchart LR
     E([Query]) --Embedding--> F([Embeddings]) --Search--> H[(Database)] --> G([Context])
@@ -45,8 +41,15 @@
     G --> I --> J([LLM]) --> K([Answer])
     ```
 
-#### UI
-
+#### 使用
+1. 使用之前要做的事情：
+   1. 下载[`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-small/tree/main)模型，放到`assets/models/m3e-small`目录下
+   2. 单独配置好`chatglm2-6b`的接口，接口启动参考：[ChatGLM2-6B API](https://github.com/THUDM/ChatGLM2-6B/blob/main/api.py)，具体使用方式参考：`knowledge_qa_llm/llm/chatglm2_6b.py`
+   3. 将部署好的llm_api写到配置文件`config.yaml`中的`llm_api_url`字段下。
+2. 运行
+    ```bash
+    streamlit run webui.py
+    ```
 
 #### 🛠 所用工具
 - 文档解析：[`extract_office_content`](https://github.com/SWHL/ExtractOfficeContent), [`rapidocr_pdf`](https://github.com/RapidAI/RapidOCRPDF)

@@ -24,12 +24,8 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 - [ ] Improve the UI
 - [ ] Add interface for uploading documents
 
-#### overall steps
-1. Things to do before using:
-    1. Download the [`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-small/tree/main) model and put it in the `assets/models/m3e-small` directory
-    2. Separately configure the interface of `chatglm2-6b`, interface startup reference: [ChatGLM2-6B API](https://github.com/THUDM/ChatGLM2-6B/blob/main/api.py), the specific usage method Reference: `knowledge_qa_llm/llm/chatglm2_6b.py`
-    3. Write the deployed llm_api to the `llm_api_url` field in the configuration file `config.yaml`.
-2. Parse the document and store it in the database
+#### Overall framework
+- Parse the document and store it in the database
      ```mermaid
      flowchart LR
 
@@ -37,13 +33,23 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
      B --Embeddings--> C([Embeddings])
      C --Store--> D[(DataBase)]
      ```
-3. Retrieve and answer questions
+- Retrieve and answer questions
      ```mermaid
      flowchart LR
      E([Query]) --Embedding--> F([Embeddings]) --Search--> H[(Database)] --> G([Context])
      E --> I([Prompt])
      G --> I --> J([LLM]) --> K([Answer])
      ```
+
+#### Run
+1. Things to do before using:
+    1. Download the [`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-small/tree/main) model and put it in the `assets/models/m3e-small` directory
+    2. Separately configure the interface of `chatglm2-6b`, interface startup reference: [ChatGLM2-6B API](https://github.com/THUDM/ChatGLM2-6B/blob/main/api.py), the specific usage method Reference: `knowledge_qa_llm/llm/chatglm2_6b.py`
+    3. Write the deployed llm_api to the `llm_api_url` field in the configuration file `config.yaml`.
+2. Run
+    ```bash
+    streamlit run webui.py
+    ```
 
 #### 🛠 Tools Used
 - Document analysis: [`extract_office_content`](https://github.com/SWHL/ExtractOfficeContent), [`rapidocr_pdf`](https://github.com/RapidAI/RapidOCRPDF)
