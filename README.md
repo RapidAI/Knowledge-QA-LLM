@@ -18,8 +18,8 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 
 #### TODO
 - [x] Improve parsing office document interface and unit test
-- [ ] Improve PDF extraction interface and unit test
-- [ ] Improve image content extraction interface and unit test
+- [x] Improve PDF extraction interface and unit test
+- [x] Improve image content extraction interface and unit test
 - [x] Improve the LLM interface
 - [ ] Improve the UI
 - [ ] Add interface for uploading documents
@@ -50,6 +50,11 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
     ```bash
     streamlit run webui.py
     ```
+3. CLI Demo
+
+    <div align="center">
+        <img src="https://github.com/RapidAI/Knowledge-QA-LLM/releases/download/v0.0.1/demo.gif" width="100%" height="100%">
+    </div>
 
 #### 🛠 Tools Used
 - Document analysis: [`extract_office_content`](https://github.com/SWHL/ExtractOfficeContent), [`rapidocr_pdf`](https://github.com/RapidAI/RapidOCRPDF)
@@ -62,22 +67,22 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 ```python
 .
 ├── assets
-│ ├── db # store vector database
-│ ├── models # place the model for extracting embedding
+│ ├── db                # store vector database
+│ ├── models            # place the model for extracting embedding
 │ └── raw_upload_files
 ├── cli.py
-├── config.yaml # configuration file
+├── config.yaml         # configuration file
 ├── knowledge_qa_llm
 │ ├── __init__.py
-│ ├── file_loader # Handle documents in various formats
-│ ├── llm #Large model interface, the large model needs to be deployed separately and called by interface
+│ ├── file_loader       # Handle documents in various formats
+│ ├── llm               # Large model interface, the large model needs to be deployed separately and called by interface
 │ ├── utils
-│ └── vector_utils # embedding access and search
+│ └── vector_utils      # embedding access and search
 ├── LICENSE
 ├── README.md
 ├── requirements.txt
 ├── tests
-└── webui.py # UI implementation based on streamlit
+└── webui.py            # UI implementation based on streamlit
 ```
 
 #### Update Log

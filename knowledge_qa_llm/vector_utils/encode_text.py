@@ -14,7 +14,7 @@ class EncodeText:
         self.model = SentenceTransformer(model_path)
 
     def __call__(self, sentences: List[str]):
-        if not isinstance(sentences, List[str]):
+        if not isinstance(sentences, List):
             sentences = [sentences]
         return self.model.encode(sentences)
 

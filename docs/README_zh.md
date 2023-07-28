@@ -50,6 +50,11 @@
     ```bash
     streamlit run webui.py
     ```
+3. CLI Demo
+
+    <div align="center">
+        <img src="https://github.com/RapidAI/Knowledge-QA-LLM/releases/download/v0.0.1/demo.gif" width="100%" height="100%">
+    </div>
 
 #### 🛠 所用工具
 - 文档解析：[`extract_office_content`](https://github.com/SWHL/ExtractOfficeContent), [`rapidocr_pdf`](https://github.com/RapidAI/RapidOCRPDF)

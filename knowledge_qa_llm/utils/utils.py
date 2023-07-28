@@ -18,8 +18,8 @@ def make_prompt(query: str, context: str, custom_prompt: str = None) -> str:
     return message
 
 
-def read_yaml(yaml_path):
-    with open(yaml_path, "rb") as f:
+def read_yaml(yaml_path: Union[str, Path]):
+    with open(str(yaml_path), "rb") as f:
         data = yaml.load(f, Loader=yaml.Loader)
     return data
 
