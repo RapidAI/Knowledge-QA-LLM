@@ -1,41 +1,93 @@
 # -*- encoding: utf-8 -*-
 # @Author: SWHL
 # @Contact: liekkaskono@163.com
+import logging
 from pathlib import Path
-from typing import Union
+from typing import Dict, List, Union
 
 import filetype
+
+from .image_loader import ImageLoader
+from .office_loader import OfficeLoader
+from .pdf_loader import PDFLoader
+from .txt_loader import TXTLoader
 
 INPUT_TYPE = Union[str, Path]
 
 
 class FileLoader:
     def __init__(self) -> None:
-        self.OfficeSuffix = ["docx", "doc", "ppt", "pptx", "xlsx", "xlx"]
+        self.file_map = {
+            "office": ["docx", "doc", "ppt", "pptx", "xlsx", "xlx"],
+            "image": ["jpg", "png", "bmp", "tif", "jpeg"],
+            "txt": ["txt", "md"],
+            "pdf": ["pdf"],
+        }
 
-    def __call__(self, file_path: INPUT_TYPE):
+        self.img_loader = ImageLoader()
+        self.office_loader = OfficeLoader()
+        self.pdf_loader = PDFLoader()
+        self.txt_loader = TXTLoader()
+
+    def __call__(self, file_path: INPUT_TYPE) -> List[str]:
+        all_content = []
+
         file_list = self.get_file_list(file_path)
-        filter_file = [
-            file for file in file_list if self.which_type(file) in self.OfficeSuffix
-        ]
-        return filter_file
+        for file_path in file_list:
+            if file_path.suffix[1:] in self.file_map["txt"]:
+                content = self.txt_loader(file_path)
+                all_content.append(content)
+                continue
+
+            file_type = self.which_type(file_path)
+            if file_type in self.file_map["office"]:
+                content = self.office_loader(file_path)
+            elif file_type in self.file_map["pdf"]:
+                content = self.pdf_loader(file_path)
+            elif file_type in self.file_map["image"]:
+                content = self.img_loader(file_path)
+            else:
+                logging.warning("%s does not support.", file_path)
+                continue
+
+            all_content.append(content)
+        return all_content
 
     def get_file_list(self, file_path: INPUT_TYPE):
         if not isinstance(file_path, Path):
             file_path = Path(file_path)
 
         if file_path.is_dir():
-            # 获取目录下所有文件的全路径
-            return list(file_path.rglob("*.*"))
+            return file_path.rglob("*.*")
         return [file_path]
 
     @staticmethod
     def which_type(content: Union[bytes, str, Path]) -> str:
-        if isinstance(content, (str, Path)) and not Path(content).exists():
-            raise FileExistsError(f"{content} does not exist.")
-
         kind = filetype.guess(content)
         if kind is None:
             raise TypeError(f"The type of {content} does not support.")
 
         return kind.extension
+
+    def sorted_by_suffix(self, file_list: List[str]) -> Dict[str, str]:
+        sorted_res = {k: [] for k in self.file_map}
+
+        for file_path in file_list:
+            if file_path.suffix[1:] in self.file_map["txt"]:
+                sorted_res["txt"].append(file_path)
+                continue
+
+            file_type = self.which_type(file_path)
+            if file_type in self.file_map["office"]:
+                sorted_res["office"].append(file_path)
+                continue
+
+            if file_type in self.file_map["pdf"]:
+                sorted_res["pdf"].append(file_path)
+                continue
+
+            if file_type in self.file_map["image"]:
+                sorted_res["image"].append(file_path)
+                continue
+
+        return sorted_res

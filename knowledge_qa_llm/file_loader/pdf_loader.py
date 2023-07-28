@@ -13,9 +13,6 @@ class PDFLoader:
     ):
         self.extracter = PDFExtracter()
 
-    def __call__(self, pdf_list: List[Union[str, Path]]) -> List[str]:
-        all_content = []
-        for pdf_path in pdf_list:
-            content = self.extracter(pdf_path)
-            all_content.append(content)
-        return all_content
+    def __call__(self, pdf_path: Union[str, Path]) -> List[List[str]]:
+        content = self.extracter(pdf_path)
+        return content

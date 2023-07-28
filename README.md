@@ -81,6 +81,8 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 ```
 
 #### Update Log
+- 2023-07-28 v0.0.3 update:
+  - Finish the file_loader part.
 - 2023-07-25 v0.0.2 update:
    - Standardize the existing directory structure, more compact, extract some variables into `config.yaml`
    - Perfect documentation

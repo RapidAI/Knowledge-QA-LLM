@@ -13,10 +13,7 @@ class ImageLoader:
     ):
         self.ocr = RapidOCR()
 
-    def __call__(self, img_list: List[Union[str, Path]]) -> List[List[Union[str, str]]]:
-        all_content = []
-        for img_path in img_list:
-            ocr_results, _ = self.ocr(img_path)
-            _, rec_res, _ = list(zip(*ocr_results))
-            all_content.append(rec_res)
-        return all_content
+    def __call__(self, img_path: Union[str, Path]) -> List[str]:
+        ocr_results, _ = self.ocr(img_path)
+        _, rec_res, _ = list(zip(*ocr_results))
+        return list(rec_res)
