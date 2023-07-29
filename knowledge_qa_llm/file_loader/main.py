@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
 # @Author: SWHL
 # @Contact: liekkaskono@163.com
-import logging
 from pathlib import Path
 from typing import Dict, List, Union
 
 import filetype
 
+from ..utils import logger
 from .image_loader import ImageLoader
 from .office_loader import OfficeLoader
 from .pdf_loader import PDFLoader
@@ -29,14 +29,16 @@ class FileLoader:
         self.pdf_loader = PDFLoader()
         self.txt_loader = TXTLoader()
 
-    def __call__(self, file_path: INPUT_TYPE) -> List[str]:
-        all_content = []
+    def __call__(self, file_path: INPUT_TYPE) -> Dict[str, List[str]]:
+        all_content = {}
 
         file_list = self.get_file_list(file_path)
         for file_path in file_list:
+            file_name = file_path.name
+
             if file_path.suffix[1:] in self.file_map["txt"]:
                 content = self.txt_loader(file_path)
-                all_content.append(content)
+                all_content[file_name] = content
                 continue
 
             file_type = self.which_type(file_path)
@@ -47,10 +49,10 @@ class FileLoader:
             elif file_type in self.file_map["image"]:
                 content = self.img_loader(file_path)
             else:
-                logging.warning("%s does not support.", file_path)
+                logger.warning("%s does not support.", file_path)
                 continue
 
-            all_content.append(content)
+            all_content[file_name] = content
         return all_content
 
     def get_file_list(self, file_path: INPUT_TYPE):

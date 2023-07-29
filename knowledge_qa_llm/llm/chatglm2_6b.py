@@ -2,7 +2,7 @@
 # @Author: SWHL
 # @Contact: liekkaskono@163.com
 import json
-from typing import List
+from typing import List, Optional
 
 import requests
 
@@ -11,7 +11,10 @@ class ChatGLM26B:
     def __init__(self, api_url: str = None):
         self.api_url = api_url
 
-    def __call__(self, prompt: str, history: List, **kwargs):
+    def __call__(self, prompt: str, history: Optional[List] = None, **kwargs):
+        if not history:
+            history = []
+
         data = {"prompt": prompt, "history": history}
         if kwargs:
             temperature = kwargs.get("temperature", 0.1)

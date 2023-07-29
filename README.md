@@ -2,7 +2,7 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 
 ## Knowledge QA LLM
 <p>
-     <a href=""><img src="https://img.shields.io/badge/Python->=3.6,<3.12-aff.svg"></a>
+     <a href=""><img src="https://img.shields.io/badge/Python->=3.8,<3.12-aff.svg"></a>
      <a href=""><img src="https://img.shields.io/badge/OS-Linux%2C%20Win%2C%20Mac-pink.svg"></a>
      <a href=""><img src="https://img.shields.io/github/v/tag/RapidAI/QA-LocalKnowledge-LLM?logo=github"></a>
      <a href="https://semver.org/"><img alt="SemVer2.0" src="https://img.shields.io/badge/SemVer-2.0-brightgreen"></a>
@@ -21,8 +21,8 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 - [x] Improve PDF extraction interface and unit test
 - [x] Improve image content extraction interface and unit test
 - [x] Improve the LLM interface
-- [ ] Improve the UI
-- [ ] Add interface for uploading documents
+- [x] Improve the UI
+- [ ] Combining keyword based search and vector based search methods.
 
 #### Overall framework
 - Parse the document and store it in the database
@@ -45,19 +45,25 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 1. Things to do before using:
     1. Download the [`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-small/tree/main) model and put it in the `assets/models/m3e-small` directory
     2. Separately configure the interface of `chatglm2-6b`, interface startup reference: [ChatGLM2-6B API](https://github.com/THUDM/ChatGLM2-6B/blob/main/api.py), the specific usage method Reference: `knowledge_qa_llm/llm/chatglm2_6b.py`
-    3. Write the deployed llm_api to the `llm_api_url` field in the configuration file `config.yaml`.
+    3. Write the deployed llm_api to the `llm_api_url` field in the configuration file `knowledge_qa_llm/config.yaml`.
 2. Run
     ```bash
     streamlit run webui.py
     ```
-3. CLI Demo
+3. UI Demo
+
+    <div align="center">
+        <img src="https://github.com/RapidAI/Knowledge-QA-LLM/releases/download/v0.0.1/UIDemo.gif" width="100%" height="100%">
+    </div>
+
+4. CLI Demo
 
     <div align="center">
         <img src="https://github.com/RapidAI/Knowledge-QA-LLM/releases/download/v0.0.1/demo.gif" width="100%" height="100%">
     </div>
 
 #### 🛠 Tools Used
-- Document analysis: [`extract_office_content`](https://github.com/SWHL/ExtractOfficeContent), [`rapidocr_pdf`](https://github.com/RapidAI/RapidOCRPDF)
+- Document analysis: [`extract_office_content`](https://github.com/SWHL/ExtractOfficeContent), [`rapidocr_pdf`](https://github.com/RapidAI/RapidOCRPDF), [`rapidocr_onnxruntime`](https://github.com/RapidAI/RapidOCR)
 - Extract feature vector: [`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-base)
 - Vector storage: `sqlite`
 - Vector retrieval: [`faiss`](https://github.com/facebookresearch/faiss)
@@ -71,9 +77,9 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 │ ├── models            # place the model for extracting embedding
 │ └── raw_upload_files
 ├── cli.py
-├── config.yaml         # configuration file
 ├── knowledge_qa_llm
 │ ├── __init__.py
+│ ├── config.yaml         # configuration file
 │ ├── file_loader       # Handle documents in various formats
 │ ├── llm               # Large model interface, the large model needs to be deployed separately and called by interface
 │ ├── utils
@@ -86,6 +92,10 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 ```
 
 #### Update Log
+- 2023-07-29 v0.0.4 update:
+  - Reorganize the UI based `streamlit==1.25.0`
+  - Optimize the code.
+  - Record the GIF demo of UI.
 - 2023-07-28 v0.0.3 update:
   - Finish the file_loader part.
 - 2023-07-25 v0.0.2 update:

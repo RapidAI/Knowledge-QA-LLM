@@ -4,20 +4,15 @@
 from pathlib import Path
 from typing import List, Union
 
+from ..text_splitter.chinese_text_splitter import ChineseTextSplitter
+from ..utils.utils import read_txt
+
 
 class TXTLoader:
     def __init__(self) -> None:
-        pass
+        self.splitter = ChineseTextSplitter()
 
     def __call__(self, txt_path: Union[str, Path]) -> List[str]:
-        txts = read_txt(txt_path)
-        return txts
-
-
-def read_txt(txt_path: Union[Path, str]) -> List[str]:
-    if not isinstance(txt_path, str):
-        txt_path = str(txt_path)
-
-    with open(txt_path, "r", encoding="utf-8") as f:
-        data = list(map(lambda x: x.rstrip("\n"), f))
-    return data
+        contents = read_txt(txt_path)
+        split_contents = [self.splitter.split_text(v) for v in contents]
+        return sum(split_contents, [])

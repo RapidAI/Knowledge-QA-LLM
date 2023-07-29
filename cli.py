@@ -6,7 +6,7 @@ from knowledge_qa_llm.llm import ChatGLM26B
 from knowledge_qa_llm.utils import make_prompt, read_yaml
 from knowledge_qa_llm.vector_utils import DBUtils, EncodeText
 
-config = read_yaml("config.yaml")
+config = read_yaml("knowledge_qa_llm/config.yaml")
 
 extract = FileLoader()
 
@@ -16,8 +16,8 @@ extract = FileLoader()
 # sentences = text[0][1]
 
 # 提取特征
-extract_model = EncodeText(config.get("encoder_model_path"))
-# embeddings = extract_model(sentences)
+embedding_model = EncodeText(config.get("encoder_model_path"))
+# embeddings = embedding_model(sentences)
 
 # 插入数据到数据库中
 db_tools = DBUtils(config.get("vector_db_path"))
@@ -31,8 +31,10 @@ while True:
     if query.strip() == "stop":
         break
 
-    embedding = extract_model(query)
+    embedding = embedding_model(query)
+
     context, which_file = db_tools.search_local(embedding_query=embedding)
+
     prompt = make_prompt(query, context, custom_prompt=config.get("DEFAULT_PROMPT"))
     response = llm_engine(prompt, history=None)
     print(response)

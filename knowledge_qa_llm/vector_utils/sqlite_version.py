@@ -4,10 +4,12 @@
 import io
 import sqlite3
 import time
-from typing import List
+from typing import Dict, List, Optional
 
 import faiss
 import numpy as np
+
+from ..utils.logger import logger
 
 
 def adapt_array(arr):
@@ -37,7 +39,6 @@ class DBUtils:
         self.table_name = "embedding_texts"
         self.vector_nums = 0
 
-        self.top_k = 5
         self.max_prompt_length = 4096
 
         self.connect_db()
@@ -64,7 +65,7 @@ class DBUtils:
         all_embeddings = np.vstack([v[1] for v in all_vectors])
         self.all_texts = np.vstack([v[2] for v in all_vectors]).squeeze()
 
-        self.search_index = faiss.IndexFlatIP(all_embeddings.shape[1])
+        self.search_index = faiss.IndexFlatL2(all_embeddings.shape[1])
         self.search_index.add(all_embeddings)
         self.vector_nums = len(all_vectors)
 
@@ -77,50 +78,57 @@ class DBUtils:
         all_vectors = cur.fetchall()
         return len(all_vectors)
 
-    def search_local(self, embedding_query: np.ndarray):
+    def search_local(
+        self,
+        embedding_query: np.ndarray,
+        top_k: int = 5,
+    ) -> Optional[Dict[str, List[str]]]:
+        s = time.perf_counter()
+
         cur_vector_nums = self.count_vectors()
         if cur_vector_nums <= 1:
-            return None, None
+            return None, 0
 
         if cur_vector_nums != self.vector_nums:
             self.load_vectors()
 
-        D, I = self.search_index.search(embedding_query, self.top_k)
-        mean_D = np.mean(D[0])
+        _, I = self.search_index.search(embedding_query, top_k)
+        top_index = I.squeeze().tolist()
+        search_contens = self.all_texts[top_index]
+        file_names = [self.file_names[idx] for idx in top_index]
+        dup_file_names = list(set(file_names))
+        dup_file_names.sort(key=file_names.index)
 
-        new_I, texts_nums = [], len(self.all_texts)
-        for i in range(len(I[0])):
-            D_i = D[0][i]
-            I_i = I[0][i]
-            if D_i >= mean_D:
-                for index in range(I_i - 2, I_i + 4):
-                    if 0 <= index < texts_nums:
-                        if index not in new_I:
-                            new_I.append(index)
-            else:
-                if I_i not in new_I:
-                    new_I.append(I_i)
+        search_res = {v: [] for v in dup_file_names}
+        for file_name, content in zip(file_names, search_contens):
+            search_res[file_name].append(content)
 
-        from_file_names = [self.file_names[idx] for idx in new_I]
-        from_file_names = list(set(from_file_names))
-        return "\n".join(self.all_texts[new_I]), from_file_names
+        elapse = time.perf_counter() - s
+        return search_res, elapse
 
     def insert(self, file_name: str, embeddings: np.ndarray, texts: List):
         cur, con = self.connect_db()
 
         file_names = [file_name] * len(embeddings)
 
-        print("插入数据中")
         t1 = time.perf_counter()
-        insert_sql = f"insert or replace into {self.table_name} (file_name, embeddings, texts) values (?, ?, ?)"
-        cur.executemany(insert_sql, list(zip(file_names, embeddings, texts)))
-        print(f"insert {len(embeddings)} data cost: {time.perf_counter() - t1}s")
+        insert_sql = f"insert or ignore into {self.table_name} (file_name, embeddings, texts) values (?, ?, ?)"
+        insert_nums = 0
+        for file_name, one_embedding, text in zip(file_names, embeddings, texts):
+            if not self.is_exist(file_name, text):
+                cur.execute(insert_sql, (file_name, one_embedding, text))
+                insert_nums += 1
+
+        elapse = time.perf_counter() - t1
+        logger.info(
+            f"Insert {insert_nums} data, total is {len(embeddings)}, cost: {elapse:4f}s"
+        )
         con.commit()
 
-    def is_exist(self, embeddings, texts):
+    def is_exist(self, file_names, texts):
         cur, _ = self.connect_db()
 
-        search_sql = f'select count(*) from {self.table_name} where embeddings="{embeddings}" and texts="{texts}"'
+        search_sql = f'select count(*) from {self.table_name} where file_name="{file_names}" and texts="{texts}"'
         cur.execute(search_sql)
         search_nums = cur.fetchall()[0][0]
         if search_nums <= 0:

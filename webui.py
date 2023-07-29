@@ -1,17 +1,18 @@
 # -*- encoding: utf-8 -*-
 # @Author: SWHL
 # @Contact: liekkaskono@163.com
+import shutil
 import time
 from pathlib import Path
 
 import streamlit as st
-from streamlit_chat import message
 
+from knowledge_qa_llm.file_loader import FileLoader
 from knowledge_qa_llm.llm import ChatGLM26B
-from knowledge_qa_llm.utils import get_timestamp, make_prompt, mkdir, read_yaml
+from knowledge_qa_llm.utils import get_timestamp, logger, make_prompt, mkdir, read_yaml
 from knowledge_qa_llm.vector_utils import DBUtils, EncodeText
 
-config = read_yaml("config.yaml")
+config = read_yaml("knowledge_qa_llm/config.yaml")
 upload_dir = config.get("upload_dir")
 
 st.set_page_config(
@@ -21,7 +22,7 @@ st.set_page_config(
 
 
 def init_sidebar():
-    st.sidebar.title("🛠参数设置")
+    st.sidebar.markdown("### 🛶 参数设置")
     param = config.get("Parameter")
 
     param_max_length = param.get("max_length")
@@ -59,13 +60,15 @@ def init_sidebar():
     )
     st.session_state["params"]["temperature"] = temperature
 
-    st.sidebar.title("👆🏻上传文档")
-    uploaded_files = st.sidebar.file_uploader("1.选择文档", accept_multiple_files=True)
+    st.sidebar.markdown("### 🧻 知识库")
+    uploaded_files = st.sidebar.file_uploader(
+        "default",
+        accept_multiple_files=True,
+        label_visibility="hidden",
+        help="支持多选",
+    )
 
-    col1, col2, col3 = st.sidebar.columns([4, 3, 1])
-    btn_upload = col1.button("2.上传到仓库")
-    tip_empty = col2.empty()
-
+    btn_upload = st.sidebar.button("上传文档并加载数据库", use_container_width=True)
     if btn_upload:
         time_stamp = get_timestamp()
         save_dir = Path(upload_dir) / time_stamp
@@ -78,18 +81,21 @@ def init_sidebar():
             save_path = save_dir / file.name
             with open(save_path, "wb") as f:
                 f.write(bytes_data)
-        tip_empty.write("上传完毕！")
+        tips("上传完毕！")
 
-    btn_parse = st.sidebar.button("3.解析文档到向量数据库")
-    if btn_parse:
-        # 传入上传文档的路径
-        # 解析，返回
-        pass
+        doc_dir = st.session_state["upload_dir"]
+        all_doc_contents = file_loader(doc_dir)
+        for file_path, one_doc_contents in all_doc_contents.items():
+            embeddings = embedding_extract(one_doc_contents)
+            db_tools.insert(file_path, embeddings, one_doc_contents)
+
+        shutil.rmtree(doc_dir.resolve())
+        tips("已经加载并存入数据库中，可以提问了！")
 
 
 def init_state():
-    if "state" not in st.session_state:
-        st.session_state["state"] = []
+    if "history" not in st.session_state:
+        st.session_state["history"] = []
 
     if "openai_state" not in st.session_state:
         st.session_state["openai_state"] = []
@@ -103,131 +109,72 @@ def init_encoder(model_path: str):
     return EncodeText(model_path)
 
 
-def predict_only_llm(text, model, history=[]):
-    params_dict = st.session_state["params"]
-
-    print(f"Using {type(model).__name__}")
-
-    with chat_container:
-        if len(history) > 0:
-            for i, (query, response) in enumerate(history):
-                message(query, avatar_style="avataaars", key=f"{i}_user", is_user=False)
-                message(response, avatar_style="bottts", key=f"{i}")
-
-        message(
-            input_txt,
-            avatar_style="avataaars",
-            key=f"{len(history)}_user",
-            is_user=False,
-        )
-
-        with st.spinner("正在梳理内容，请稍等........"):
-            with chat_empty:
-                if len(input_txt) <= 0:
-                    message("问题为空", avatar_style="bottts", key=f"{len(history) + 1}")
-                else:
-                    s_model = time.perf_counter()
-                    response = model(text, history=history, **params_dict)
-                    model_elapse = time.perf_counter() - s_model
-
-                    print(f"model response: {response}\n")
-                    if not response:
-                        response = "抱歉，未能正确回答该问题"
-
-                    history.append([input_txt, response])
-                    print_res = f"**使用模型：{select_model}**\n**模型推理耗时：{model_elapse:.5f}s** \n\n{response}"
-                    message(print_res, avatar_style="bottts", key=f"{len(history) + 1}")
-    st.session_state["state"] = history
-
-
 def predict(
     text,
     model,
     custom_prompt=None,
-    history=[],
 ):
+    logger.info(f"Using {type(model).__name__}")
+
+    query_embedding = embedding_extract(text)
+    with st.spinner("从文档中搜索相关内容"):
+        search_res, search_elapse = db_tools.search_local(query_embedding)
+
+    context = "\n".join(sum(search_res.values(), []))
+    res_cxt = f"**从文档中检索到的相关内容Top5\n(相关性从高到低，耗时:{search_elapse:.5f}s):** \n"
+    bot_print(res_cxt)
+
+    for file, content in search_res.items():
+        content = "\n".join(content)
+        one_context = f"**来自文档：《{file}》** \n{content}"
+        bot_print(one_context)
+
+        logger.info(f"上下文：\n{one_context}\n")
+
+    if len(context) <= 0:
+        bot_print("从文档中搜索相关内容为空，暂不能回答该问题")
+    else:
+        response, elapse = get_model_response(text, context, custom_prompt, model)
+        print_res = f"**使用模型：{select_model}**\n**模型推理耗时：{elapse:.5f}s**"
+        bot_print(print_res)
+        bot_print(response)
+
+
+def bot_print(content):
+    with st.chat_message("assistant", avatar="🤖"):
+        message_placeholder = st.empty()
+        full_response = ""
+        for chunk in content.split():
+            full_response += chunk + " "
+            time.sleep(0.05)
+            message_placeholder.markdown(full_response + "▌")
+        message_placeholder.markdown(full_response)
+
+
+def get_model_response(text, context, custom_prompt, model):
     params_dict = st.session_state["params"]
 
-    print(f"Using {type(model).__name__}")
+    s_model = time.perf_counter()
+    prompt_msg = make_prompt(text, context, custom_prompt)
+    logger.info(f"最终拼接后的文本：\n{prompt_msg}\n")
 
-    with chat_container:
-        if len(history) > 0:
-            for i, (query, response) in enumerate(history):
-                message(query, avatar_style="avataaars", key=f"{i}_user", is_user=False)
-                message(response, avatar_style="bottts", key=f"{i}")
+    response = model(prompt_msg, history=None, **params_dict)
+    elapse = time.perf_counter() - s_model
 
-        message(
-            input_txt,
-            avatar_style="avataaars",
-            key=f"{len(history)}_user",
-            is_user=False,
-        )
-
-        print("提取问题的embedding")
-        query_embedding = embedding_extract(text)
-
-        s_context = time.perf_counter()
-        with st.spinner("从文档中搜索相关内容"):
-            context, which_file = db_tools.search_local(query_embedding)
-        context_elapse = time.perf_counter() - s_context
-        res_cxt = f"**从文档中检索到的相关内容Top5\n(相关性从高到低，耗时:{context_elapse:.5f}s):** \n\n"
-        res_cxt += f"**来自{Path(str(which_file[0])).name}**\n\n{context}"
-        print(context)
-        message(res_cxt, avatar_style="bottts", key=f"{len(history)}_context")
-
-        with st.spinner("正在梳理内容，请稍等........"):
-            with chat_empty:
-                if len(input_txt) <= 0:
-                    message("问题为空", avatar_style="bottts", key=f"{len(history) + 1}")
-                elif len(context) <= 0:
-                    message(
-                        "从文档中搜索相关内容为空，暂不能回答该问题",
-                        avatar_style="bottts",
-                        key=f"{len(history) + 1}",
-                    )
-                else:
-                    s_model = time.perf_counter()
-                    prompt_msg = make_prompt(text, context, custom_prompt)
-                    print(f"最终拼接后的文本：\n{prompt_msg}\n")
-
-                    response = model(prompt_msg, history=history, **params_dict)
-                    model_elapse = time.perf_counter() - s_model
-
-                    print(f"model response: {response}\n")
-                    if not response:
-                        response = "抱歉，未能正确回答该问题"
-
-                    history = [[input_txt, response]]
-                    print_res = f"**使用模型：{select_model}**\n**模型推理耗时：{model_elapse:.5f}s** \n\n{response}"
-                    message(print_res, avatar_style="bottts", key=f"{len(history) + 1}")
-    st.session_state["state"] = history
+    logger.info(f"模型回答: \n{response}\n")
+    if not response:
+        response = "抱歉，未能正确回答该问题"
+    return response, elapse
 
 
-def tips(txt: str, tips_empty=None, wait_time=2):
-    if tips_empty is None:
-        tips_empty = st.empty()
-
-    tips_empty.success(txt)
+def tips(txt: str, wait_time: int = 2, icon: str = "🎉"):
+    st.toast(txt, icon=icon)
     time.sleep(wait_time)
-    tips_empty.empty()
-
-
-def clear_history():
-    st.session_state["state"] = []
-
-
-def upload_file():
-    uploaded_file = st.file_uploader("Choose a file")
-    print(uploaded_file)
-    if uploaded_file:
-        print("not ok")
-        bytes_data = uploaded_file.getvalue()
-        print(uploaded_file.name)
-        with open(uploaded_file.name, "wb") as f:
-            f.write(bytes_data)
 
 
 if __name__ == "__main__":
+    file_loader = FileLoader()
+
     db_path = config.get("vector_db_path")
     db_tools = DBUtils(db_path)
 
@@ -259,12 +206,7 @@ if __name__ == "__main__":
     select_model = menu_col1.selectbox("🎨基础模型：", MODEL_OPTIONS.keys())
     select_plugin = menu_col2.selectbox("🛠Plugin：", PLUGINS_OPTIONS.keys())
 
-    chat_container = st.container()
-    chat_empty = st.empty()
     input_prompt_container = st.container()
-    input_container = st.container()
-    tips_empty = input_container.empty()
-
     with input_prompt_container:
         with st.expander("💡Prompt", expanded=False):
             text_area = st.empty()
@@ -277,21 +219,11 @@ if __name__ == "__main__":
                 key="input_prompt",
             )
 
-    with input_container:
-        input_txt = st.text_area(
-            label="😃 You:",
-            max_chars=2000,
-            height=150,
-            placeholder="请在这儿输入您的问题",
-            label_visibility="collapsed",
-            key="input_txt",
-        )
-        col1, col2, col3, _, _ = st.columns([1, 1, 1, 1, 1], gap="small")
-        btn_send = col1.button("发  送", key="btn_send")
-        btn_stop = col2.button("停止生成")
-        btn_clear = col3.button("清除历史")
+    input_txt = st.chat_input("What is up?")
+    if input_txt:
+        with st.chat_message("user", avatar="😀"):
+            st.markdown(input_txt)
 
-    if btn_send:
         plugin_id = PLUGINS_OPTIONS[select_plugin]
         llm = MODEL_OPTIONS[select_model]
 
@@ -299,18 +231,8 @@ if __name__ == "__main__":
             input_prompt = config.get("DEFAULT_PROMPT")
 
         if plugin_id == 3:
-            clear_history()
-
             predict(
                 input_txt,
                 llm,
                 input_prompt,
-                st.session_state["state"],
             )
-
-        if plugin_id == 0:
-            tips("该插件下，定制prompt功能将会失效", tips_empty, 1.5)
-            predict_only_llm(input_txt, llm, st.session_state["state"])
-
-    if btn_clear:
-        clear_history()

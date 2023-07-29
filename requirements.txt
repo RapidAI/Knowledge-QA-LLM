@@ -1,8 +1,9 @@
 numpy>=1.21.6
-streamlit>=1.20.0
+streamlit>=1.24.0
 transformers>=4.27.0.dev0
-faiss
-streamlit_chat
+faiss-cpu
 filetype
 extract-office-content>=0.0.6
 sentence_transformers
+rapidocr_onnxruntime
+rapidocr_pdf
