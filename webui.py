@@ -74,6 +74,7 @@ def init_sidebar():
         save_dir = Path(upload_dir) / time_stamp
         st.session_state["upload_dir"] = save_dir
 
+        tips("Uploading files to platform...", icon="⏳")
         for file in uploaded_files:
             bytes_data = file.getvalue()
 
@@ -85,6 +86,7 @@ def init_sidebar():
 
         doc_dir = st.session_state["upload_dir"]
         all_doc_contents = file_loader(doc_dir)
+        tips("正在提取特征向量并插入到数据库中...", icon="⏳")
         for file_path, one_doc_contents in all_doc_contents.items():
             embeddings = embedding_extract(one_doc_contents)
             db_tools.insert(file_path, embeddings, one_doc_contents)

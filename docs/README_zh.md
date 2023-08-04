@@ -72,7 +72,7 @@
 - 提取特征向量：[`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-base)
 - 向量存储：`sqlite`
 - 向量检索：[`faiss`](https://github.com/facebookresearch/faiss)
-- UI: [`streamlit>=1.24.0`](https://github.com/streamlit/streamlit)
+- UI: [`streamlit>=1.25.0`](https://github.com/streamlit/streamlit)
 
 
 #### 📂 文件结构
@@ -98,6 +98,8 @@
 ```
 
 #### 更新日志
+- 2023-08-04 v0.0.5 update:
+  - 修复了插入数据库数据重复的问题。
 - 2023-07-29 v0.0.4 update:
   - 基于`streamlit==1.25.0`优化UI
   - 优化代码

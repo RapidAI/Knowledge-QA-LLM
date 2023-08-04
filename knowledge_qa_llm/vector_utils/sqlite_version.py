@@ -49,7 +49,7 @@ class DBUtils:
         con = sqlite3.connect(self.db_path, detect_types=sqlite3.PARSE_DECLTYPES)
         cur = con.cursor()
         cur.execute(
-            f"create table if not exists {self.table_name} (file_name TEXT, embeddings array, texts TEXT)"
+            f"create table if not exists {self.table_name} (id integer primary key autoincrement, file_name TEXT, embeddings array UNIQUE, texts TEXT)"
         )
         return cur, con
 
@@ -113,27 +113,12 @@ class DBUtils:
 
         t1 = time.perf_counter()
         insert_sql = f"insert or ignore into {self.table_name} (file_name, embeddings, texts) values (?, ?, ?)"
-        insert_nums = 0
-        for file_name, one_embedding, text in zip(file_names, embeddings, texts):
-            if not self.is_exist(file_name, text):
-                cur.execute(insert_sql, (file_name, one_embedding, text))
-                insert_nums += 1
-
+        cur.executemany(insert_sql, list(zip(file_names, embeddings, texts)))
         elapse = time.perf_counter() - t1
         logger.info(
-            f"Insert {insert_nums} data, total is {len(embeddings)}, cost: {elapse:4f}s"
+            f"Insert {len(embeddings)} data, total is {len(embeddings)}, cost: {elapse:4f}s"
         )
         con.commit()
-
-    def is_exist(self, file_names, texts):
-        cur, _ = self.connect_db()
-
-        search_sql = f'select count(*) from {self.table_name} where file_name="{file_names}" and texts="{texts}"'
-        cur.execute(search_sql)
-        search_nums = cur.fetchall()[0][0]
-        if search_nums <= 0:
-            return False
-        return True
 
     def __enter__(self):
         return self

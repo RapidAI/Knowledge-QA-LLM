@@ -69,7 +69,7 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 - Extract feature vector: [`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-base)
 - Vector storage: `sqlite`
 - Vector retrieval: [`faiss`](https://github.com/facebookresearch/faiss)
-- UI: [`streamlit>=1.24.0`](https://github.com/streamlit/streamlit)
+- UI: [`streamlit>=1.25.0`](https://github.com/streamlit/streamlit)
 
 
 #### 📂 File structure
@@ -95,6 +95,8 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 ```
 
 #### Update Log
+- 2023-08-04 v0.0.5 update:
+  - Fixed the problem of duplicate data inserted into the database.
 - 2023-07-29 v0.0.4 update:
   - Reorganize the UI based `streamlit==1.25.0`
   - Optimize the code.
