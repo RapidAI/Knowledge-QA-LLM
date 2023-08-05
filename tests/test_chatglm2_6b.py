@@ -8,13 +8,13 @@ cur_dir = Path(__file__).resolve().parent
 root_dir = cur_dir.parent
 sys.path.append(str(root_dir))
 
-from knowledge_qa_llm.llm import ChatGLM26B
+from knowledge_qa_llm.llm import ChatGLM2_6B
 from knowledge_qa_llm.utils import read_yaml
 
-config_path = root_dir / "config.yaml"
+config_path = root_dir / "knowledge_qa_llm" / "config.yaml"
 config = read_yaml(config_path)
 
-llm_model = ChatGLM26B(config.get("llm_api_url"))
+llm_model = ChatGLM2_6B(config.get("LLM_API")["ChatGLM2_6B"])
 
 
 def test_normal_input():

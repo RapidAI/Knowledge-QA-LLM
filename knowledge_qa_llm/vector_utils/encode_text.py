@@ -10,7 +10,6 @@ class EncodeText:
     def __init__(self, model_path: Optional[str] = None) -> None:
         if model_path is None:
             raise EncoderTextError("model_path is None.")
-
         self.model = SentenceTransformer(model_path)
 
     def __call__(self, sentences: List[str]):

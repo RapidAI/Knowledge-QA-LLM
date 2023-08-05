@@ -23,8 +23,8 @@ def get_logger(save_dir: str = "."):
         level="INFO",
         enqueue=True,
     )
-    save_file = Path(save_dir) / "{time:YYYY-MM-DD}.log"
-    logger.add(save_file, rotation="5 MB", retention="3 days")
+    save_file = Path(save_dir) / "{time:YYYY-MM-DD-HH-mm-ss}.log"
+    logger.add(save_file, rotation=None, retention="5 days")
     return logger
 
 

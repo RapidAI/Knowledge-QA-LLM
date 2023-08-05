@@ -120,6 +120,15 @@ class DBUtils:
         )
         con.commit()
 
+    def get_files(self):
+        cur, _ = self.connect_db()
+
+        search_sql = f"select distinct file_name from {self.table_name}"
+        cur.execute(search_sql)
+        search_res = cur.fetchall()
+        search_res = [v[0] for v in search_res]
+        return search_res
+
     def __enter__(self):
         return self
 

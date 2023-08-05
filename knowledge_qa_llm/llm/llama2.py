@@ -7,7 +7,7 @@ from typing import List, Optional
 import requests
 
 
-class ChatGLM2_6B:
+class Llama2_7BChat:
     def __init__(self, api_url: str = None):
         self.api_url = api_url
 
@@ -15,7 +15,7 @@ class ChatGLM2_6B:
         if not history:
             history = []
 
-        data = {"prompt": prompt, "history": history}
+        data = {"prompt": prompt}
         if kwargs:
             temperature = kwargs.get("temperature", 0.1)
             top_p = kwargs.get("top_p", 0.7)
@@ -37,7 +37,7 @@ class ChatGLM2_6B:
 if __name__ == "__main__":
     prompt = "你是谁？"
     history = []
-    t = ChatGLM2_6B()
+    t = BaiChuan7B()
 
     res = t(prompt, history)
     print(res)

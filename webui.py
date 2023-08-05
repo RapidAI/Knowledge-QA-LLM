@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 # @Author: SWHL
 # @Contact: liekkaskono@163.com
+import importlib
 import shutil
 import time
 from pathlib import Path
@@ -8,12 +9,10 @@ from pathlib import Path
 import streamlit as st
 
 from knowledge_qa_llm.file_loader import FileLoader
-from knowledge_qa_llm.llm import ChatGLM26B
 from knowledge_qa_llm.utils import get_timestamp, logger, make_prompt, mkdir, read_yaml
 from knowledge_qa_llm.vector_utils import DBUtils, EncodeText
 
 config = read_yaml("knowledge_qa_llm/config.yaml")
-upload_dir = config.get("upload_dir")
 
 st.set_page_config(
     page_title=config.get("title"),
@@ -68,13 +67,14 @@ def init_sidebar():
         help="支持多选",
     )
 
+    upload_dir = config.get("upload_dir")
     btn_upload = st.sidebar.button("上传文档并加载数据库", use_container_width=True)
     if btn_upload:
         time_stamp = get_timestamp()
         save_dir = Path(upload_dir) / time_stamp
         st.session_state["upload_dir"] = save_dir
 
-        tips("Uploading files to platform...", icon="⏳")
+        tips("正在上传文件到平台...", icon="⏳")
         for file in uploaded_files:
             bytes_data = file.getvalue()
 
@@ -86,13 +86,35 @@ def init_sidebar():
 
         doc_dir = st.session_state["upload_dir"]
         all_doc_contents = file_loader(doc_dir)
-        tips("正在提取特征向量并插入到数据库中...", icon="⏳")
+
+        pro_text = "正在提取特征向量..."
+        batch_size = config.get("encoder_batch_size", 32)
         for file_path, one_doc_contents in all_doc_contents.items():
-            embeddings = embedding_extract(one_doc_contents)
-            db_tools.insert(file_path, embeddings, one_doc_contents)
+            my_bar = st.sidebar.progress(0, text=pro_text)
+            content_nums = len(one_doc_contents)
+            all_embeddings = []
+            for i in range(0, content_nums, batch_size):
+                start_idx = i
+                end_idx = start_idx + batch_size
+                end_idx = content_nums if end_idx > content_nums else end_idx
+                embeddings = embedding_extract(one_doc_contents[start_idx:end_idx])
+                all_embeddings.append(embeddings)
+
+                my_bar.progress(
+                    end_idx / content_nums,
+                    f"提取{file_path}数据: [{end_idx}/{content_nums}]",
+                )
+            my_bar.empty()
+            db_tools.insert(file_path, all_embeddings, one_doc_contents)
+        my_bar.empty()
 
         shutil.rmtree(doc_dir.resolve())
         tips("已经加载并存入数据库中，可以提问了！")
+
+    had_files = db_tools.get_files()
+    if had_files:
+        st.sidebar.markdown("仓库已有文档：")
+        st.sidebar.markdown("\n".join([f" - {v}" for v in had_files]))
 
 
 def init_state():
@@ -120,7 +142,9 @@ def predict(
 
     query_embedding = embedding_extract(text)
     with st.spinner("从文档中搜索相关内容"):
-        search_res, search_elapse = db_tools.search_local(query_embedding)
+        search_res, search_elapse = db_tools.search_local(
+            query_embedding, top_k=config.get("top_k")
+        )
 
     context = "\n".join(sum(search_res.values(), []))
     res_cxt = f"**从文档中检索到的相关内容Top5\n(相关性从高到低，耗时:{search_elapse:.5f}s):** \n"
@@ -175,6 +199,13 @@ def tips(txt: str, wait_time: int = 2, icon: str = "🎉"):
 
 
 if __name__ == "__main__":
+    title = config.get("title")
+    version = config.get("version", "0.0.1")
+    st.markdown(
+        f"<h3 style='text-align: center;'>{title} v{version}</h3><br/>",
+        unsafe_allow_html=True,
+    )
+
     file_loader = FileLoader()
 
     db_path = config.get("vector_db_path")
@@ -183,30 +214,33 @@ if __name__ == "__main__":
     encoder_model_path = config.get("encoder_model_path")
     embedding_extract = init_encoder(encoder_model_path)
 
-    chatglm26b = ChatGLM26B(config.get("llm_api_url"))
-
     init_sidebar()
     init_state()
 
-    title = config.get("title")
-    version = config.get("version", "0.0.1")
-    st.markdown(
-        f"<h3 style='text-align: center;'>{title} v{version}</h3><br/>",
-        unsafe_allow_html=True,
-    )
-
+    llm_module = importlib.import_module("knowledge_qa_llm.llm")
     MODEL_OPTIONS = {
-        "ChatGLM2-6B": chatglm26b,
+        name: getattr(llm_module, name)(api)
+        for name, api in config.get("LLM_API").items()
     }
+
+    online_llm_api = config.get("OnlineLLMAPI", None)
+    if online_llm_api:
+        MODEL_OPTIONS.update(
+            {
+                name: getattr(llm_module, name)(**params)
+                for name, params in online_llm_api.items()
+            }
+        )
 
     PLUGINS_OPTIONS = {
-        "文档": 3,
-        "模型本身": 0,
+        "文档": 0,
     }
+    TOP_OPTIONS = [5, 10, 15]
 
-    menu_col1, menu_col2 = st.columns([5, 5])
+    menu_col1, menu_col2, menu_col3 = st.columns([1, 1, 1])
     select_model = menu_col1.selectbox("🎨基础模型：", MODEL_OPTIONS.keys())
     select_plugin = menu_col2.selectbox("🛠Plugin：", PLUGINS_OPTIONS.keys())
+    search_top = menu_col3.selectbox("🔍查找Top_K", TOP_OPTIONS)
 
     input_prompt_container = st.container()
     with input_prompt_container:
@@ -232,7 +266,7 @@ if __name__ == "__main__":
         if not input_prompt:
             input_prompt = config.get("DEFAULT_PROMPT")
 
-        if plugin_id == 3:
+        if plugin_id == 0:
             predict(
                 input_txt,
                 llm,

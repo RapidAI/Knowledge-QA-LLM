@@ -1,14 +1,27 @@
 title: Knowledge QA LLM
-version: 0.0.5
+version: 0.0.6
+
+LLM_API:
+  Qwen7B_Chat: your_api
+  ChatGLM2_6B: your_api
+  BaiChuan7B: your_api
+
+OnlineLLMAPI:
+  ERNIEBotTurbo:
+    api_url: https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token=
+    api_key: your_api_key
+    secret_key: your_secret_key
+
 
 DEFAULT_PROMPT: 文章：$context\n从上面文章里，找出能回答以下问题的答案。如果文中没有答案，回答“没找到答案”。问题是：$query\n
-llm_api_url: your_api
 
 upload_dir: assets/raw_upload_files
 vector_db_path: assets/db/DefaultVector.db
 encoder_model_path: assets/models/m3e-small
-
+encoder_batch_size: 32
 SENTENCE_SIZE: 200
+
+top_k: 10
 
 Parameter:
   max_length:

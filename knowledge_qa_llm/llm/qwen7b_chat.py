@@ -7,7 +7,7 @@ from typing import List, Optional
 import requests
 
 
-class ChatGLM2_6B:
+class Qwen7B_Chat:
     def __init__(self, api_url: str = None):
         self.api_url = api_url
 
@@ -37,7 +37,7 @@ class ChatGLM2_6B:
 if __name__ == "__main__":
     prompt = "你是谁？"
     history = []
-    t = ChatGLM2_6B()
+    t = Qwen7B()
 
     res = t(prompt, history)
     print(res)
