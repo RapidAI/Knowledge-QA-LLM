@@ -18,13 +18,6 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
      - In addition to the large model interface that needs to be deployed separately, other parts can use CPU.
      - Support documents in common formats, including txt, md, pdf, docx, pptx, excel, etc. Of course, other types of documents can also be customized and supported.
 
-#### TODO
-- [x] Improve parsing office document interface and unit test
-- [x] Improve PDF extraction interface and unit test
-- [x] Improve image content extraction interface and unit test
-- [x] Improve the LLM interface
-- [x] Improve the UI
-- [ ] Combining keyword based search and vector based search methods.
 
 #### Overall framework
 - Parse the document and store it in the database
@@ -95,6 +88,9 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 ```
 
 #### Update Log
+- 2023-08-05 v0.0.6 update:
+  - Adapt more llm_api, include online llm api, such ad ERNIE-Bot-Turbo.
+  - Add the status of extracting embeddings.
 - 2023-08-04 v0.0.5 update:
   - Fixed the problem of duplicate data inserted into the database.
 - 2023-07-29 v0.0.4 update:
