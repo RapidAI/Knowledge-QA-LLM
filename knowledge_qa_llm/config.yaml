@@ -9,19 +9,31 @@ LLM_API:
 OnlineLLMAPI:
   ERNIEBotTurbo:
     api_url: https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token=
+    api_key: VrBlyaNSwtLNdTtOGOaHHa7U
+    secret_key: mGso2bzkZlg2O0ripQlMcPP5zZ7mQjcf
+
+
+OnlineLLMAPI:
+  ERNIEBotTurbo:
+    api_url: https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token=
     api_key: your_api_key
     secret_key: your_secret_key
-
 
 DEFAULT_PROMPT: 文章：$context\n从上面文章里，找出能回答以下问题的答案。如果文中没有答案，回答“没找到答案”。问题是：$query\n
 
 upload_dir: assets/raw_upload_files
 vector_db_path: assets/db/DefaultVector.db
-encoder_model_path: assets/models/m3e-small
+
 encoder_batch_size: 32
+Encoder:
+  m3e-small: assets/models/m3e-small
+  # m3e-base: assets/models/m3e-base
+  # bge-small-zh: assets/models/bge-small-zh
+
+# text splitter
 SENTENCE_SIZE: 200
 
-top_k: 10
+top_k: 5
 
 Parameter:
   max_length:

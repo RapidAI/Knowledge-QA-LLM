@@ -94,13 +94,13 @@ class DBUtils:
 
         _, I = self.search_index.search(embedding_query, top_k)
         top_index = I.squeeze().tolist()
-        search_contens = self.all_texts[top_index]
+        search_contents = self.all_texts[top_index]
         file_names = [self.file_names[idx] for idx in top_index]
         dup_file_names = list(set(file_names))
         dup_file_names.sort(key=file_names.index)
 
         search_res = {v: [] for v in dup_file_names}
-        for file_name, content in zip(file_names, search_contens):
+        for file_name, content in zip(file_names, search_contents):
             search_res[file_name].append(content)
 
         elapse = time.perf_counter() - s

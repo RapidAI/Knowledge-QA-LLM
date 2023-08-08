@@ -6,11 +6,13 @@ import shutil
 import time
 from pathlib import Path
 
+import numpy as np
 import streamlit as st
 
+from knowledge_qa_llm.encoder import EncodeText
 from knowledge_qa_llm.file_loader import FileLoader
 from knowledge_qa_llm.utils import get_timestamp, logger, make_prompt, mkdir, read_yaml
-from knowledge_qa_llm.vector_utils import DBUtils, EncodeText
+from knowledge_qa_llm.vector_utils import DBUtils
 
 config = read_yaml("knowledge_qa_llm/config.yaml")
 
@@ -68,6 +70,13 @@ def init_sidebar():
     )
 
     upload_dir = config.get("upload_dir")
+
+    ENCODER_OPTIONS = config.get("Encoder")
+    select_encoder = st.sidebar.selectbox("🧬提取向量模型：", ENCODER_OPTIONS.keys())
+    tips(f"初始化{select_encoder}...")
+    embedding_extract = init_encoder(ENCODER_OPTIONS[select_encoder])
+    tips("初始化完成！")
+
     btn_upload = st.sidebar.button("上传文档并加载数据库", use_container_width=True)
     if btn_upload:
         time_stamp = get_timestamp()
@@ -105,6 +114,7 @@ def init_sidebar():
                     f"提取{file_path}数据: [{end_idx}/{content_nums}]",
                 )
             my_bar.empty()
+            all_embeddings = np.vstack(all_embeddings)
             db_tools.insert(file_path, all_embeddings, one_doc_contents)
         my_bar.empty()
 
@@ -115,6 +125,8 @@ def init_sidebar():
     if had_files:
         st.sidebar.markdown("仓库已有文档：")
         st.sidebar.markdown("\n".join([f" - {v}" for v in had_files]))
+
+    return embedding_extract
 
 
 def init_state():
@@ -145,21 +157,20 @@ def predict(
         search_res, search_elapse = db_tools.search_local(
             query_embedding, top_k=config.get("top_k")
         )
-
-    context = "\n".join(sum(search_res.values(), []))
-    res_cxt = f"**从文档中检索到的相关内容Top5\n(相关性从高到低，耗时:{search_elapse:.5f}s):** \n"
-    bot_print(res_cxt)
-
-    for file, content in search_res.items():
-        content = "\n".join(content)
-        one_context = f"**来自文档：《{file}》** \n{content}"
-        bot_print(one_context)
-
-        logger.info(f"上下文：\n{one_context}\n")
-
-    if len(context) <= 0:
+    if search_res is None:
         bot_print("从文档中搜索相关内容为空，暂不能回答该问题")
     else:
+        context = "\n".join(sum(search_res.values(), []))
+        res_cxt = f"**从文档中检索到的相关内容Top5\n(相关性从高到低，耗时:{search_elapse:.5f}s):** \n"
+        bot_print(res_cxt)
+
+        for file, content in search_res.items():
+            content = "\n".join(content)
+            one_context = f"**来自文档：《{file}》** \n{content}"
+            bot_print(one_context)
+
+            logger.info(f"上下文：\n{one_context}\n")
+
         response, elapse = get_model_response(text, context, custom_prompt, model)
         print_res = f"**使用模型：{select_model}**\n**模型推理耗时：{elapse:.5f}s**"
         bot_print(print_res)
@@ -211,10 +222,7 @@ if __name__ == "__main__":
     db_path = config.get("vector_db_path")
     db_tools = DBUtils(db_path)
 
-    encoder_model_path = config.get("encoder_model_path")
-    embedding_extract = init_encoder(encoder_model_path)
-
-    init_sidebar()
+    embedding_extract = init_sidebar()
     init_state()
 
     llm_module = importlib.import_module("knowledge_qa_llm.llm")
