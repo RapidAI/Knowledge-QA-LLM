@@ -17,7 +17,7 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
      - The whole project is modularized and does not depend on the `lanchain` library, each part can be easily replaced, and the code is simple and easy to understand.
      - In addition to the large model interface that needs to be deployed separately, other parts can use CPU.
      - Support documents in common formats, including txt, md, pdf, docx, pptx, excel, etc. Of course, other types of documents can also be customized and supported.
-
+- 📣 **Recruitment: Front-end development engineers for the development of front-end interfaces to achieve front-end and back-end separation.**
 
 #### Overall framework
 - Parse the document and store it in the database
