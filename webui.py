@@ -23,7 +23,7 @@ st.set_page_config(
 
 
 def init_sidebar():
-    st.sidebar.markdown("### 🛶 参数设置")
+    st.sidebar.markdown("### 🛶 Parameter Settings")
     param = config.get("Parameter")
 
     param_max_length = param.get("max_length")
@@ -61,29 +61,22 @@ def init_sidebar():
     )
     st.session_state["params"]["temperature"] = temperature
 
-    st.sidebar.markdown("### 🧻 知识库")
+    st.sidebar.markdown("### 🧻 Knowledge Base")
     uploaded_files = st.sidebar.file_uploader(
         "default",
         accept_multiple_files=True,
         label_visibility="hidden",
-        help="支持多选",
+        help="Support for multiple selections",
     )
 
     upload_dir = config.get("upload_dir")
-
-    ENCODER_OPTIONS = config.get("Encoder")
-    select_encoder = st.sidebar.selectbox("🧬提取向量模型：", ENCODER_OPTIONS.keys())
-    tips(f"初始化{select_encoder}...")
-    embedding_extract = init_encoder(ENCODER_OPTIONS[select_encoder])
-    tips("初始化完成！")
-
-    btn_upload = st.sidebar.button("上传文档并加载数据库", use_container_width=True)
+    btn_upload = st.sidebar.button("Upload and load database", use_container_width=True)
     if btn_upload:
         time_stamp = get_timestamp()
         save_dir = Path(upload_dir) / time_stamp
         st.session_state["upload_dir"] = save_dir
 
-        tips("正在上传文件到平台...", icon="⏳")
+        tips("Uploading files to platform...", icon="⏳")
         for file in uploaded_files:
             bytes_data = file.getvalue()
 
@@ -91,12 +84,12 @@ def init_sidebar():
             save_path = save_dir / file.name
             with open(save_path, "wb") as f:
                 f.write(bytes_data)
-        tips("上传完毕！")
+        tips("Upload completed！")
 
         doc_dir = st.session_state["upload_dir"]
         all_doc_contents = file_loader(doc_dir)
 
-        pro_text = "正在提取特征向量..."
+        pro_text = "Extracting embeddings..."
         batch_size = config.get("encoder_batch_size", 32)
         for file_path, one_doc_contents in all_doc_contents.items():
             my_bar = st.sidebar.progress(0, text=pro_text)
@@ -111,7 +104,7 @@ def init_sidebar():
 
                 my_bar.progress(
                     end_idx / content_nums,
-                    f"提取{file_path}数据: [{end_idx}/{content_nums}]",
+                    f"Extract {file_path} datas: [{end_idx}/{content_nums}]",
                 )
             my_bar.empty()
             all_embeddings = np.vstack(all_embeddings)
@@ -119,14 +112,12 @@ def init_sidebar():
         my_bar.empty()
 
         shutil.rmtree(doc_dir.resolve())
-        tips("已经加载并存入数据库中，可以提问了！")
+        tips("You can now ask a question!")
 
     had_files = db_tools.get_files()
     if had_files:
-        st.sidebar.markdown("仓库已有文档：")
+        st.sidebar.markdown("Existing documents:")
         st.sidebar.markdown("\n".join([f" - {v}" for v in had_files]))
-
-    return embedding_extract
 
 
 def init_state():
@@ -153,26 +144,26 @@ def predict(
     logger.info(f"Using {type(model).__name__}")
 
     query_embedding = embedding_extract(text)
-    with st.spinner("从文档中搜索相关内容"):
+    with st.spinner("Search for relevant contents from docs..."):
         search_res, search_elapse = db_tools.search_local(
             query_embedding, top_k=config.get("top_k")
         )
     if search_res is None:
-        bot_print("从文档中搜索相关内容为空，暂不能回答该问题")
+        bot_print("The results of searching from docs is empty.")
     else:
         context = "\n".join(sum(search_res.values(), []))
-        res_cxt = f"**从文档中检索到的相关内容Top5\n(相关性从高到低，耗时:{search_elapse:.5f}s):** \n"
+        res_cxt = f"**Find Top{search_top}\n(Scores from high to low，cost:{search_elapse:.5f}s):** \n"
         bot_print(res_cxt)
 
         for file, content in search_res.items():
             content = "\n".join(content)
-            one_context = f"**来自文档：《{file}》** \n{content}"
+            one_context = f"**From：《{file}》** \n{content}"
             bot_print(one_context)
 
-            logger.info(f"上下文：\n{one_context}\n")
+            logger.info(f"Context：\n{one_context}\n")
 
         response, elapse = get_model_response(text, context, custom_prompt, model)
-        print_res = f"**使用模型：{select_model}**\n**模型推理耗时：{elapse:.5f}s**"
+        print_res = f"**Use：{select_model}**\n**Infer model cost：{elapse:.5f}s**"
         bot_print(print_res)
         bot_print(response)
 
@@ -193,14 +184,14 @@ def get_model_response(text, context, custom_prompt, model):
 
     s_model = time.perf_counter()
     prompt_msg = make_prompt(text, context, custom_prompt)
-    logger.info(f"最终拼接后的文本：\n{prompt_msg}\n")
+    logger.info(f"Final prompt: \n{prompt_msg}\n")
 
     response = model(prompt_msg, history=None, **params_dict)
     elapse = time.perf_counter() - s_model
 
-    logger.info(f"模型回答: \n{response}\n")
+    logger.info(f"Reponse of LLM: \n{response}\n")
     if not response:
-        response = "抱歉，未能正确回答该问题"
+        response = "Sorry, I didn't answer the question correctly"
     return response, elapse
 
 
@@ -222,7 +213,7 @@ if __name__ == "__main__":
     db_path = config.get("vector_db_path")
     db_tools = DBUtils(db_path)
 
-    embedding_extract = init_sidebar()
+    init_sidebar()
     init_state()
 
     llm_module = importlib.import_module("knowledge_qa_llm.llm")
@@ -240,22 +231,24 @@ if __name__ == "__main__":
             }
         )
 
-    PLUGINS_OPTIONS = {
-        "文档": 0,
-    }
     TOP_OPTIONS = [5, 10, 15]
+    ENCODER_OPTIONS = config.get("Encoder")
 
     menu_col1, menu_col2, menu_col3 = st.columns([1, 1, 1])
-    select_model = menu_col1.selectbox("🎨基础模型：", MODEL_OPTIONS.keys())
-    select_plugin = menu_col2.selectbox("🛠Plugin：", PLUGINS_OPTIONS.keys())
-    search_top = menu_col3.selectbox("🔍查找Top_K", TOP_OPTIONS)
+    select_model = menu_col1.selectbox("🎨Base model：", MODEL_OPTIONS.keys())
+    select_encoder = menu_col2.selectbox(
+        "🧬Extract Embedding Model：", ENCODER_OPTIONS.keys()
+    )
+    search_top = menu_col3.selectbox("🔍Search Top_K", TOP_OPTIONS)
+
+    embedding_extract = init_encoder(ENCODER_OPTIONS[select_encoder])
 
     input_prompt_container = st.container()
     with input_prompt_container:
         with st.expander("💡Prompt", expanded=False):
             text_area = st.empty()
             input_prompt = text_area.text_area(
-                label="输入",
+                label="Input",
                 max_chars=500,
                 height=200,
                 label_visibility="hidden",
@@ -268,15 +261,13 @@ if __name__ == "__main__":
         with st.chat_message("user", avatar="😀"):
             st.markdown(input_txt)
 
-        plugin_id = PLUGINS_OPTIONS[select_plugin]
         llm = MODEL_OPTIONS[select_model]
 
         if not input_prompt:
             input_prompt = config.get("DEFAULT_PROMPT")
 
-        if plugin_id == 0:
-            predict(
-                input_txt,
-                llm,
-                input_prompt,
-            )
+        predict(
+            input_txt,
+            llm,
+            input_prompt,
+        )

@@ -1,6 +1,6 @@
-English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/docs/README_zh.md)
+[简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/docs/README_zh.md) | English
 
-## Knowledge QA LLM
+## 🧐 Knowledge QA LLM
 <p>
      <a href=""><img src="https://img.shields.io/badge/Python->=3.8,<3.12-aff.svg"></a>
      <a href=""><img src="https://img.shields.io/badge/OS-Linux%2C%20Win%2C%20Mac-pink.svg"></a>
@@ -74,8 +74,9 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 │ └── raw_upload_files
 ├── knowledge_qa_llm
 │ ├── __init__.py
-│ ├── config.yaml         # configuration file
+│ ├── config.yaml       # configuration file
 │ ├── file_loader       # Handle documents in various formats
+│ ├── encoder           # Extract embeddings
 │ ├── llm               # Large model interface, the large model needs to be deployed separately and called by interface
 │ ├── utils
 │ └── vector_utils      # embedding access and search
@@ -87,7 +88,12 @@ English | [简体中文](https://github.com/RapidAI/Knowledge-QA-LLM/blob/main/d
 └── webui.py            # UI implementation based on streamlit
 ```
 
-#### Update Log
+#### Change Log
+- 2023-08-11 v0.0.7 update:
+  - Optimize layout, remove the plugin option, and put the extract vector model option on the home page.
+  - The tips are translated into English for easy communication.
+  - Add project logo:🧐
+  - Update CLI module code.
 - 2023-08-05 v0.0.6 update:
   - Adapt more llm_api, include online llm api, such ad ERNIE-Bot-Turbo.
   - Add the status of extracting embeddings.

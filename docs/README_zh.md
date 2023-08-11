@@ -1,6 +1,6 @@
-[English](https://github.com/RapidAI/Knowledge-QA-LLM) | 简体中文
+简体中文 | [English](https://github.com/RapidAI/Knowledge-QA-LLM)
 
-## Knowledge QA LLM
+## 🧐 Knowledge QA LLM
 <p>
     <a href=""><img src="https://img.shields.io/badge/Python->=3.8,<3.12-aff.svg"></a>
     <a href=""><img src="https://img.shields.io/badge/OS-Linux%2C%20Win%2C%20Mac-pink.svg"></a>
@@ -79,6 +79,7 @@
 │   ├── __init__.py
 │   ├── config.yaml         # 配置文件
 │   ├── file_loader         # 处理各种格式的文档
+│   ├── encoder             # 提取特征向量
 │   ├── llm                 # 大模型接口，大模型需要单独部署，以接口方式调用
 │   ├── utils
 │   └── vector_utils        # embedding的存取和搜索
@@ -91,6 +92,11 @@
 ```
 
 #### 更新日志
+- 2023-08-11 v0.0.7 update:
+  - 优化布局，去掉插件选项，将提取向量模型选项放到主页部分
+  - 将提示语英语化，便于交流使用。
+  - 添加项目logo: 🧐
+  - 更新CLI使用代码
 - 2023-08-05 v0.0.6 update:
   - 适配更多模型接口，包括在线大模型接口，例如文心一言
   - 添加提取特征向量的状态提示

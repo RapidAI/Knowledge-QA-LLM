@@ -1,10 +1,11 @@
 # -*- encoding: utf-8 -*-
 # @Author: SWHL
 # @Contact: liekkaskono@163.com
+from knowledge_qa_llm.encoder import EncodeText
 from knowledge_qa_llm.file_loader import FileLoader
-from knowledge_qa_llm.llm import ChatGLM26B
+from knowledge_qa_llm.llm import Qwen7B_Chat
 from knowledge_qa_llm.utils import make_prompt, read_yaml
-from knowledge_qa_llm.vector_utils import DBUtils, EncodeText
+from knowledge_qa_llm.vector_utils import DBUtils
 
 config = read_yaml("knowledge_qa_llm/config.yaml")
 
@@ -16,18 +17,20 @@ extract = FileLoader()
 # sentences = text[0][1]
 
 # 提取特征
-embedding_model = EncodeText(config.get("encoder_model_path"))
+embedding_model = EncodeText(config.get("Encoder")["m3e-small"])
 # embeddings = embedding_model(sentences)
 
 # 插入数据到数据库中
 db_tools = DBUtils(config.get("vector_db_path"))
 # db_tools.insert(file_path, embeddings, sentences)
 
-llm_engine = ChatGLM26B(api_url=config.get("llm_api_url"))
+llm_engine = Qwen7B_Chat(api_url=config.get("LLM_API")["Qwen7B_Chat"])
 
-print("欢迎使用 Knowledge QA LLM，输入内容即可进行对话，stop 终止程序")
+print(
+    "Welcom to 🧐 Knowledge QA LLM，enter the content to start the conversation, enter stop to terminate the program."
+)
 while True:
-    query = input("\n用户：")
+    query = input("\n😀 User：")
     if query.strip() == "stop":
         break
 
@@ -37,4 +40,4 @@ while True:
 
     prompt = make_prompt(query, context, custom_prompt=config.get("DEFAULT_PROMPT"))
     response = llm_engine(prompt, history=None)
-    print(response)
+    print(f"🤖 LLM:{response}")
