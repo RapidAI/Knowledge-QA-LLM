@@ -61,7 +61,7 @@ def init_sidebar():
     )
     st.session_state["params"]["temperature"] = temperature
 
-    st.sidebar.markdown("### 🧻 Knowledge Base")
+    st.sidebar.markdown("### 🧻 Knowledge DataBase")
     uploaded_files = st.sidebar.file_uploader(
         "default",
         accept_multiple_files=True,
@@ -146,12 +146,11 @@ def predict(
     query_embedding = embedding_extract(text)
     with st.spinner("Search for relevant contents from docs..."):
         search_res, search_elapse = db_tools.search_local(
-            query_embedding, top_k=config.get("top_k")
+            query_embedding, top_k=search_top
         )
     if search_res is None:
         bot_print("The results of searching from docs is empty.")
     else:
-        context = "\n".join(sum(search_res.values(), []))
         res_cxt = f"**Find Top{search_top}\n(Scores from high to low，cost:{search_elapse:.5f}s):** \n"
         bot_print(res_cxt)
 
@@ -162,6 +161,7 @@ def predict(
 
             logger.info(f"Context：\n{one_context}\n")
 
+        context = "\n".join(sum(search_res.values(), []))
         response, elapse = get_model_response(text, context, custom_prompt, model)
         print_res = f"**Use：{select_model}**\n**Infer model cost：{elapse:.5f}s**"
         bot_print(print_res)
@@ -235,11 +235,11 @@ if __name__ == "__main__":
     ENCODER_OPTIONS = config.get("Encoder")
 
     menu_col1, menu_col2, menu_col3 = st.columns([1, 1, 1])
-    select_model = menu_col1.selectbox("🎨Base model：", MODEL_OPTIONS.keys())
+    select_model = menu_col1.selectbox("🎨Base model:", MODEL_OPTIONS.keys())
     select_encoder = menu_col2.selectbox(
-        "🧬Extract Embedding Model：", ENCODER_OPTIONS.keys()
+        "🧬Extract Embedding Model:", ENCODER_OPTIONS.keys()
     )
-    search_top = menu_col3.selectbox("🔍Search Top_K", TOP_OPTIONS)
+    search_top = menu_col3.selectbox("🔍Search Top_K:", TOP_OPTIONS)
 
     embedding_extract = init_encoder(ENCODER_OPTIONS[select_encoder])
 

@@ -36,7 +36,10 @@ while True:
 
     embedding = embedding_model(query)
 
-    context, which_file = db_tools.search_local(embedding_query=embedding)
+    search_res, search_elapse = db_tools.search_local(embedding_query=embedding)
+
+    context = "\n".join(sum(search_res.values(), []))
+    print(f"上下文：\n{context}\n")
 
     prompt = make_prompt(query, context, custom_prompt=config.get("DEFAULT_PROMPT"))
     response = llm_engine(prompt, history=None)
