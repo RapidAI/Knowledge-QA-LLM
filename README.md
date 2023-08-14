@@ -52,7 +52,9 @@
     </div>
 
 4. CLI Demo
-
+    ```bash
+    python cli.py
+    ```
     <div align="center">
         <img src="https://github.com/RapidAI/Knowledge-QA-LLM/releases/download/v0.0.1/demo.gif" width="100%" height="100%">
     </div>
