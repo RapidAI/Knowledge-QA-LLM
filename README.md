@@ -100,6 +100,7 @@
 
 ### Changelog
 <details>
+    <summary>Click to expand</summary>
 
 - 2023-08-11 v0.0.7 update:
   - Optimize layout, remove the plugin option, and put the extract vector model option on the home page.
