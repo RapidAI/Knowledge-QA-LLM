@@ -1,5 +1,7 @@
 简体中文 | [English](https://github.com/RapidAI/Knowledge-QA-LLM)
 
+⚠️注意：中文版README暂时先不和英文同步，目前以英文版为主。
+
 ## 🧐 Knowledge QA LLM
 <p>
     <a href=""><img src="https://img.shields.io/badge/Python->=3.8,<3.12-aff.svg"></a>
