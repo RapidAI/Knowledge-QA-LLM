@@ -6,4 +6,5 @@ filetype
 extract-office-content>=0.0.6
 sentence_transformers
 rapidocr_onnxruntime
-rapidocr_pdf
+rapidocr_pdf>=0.0.5
+loguru
