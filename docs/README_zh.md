@@ -1,7 +1,5 @@
 简体中文 | [English](https://github.com/RapidAI/Knowledge-QA-LLM)
 
-⚠️注意：中文版README暂时先不和英文同步，目前以英文版为主。
-
 ## 🧐 Knowledge QA LLM
 <p>
     <a href=""><img src="https://img.shields.io/badge/Python->=3.8,<3.12-aff.svg"></a>
@@ -11,6 +9,8 @@
     <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 </p>
 
+### 📣 **招募：前端开发工程师，用于开发前端界面，做到前后端分离。**
+
 - 基于本地知识库+LLM的问答系统。该项目的思路是由[langchain-ChatGLM](https://github.com/imClumsyPanda/langchain-ChatGLM)启发而来。
 - 缘由：
   - 之前使用过这个项目，感觉不是太灵活，部署不太友好。
@@ -19,7 +19,6 @@
     - 整个项目为模块化配置，不依赖`lanchain`库，各部分可轻易替换，代码简单易懂。
     - 除需要单独部署大模型接口外，其他部分用CPU即可。
     - 支持常见格式文档，包括txt、md、pdf, docx, pptx, excel等等。当然，也可自定义支持其他类型文档。
-- 📣 **招募：前端开发工程师，用于开发前端界面，做到前后端分离。**
 
 #### 整体流程
 - 解析文档并存入数据库
@@ -38,15 +37,21 @@
     G --> I --> J([LLM]) --> K([Answer])
     ```
 
-#### 使用
-1. 下载和部署模型
-   1. 下载[`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-small/tree/main)模型，放到`assets/models/m3e-small`目录下，用于向量化文本内容。
-   2. 单独配置好`chatglm2-6b`的接口，接口启动参考：[ChatGLM2-6B API](https://github.com/THUDM/ChatGLM2-6B/blob/main/api.py)。具体使用方式可参考：`knowledge_qa_llm/llm/chatglm2_6b.py`
-   3. 将部署好的`llm_api`写到配置文件`knowledge_qa_llm/config.yaml`中的`llm_api_url`字段下。
-2. 安装运行环境
+#### 安装运行环境
+1. 克隆整个项目到本地。
     ```bash
-    pip install -r requirements.txt --no-cache-dir
+    git clone https://github.com/RapidAI/Knowledge-QA-LLM.git
     ```
+2. 安装运行环境。
+    ```bash
+    cd Knowledge-QA-LLM
+    pip install -r requirements.txt
+    ```
+3. 下载[`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-small/tree/main)模型，放到`assets/models/m3e-small`目录下，用于向量化文本内容。
+4. 单独配置好`chatglm2-6b`的接口，接口启动参考：[ChatGLM2-6B API](https://github.com/THUDM/ChatGLM2-6B/blob/main/api.py)。具体使用方式可参考：`knowledge_qa_llm/llm/chatglm2_6b.py`
+5. 将部署好的`llm_api`写到配置文件`knowledge_qa_llm/config.yaml`中的`llm_api_url`字段下。
+
+#### 使用
 3. 运行
     ```bash
     streamlit run webui.py
