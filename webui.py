@@ -44,7 +44,7 @@ def init_sidebar():
         "top_p",
         min_value=param_top.get("min_value"),
         max_value=param_top.get("max_value"),
-        value=param_top.get("value"),
+        value=param_top.get("default"),
         step=param_top.get("step"),
         help=param_top.get("tip"),
     )
@@ -55,7 +55,7 @@ def init_sidebar():
         "temperature",
         min_value=param_temp.get("min_value"),
         max_value=param_temp.get("max_value"),
-        value=param_temp.get("value"),
+        value=param_temp.get("default"),
         step=param_temp.get("stemp"),
         help=param_temp.get("tip"),
     )
@@ -213,9 +213,6 @@ if __name__ == "__main__":
     db_path = config.get("vector_db_path")
     db_tools = DBUtils(db_path)
 
-    init_sidebar()
-    init_state()
-
     llm_module = importlib.import_module("knowledge_qa_llm.llm")
     MODEL_OPTIONS = {
         name: getattr(llm_module, name)(api)
@@ -242,6 +239,9 @@ if __name__ == "__main__":
     search_top = menu_col3.selectbox("🔍Search Top_K:", TOP_OPTIONS)
 
     embedding_extract = init_encoder(ENCODER_OPTIONS[select_encoder])
+
+    init_sidebar()
+    init_state()
 
     input_prompt_container = st.container()
     with input_prompt_container:

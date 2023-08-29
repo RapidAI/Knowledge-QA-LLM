@@ -1,5 +1,5 @@
 title: 🧐 Knowledge QA LLM
-version: 0.0.7
+version: 0.0.8
 
 LLM_API:
   Qwen7B_Chat: your_api
