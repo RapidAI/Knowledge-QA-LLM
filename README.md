@@ -12,7 +12,7 @@
 
 - Questions & Answers based on local knowledge base + LLM.
 - Reason:
-    - The idea of this project comes from [Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat)
+    - The idea of this project comes from [Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat).
     - I have used this project before, but it is not very flexible and deployment is not very friendly.
     - Learn from the ideas in [How to build a knowledge question answering system with a large language model](https://mp.weixin.qq.com/s/movaNCWjJGBaes6KxhpYpg), and try to use this as a practice.
 - Advantage:
