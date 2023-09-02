@@ -4,6 +4,7 @@ author: SWHL
 date: 2023-09-02
 category: Jekyll
 layout: post
+mermaid: true
 ---
 
 ### Parse the document and store it in the database

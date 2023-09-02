@@ -2,7 +2,6 @@
 layout: home
 title: 🧐 Knowledge QA LLM
 permalink: /
-mermaid: true
 ---
 
 <p>
