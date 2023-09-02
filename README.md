@@ -11,6 +11,7 @@ permalink: /
      <a href="https://semver.org/"><img alt="SemVer2.0" src="https://img.shields.io/badge/SemVer-2.0-brightgreen"></a>
      <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
      <a href="https://choosealicense.com/licenses/apache-2.0/"><img alt="GitHub" src="https://img.shields.io/github/license/RapidAI/Knowledge-QA-LLM"></a>
+     <a href="https://github.com/RapidAI/Knowledge-QA-LLM"><img src="https://img.shields.io/badge/Github-KnowledgeQALLM-brightgreen"></a>
 </p>
 
 - Questions & Answers based on local knowledge base + LLM.
