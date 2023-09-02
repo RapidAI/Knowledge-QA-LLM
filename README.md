@@ -1,11 +1,10 @@
 ---
 layout: home
-title:
+title: 🧐 Knowledge QA LLM
 permalink: /
 mermaid: true
 ---
 
-# 🧐 Knowledge QA LLM
 <p>
      <a href=""><img src="https://img.shields.io/badge/Python->=3.8,<3.12-aff.svg"></a>
      <a href=""><img src="https://img.shields.io/badge/OS-Linux%2C%20Win%2C%20Mac-pink.svg"></a>
@@ -58,24 +57,6 @@ mermaid: true
 4. Separately configure the interface of `chatglm2-6b`, interface startup reference: [ChatGLM2-6B API](https://github.com/THUDM/ChatGLM2-6B/blob/main/api.py). The specific usage method Reference: [`knowledge_qa_llm/llm/chatglm2_6b.py`](./knowledge_qa_llm/llm/chatglm2_6b.py)
 5. Write the deployed `llm_api` to the `llm_api_url` field in the configuration file [`knowledge_qa_llm/config.yaml`](./knowledge_qa_llm/config.yaml).
 
-### Usage
-1. Run
-    ```bash
-    streamlit run webui.py
-    ```
-2. UI Demo
-
-    <div align="center">
-        <img src="https://github.com/RapidAI/Knowledge-QA-LLM/releases/download/v0.0.1/UIDemo.gif" width="100%" height="100%">
-    </div>
-
-3. CLI Demo
-    ```bash
-    python cli.py
-    ```
-    <div align="center">
-        <img src="https://github.com/RapidAI/Knowledge-QA-LLM/releases/download/v0.0.1/demo.gif" width="100%" height="100%">
-    </div>
 
 ### 🛠 Tools Used
 - Document analysis: [`extract_office_content`](https://github.com/SWHL/ExtractOfficeContent), [`rapidocr_pdf`](https://github.com/RapidAI/RapidOCRPDF), [`rapidocr_onnxruntime`](https://github.com/RapidAI/RapidOCR)
@@ -107,36 +88,3 @@ mermaid: true
 ├── cli.py
 └── webui.py            # UI implementation based on streamlit
 ```
-
-### Changelog
-<details>
-    <summary>Click to expand</summary>
-
-- 2023-08-29 v0.0.8 update:
-    - Fixed missing `embedding_extract`
-    - Fixed default parameters of LLM
-- 2023-08-11 v0.0.7 update:
-  - Optimize layout, remove the plugin option, and put the extract vector model option on the home page.
-  - The tips are translated into English for easy communication.
-  - Add project logo:🧐
-  - Update CLI module code.
-- 2023-08-05 v0.0.6 update:
-  - Adapt more llm_api, include online llm api, such ad ERNIE-Bot-Turbo.
-  - Add the status of extracting embeddings.
-- 2023-08-04 v0.0.5 update:
-  - Fixed the problem of duplicate data inserted into the database.
-- 2023-07-29 v0.0.4 update:
-  - Reorganize the UI based `streamlit==1.25.0`
-  - Optimize the code.
-  - Record the GIF demo of UI.
-- 2023-07-28 v0.0.3 update:
-  - Finish the file_loader part.
-- 2023-07-25 v0.0.2 update:
-   - Standardize the existing directory structure, more compact, extract some variables into `config.yaml`
-   - Perfect documentation
-</details>
-
-### Contributing
-- Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-- Please make sure to update tests as appropriate.
