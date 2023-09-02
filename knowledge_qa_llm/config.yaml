@@ -5,6 +5,7 @@ LLM_API:
   Qwen7B_Chat: your_api
   ChatGLM2_6B: your_api
   BaiChuan7B: your_api
+  InternLM_7B: your_api
 
 OnlineLLMAPI:
   ERNIEBotTurbo:
