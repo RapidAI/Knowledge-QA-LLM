@@ -109,7 +109,6 @@ def init_sidebar():
             my_bar.empty()
             all_embeddings = np.vstack(all_embeddings)
             db_tools.insert(file_path, all_embeddings, one_doc_contents)
-        my_bar.empty()
 
         shutil.rmtree(doc_dir.resolve())
         tips("You can now ask a question!")
