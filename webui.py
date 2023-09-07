@@ -22,9 +22,11 @@ st.set_page_config(
 )
 
 
-def init_sidebar():
-    st.sidebar.markdown("### 🛶 Parameter Settings")
+def init_ui_parameters():
+    st.session_state["params"] = {}
     param = config.get("Parameter")
+
+    st.sidebar.markdown("### 🛶 Parameter Settings")
 
     param_max_length = param.get("max_length")
     max_length = st.sidebar.slider(
@@ -35,8 +37,6 @@ def init_sidebar():
         step=param_max_length.get("step"),
         help=param_max_length.get("tip"),
     )
-
-    st.session_state["params"] = {}
     st.session_state["params"]["max_length"] = max_length
 
     param_top = param.get("top_p")
@@ -61,6 +61,8 @@ def init_sidebar():
     )
     st.session_state["params"]["temperature"] = temperature
 
+
+def init_ui_db():
     st.sidebar.markdown("### 🧻 Knowledge DataBase")
     uploaded_files = st.sidebar.file_uploader(
         "default",
@@ -70,30 +72,27 @@ def init_sidebar():
     )
 
     upload_dir = config.get("upload_dir")
-    btn_upload = st.sidebar.button("Upload and load database", use_container_width=True)
-    if btn_upload:
+    if uploaded_files:
         time_stamp = get_timestamp()
-        save_dir = Path(upload_dir) / time_stamp
-        st.session_state["upload_dir"] = save_dir
+        doc_dir = Path(upload_dir) / time_stamp
 
         tips("Uploading files to platform...", icon="⏳")
-        for file in uploaded_files:
-            bytes_data = file.getvalue()
+        for file_data in uploaded_files:
+            bytes_data = file_data.getvalue()
 
-            mkdir(save_dir)
-            save_path = save_dir / file.name
+            mkdir(doc_dir)
+            save_path = doc_dir / file_data.name
             with open(save_path, "wb") as f:
                 f.write(bytes_data)
         tips("Upload completed！")
 
-        doc_dir = st.session_state["upload_dir"]
         all_doc_contents = file_loader(doc_dir)
-
         pro_text = "Extracting embeddings..."
         batch_size = config.get("encoder_batch_size", 32)
         for file_path, one_doc_contents in all_doc_contents.items():
             my_bar = st.sidebar.progress(0, text=pro_text)
             content_nums = len(one_doc_contents)
+
             all_embeddings = []
             for i in range(0, content_nums, batch_size):
                 start_idx = i
@@ -114,20 +113,10 @@ def init_sidebar():
         tips("You can now ask a question!")
 
     had_files = db_tools.get_files()
+    st.session_state.had_file_nums = len(had_files)
     if had_files:
         st.sidebar.markdown("Existing documents:")
         st.sidebar.markdown("\n".join([f" - {v}" for v in had_files]))
-
-
-def init_state():
-    if "history" not in st.session_state:
-        st.session_state["history"] = []
-
-    if "openai_state" not in st.session_state:
-        st.session_state["openai_state"] = []
-
-    if "input_txt" not in st.session_state:
-        st.session_state["input_txt"] = ""
 
 
 @st.cache_resource
@@ -190,7 +179,7 @@ def get_model_response(text, context, custom_prompt, model):
 
     logger.info(f"Reponse of LLM: \n{response}\n")
     if not response:
-        response = "Sorry, I didn't answer the question correctly"
+        response = "Sorry, I didn't answer the question correctly."
     return response, elapse
 
 
@@ -206,6 +195,8 @@ if __name__ == "__main__":
         f"<h3 style='text-align: center;'>{title} v{version}</h3><br/>",
         unsafe_allow_html=True,
     )
+
+    init_ui_parameters()
 
     file_loader = FileLoader()
 
@@ -239,8 +230,7 @@ if __name__ == "__main__":
 
     embedding_extract = init_encoder(ENCODER_OPTIONS[select_encoder])
 
-    init_sidebar()
-    init_state()
+    init_ui_db()
 
     input_prompt_container = st.container()
     with input_prompt_container:
@@ -260,13 +250,19 @@ if __name__ == "__main__":
         with st.chat_message("user", avatar="😀"):
             st.markdown(input_txt)
 
-        llm = MODEL_OPTIONS[select_model]
+        if st.session_state.had_file_nums <= 0:
+            tips(
+                "Knowledge DataBase has not valid documents. Please upload documents in the sidebar firstly.",
+                icon="⚠️",
+            )
+        else:
+            llm = MODEL_OPTIONS[select_model]
 
-        if not input_prompt:
-            input_prompt = config.get("DEFAULT_PROMPT")
+            if not input_prompt:
+                input_prompt = config.get("DEFAULT_PROMPT")
 
-        predict(
-            input_txt,
-            llm,
-            input_prompt,
-        )
+            predict(
+                input_txt,
+                llm,
+                input_prompt,
+            )
