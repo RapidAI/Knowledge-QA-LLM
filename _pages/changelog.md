@@ -6,6 +6,10 @@ category: Jekyll
 layout: post
 ---
 
+### 2023-09-07 v0.0.9 update:
+- Remove **Upload and load databse** button.
+- Add tips when database is empty.
+
 ### 2023-08-29 v0.0.8 update:
 - Fixed missing `embedding_extract`
 - Fixed default parameters of LLM
