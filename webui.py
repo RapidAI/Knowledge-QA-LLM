@@ -72,7 +72,8 @@ def init_ui_db():
     )
 
     upload_dir = config.get("upload_dir")
-    if uploaded_files:
+    btn_upload = st.sidebar.button("Upload and load database")
+    if btn_upload:
         time_stamp = get_timestamp()
         doc_dir = Path(upload_dir) / time_stamp
 
