@@ -87,7 +87,11 @@ def init_ui_db():
                 f.write(bytes_data)
         tips("Upload completed！")
 
-        all_doc_contents = file_loader(doc_dir)
+        with st.spinner(
+            f"Please be patient. Now extracting the content from {doc_dir}...."
+        ):
+            all_doc_contents = file_loader(doc_dir)
+
         pro_text = "Extracting embeddings..."
         batch_size = config.get("encoder_batch_size", 32)
         for file_path, one_doc_contents in all_doc_contents.items():
@@ -113,6 +117,12 @@ def init_ui_db():
         shutil.rmtree(doc_dir.resolve())
         tips("You can now ask a question!")
 
+
+    clear_db_btn = st.sidebar.button('Clear the database')
+    if clear_db_btn:
+        db_tools.clear_db()
+        tips('Knowledge DataBase has been cleared.')
+
     had_files = db_tools.get_files()
     st.session_state.had_file_nums = len(had_files)
     if had_files:
@@ -127,34 +137,30 @@ def init_encoder(model_path: str):
 
 def predict(
     text,
+    search_res,
     model,
     custom_prompt=None,
 ):
-    logger.info(f"Using {type(model).__name__}")
+    for file, content in search_res.items():
+        content = "\n".join(content)
+        one_context = f"**From:《{file}》** \n{content}"
+        bot_print(one_context)
 
-    query_embedding = embedding_extract(text)
-    with st.spinner("Search for relevant contents from docs..."):
-        search_res, search_elapse = db_tools.search_local(
-            query_embedding, top_k=search_top
-        )
-    if search_res is None:
-        bot_print("The results of searching from docs is empty.")
-    else:
-        res_cxt = f"**Find Top{search_top}\n(Scores from high to low，cost:{search_elapse:.5f}s):** \n"
-        bot_print(res_cxt)
+        logger.info(f"Context:\n{one_context}\n")
 
-        for file, content in search_res.items():
-            content = "\n".join(content)
-            one_context = f"**From：《{file}》** \n{content}"
-            bot_print(one_context)
+    context = "\n".join(sum(search_res.values(), []))
+    response, elapse = get_model_response(text, context, custom_prompt, model)
 
-            logger.info(f"Context：\n{one_context}\n")
+    print_res = f"**Use:{select_model}**\n**Infer model cost:{elapse:.5f}s**"
+    bot_print(print_res)
 
-        context = "\n".join(sum(search_res.values(), []))
-        response, elapse = get_model_response(text, context, custom_prompt, model)
-        print_res = f"**Use：{select_model}**\n**Infer model cost：{elapse:.5f}s**"
-        bot_print(print_res)
-        bot_print(response)
+    bot_print(response)
+
+
+def predict_only_model(text, model):
+    params_dict = st.session_state["params"]
+    response = model(text, history=None, **params_dict)
+    bot_print(response)
 
 
 def bot_print(content):
@@ -251,19 +257,31 @@ if __name__ == "__main__":
         with st.chat_message("user", avatar="😀"):
             st.markdown(input_txt)
 
-        if st.session_state.had_file_nums <= 0:
-            tips(
-                "Knowledge DataBase has not valid documents. Please upload documents in the sidebar firstly.",
-                icon="⚠️",
-            )
-        else:
-            llm = MODEL_OPTIONS[select_model]
+        llm = MODEL_OPTIONS[select_model]
 
-            if not input_prompt:
-                input_prompt = config.get("DEFAULT_PROMPT")
+        if not input_prompt:
+            input_prompt = config.get("DEFAULT_PROMPT")
+
+        query_embedding = embedding_extract(input_txt)
+        with st.spinner("Search for relevant contents from docs..."):
+            search_res, search_elapse = db_tools.search_local(
+                query_embedding, top_k=search_top
+            )
+
+        if search_res is None:
+            bot_print(
+                "The results of searching from docs is empty. It will use the llm directly."
+            )
+            predict_only_model(input_txt, llm)
+        else:
+            logger.info(f"Using {type(llm).__name__}")
+
+            res_cxt = f"**Find Top{search_top}\n(Scores from high to low,cost:{search_elapse:.5f}s):** \n"
+            bot_print(res_cxt)
 
             predict(
                 input_txt,
+                search_res,
                 llm,
                 input_prompt,
             )

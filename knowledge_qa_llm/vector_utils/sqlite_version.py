@@ -129,6 +129,16 @@ class DBUtils:
         search_res = [v[0] for v in search_res]
         return search_res
 
+    def clear_db(self,):
+        cur, con = self.connect_db()
+
+        run_sql = f'delete from {self.table_name}'
+        cur.execute(run_sql)
+
+        con.commit()
+        self.connect_db()
+
+
     def __enter__(self):
         return self
 

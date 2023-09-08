@@ -13,7 +13,7 @@ OnlineLLMAPI:
     api_key: your_api_key
     secret_key: your_secret_key
 
-DEFAULT_PROMPT: 文章：$context\n从上面文章里，找出能回答以下问题的答案。如果文中没有答案，回答“没找到答案”。问题是：$query\n
+DEFAULT_PROMPT: 问题是：$query，从下面文章里，找出能回答以上问题的答案。如果文中没有答案，回答“没找到答案”。 文章：$context\n
 
 upload_dir: assets/raw_upload_files
 vector_db_path: assets/db/DefaultVector.db

@@ -9,7 +9,10 @@ from typing import List, Union
 import yaml
 
 
-def make_prompt(query: str, context: str, custom_prompt: str = None) -> str:
+def make_prompt(query: str, context: str = None, custom_prompt: str = None) -> str:
+    if context is None:
+        return query
+
     if "$query" not in custom_prompt or "$context" not in custom_prompt:
         raise ValueError("prompt中必须含有$query和$context两个值")
 
