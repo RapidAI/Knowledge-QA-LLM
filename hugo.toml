@@ -1,4 +1,4 @@
-baseURL = 'https://github.com/RapidAI/Knowledge-QA-LLM/'
+baseURL = 'https://rapidai.github.io/Knowledge-QA-LLM/'
 languageCode = 'en-us'
 title = 'Knowledge-QA-LLM Documentation'
 enableEmoji = true
