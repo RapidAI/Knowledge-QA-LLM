@@ -1,4 +1,6 @@
-assets
+assets/db
+assets/models
+assets/raw_upload_files
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
