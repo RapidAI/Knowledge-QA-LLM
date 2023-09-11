@@ -12,17 +12,17 @@ tags:
 categories:
 ---
 
-### 1. Run
+#### 1. Run
 ```bash
 streamlit run webui.py
 ```
 
-### 2. UI Demo
+#### 2. UI Demo
 <div align="center">
     <img src="https://github.com/RapidAI/Knowledge-QA-LLM/releases/download/v0.0.1/UIDemo.gif" width="100%" height="100%">
 </div>
 
-### 3. CLI Demo
+#### 3. CLI Demo
 ```bash
 python cli.py
 ```

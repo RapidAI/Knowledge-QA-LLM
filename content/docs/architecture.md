@@ -13,7 +13,7 @@ categories:
 ---
 
 
-### Parse the document and store it in the database
+#### Parse the document and store it in the database
 ```mermaid
 flowchart LR
 
@@ -22,7 +22,7 @@ B --Embeddings--> C([Embeddings])
 C --Store--> D[(DataBase)]
 ```
 
-### Retrieve and answer questions
+#### Retrieve and answer questions
 ```mermaid
 flowchart LR
 E([Query]) --Embedding--> F([Embeddings]) --> H[(Database)] --Search--> G([Context])
@@ -30,7 +30,7 @@ E --> I([Prompt])
 G --> I --> J([LLM]) --> K([Answer])
 ```
 
-### Tools Used
+#### Tools Used
 - Document analysis: [`extract_office_content`](https://github.com/SWHL/ExtractOfficeContent), [`rapidocr_pdf`](https://github.com/RapidAI/RapidOCRPDF), [`rapidocr_onnxruntime`](https://github.com/RapidAI/RapidOCR)
 - Extract feature vector: [`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-base)
 - Vector storage: `sqlite`

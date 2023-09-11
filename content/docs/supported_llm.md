@@ -13,7 +13,7 @@ categories:
 ---
 
 
-### Already supported LLM API.
+#### Already supported LLM API.
 Now, in the current project, the list of supported models is as follows:
 - [x] [ChatGLM2-6B](https://huggingface.co/THUDM/chatglm2-6b)
 - [x] [BaiChuan-7B](https://huggingface.co/baichuan-inc/Baichuan-7B)
@@ -21,15 +21,10 @@ Now, in the current project, the list of supported models is as follows:
 - [x] [llama2](https://github.com/facebookresearch/llama)
 - [x] [InternLM-7b](https://huggingface.co/internlm/internlm-7b)
 
-### Support custom LLM.
-> ##### TIP
->
-> This LLM part of the project is independent.
->
-> After independent deployment and implementation, users can simply configure the inferface
-> functions in the **knowledge_qa_llm/llm** directory and use them normally.
->
-{: .block-tip }
+#### Support custom LLM.
+{{% alert context="info" %}}
+This LLM part of the project is independent. After independent deployment and implementation, users can simply configure the inferface functions in the **knowledge_qa_llm/llm** directory and use them normally.
+{{% /alert %}}
 
 Take supporting the InternLM-7b as an example for a brief explanation.
 1. Download the InternLM model in the Hugging Face. See detais for [internlm-7b](https://huggingface.co/internlm/internlm-7b).
