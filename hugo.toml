@@ -10,7 +10,7 @@ enableGitInfo = true # N.B. .GitInfo does not currently function with submodule 
 
 [module]
     [[module.imports]]
-        path = "github.com/SWHL/lotusdocs"
+        path = "github.com/colinwilson/lotusdocs"
         disable = false
     [[module.imports]]
         path = "github.com/gohugoio/hugo-mod-bootstrap-scss/v5"
