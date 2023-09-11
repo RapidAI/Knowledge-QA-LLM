@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Documentation on Knowledge-QA-LLM Documentation</title>
-    <link>https://github.com/RapidAI/Knowledge-QA-LLM/docs/</link>
+    <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/</link>
     <description>Recent content in Documentation on Knowledge-QA-LLM Documentation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Oct 2022 02:21:15 +0000</lastBuildDate><atom:link href="https://github.com/RapidAI/Knowledge-QA-LLM/docs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Oct 2022 02:21:15 +0000</lastBuildDate><atom:link href="https://rapidai.github.io/Knowledge-QA-LLM/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>https://github.com/RapidAI/Knowledge-QA-LLM/docs/overview/</link>
+      <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/overview/</link>
       <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://github.com/RapidAI/Knowledge-QA-LLM/docs/overview/</guid>
+      <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/overview/</guid>
       <description>Questions &amp;amp; Answers based on local knowledge base + LLM. Reason: The idea of this project comes from Langchain-Chatchat I have used this project before, but it is not very flexible and deployment is not very friendly. Learn from the ideas in How to build a knowledge question answering system with a large language model, and try to use this as a practice. Advantage: The whole project is modularized and does not depend on the lanchain library, each part can be easily replaced, and the code is simple and easy to understand.</description>
     </item>
     
     <item>
       <title>Architecture</title>
-      <link>https://github.com/RapidAI/Knowledge-QA-LLM/docs/architecture/</link>
+      <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/architecture/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://github.com/RapidAI/Knowledge-QA-LLM/docs/architecture/</guid>
+      <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/architecture/</guid>
       <description>Parse the document and store it in the database linkflowchart LR A([Documents]) --ExtractText--&amp;gt; B([sentences]) B --Embeddings--&amp;gt; C([Embeddings]) C --Store--&amp;gt; D[(DataBase)] Retrieve and answer questions linkflowchart LR E([Query]) --Embedding--&amp;gt; F([Embeddings]) --&amp;gt; H[(Database)] --Search--&amp;gt; G([Context]) E --&amp;gt; I([Prompt]) G --&amp;gt; I --&amp;gt; J([LLM]) --&amp;gt; K([Answer]) Tools Used link Document analysis: extract_office_content, rapidocr_pdf, rapidocr_onnxruntime Extract feature vector: moka-ai/m3e-small Vector storage: sqlite Vector retrieval: faiss UI: streamlit&amp;gt;=1.25.0 </description>
     </item>
     
     <item>
       <title>Changelog</title>
-      <link>https://github.com/RapidAI/Knowledge-QA-LLM/docs/changelog/</link>
+      <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/changelog/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://github.com/RapidAI/Knowledge-QA-LLM/docs/changelog/</guid>
+      <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/changelog/</guid>
       <description>2023-09-07 v0.0.9 update: link Add tips when database is empty. 2023-08-29 v0.0.8 update: link Fixed missing embedding_extract Fixed default parameters of LLM 2023-08-11 v0.0.7 update: link Optimize layout, remove the plugin option, and put the extract vector model option on the home page. The tips are translated into English for easy communication. Add project logo:🧐 Update CLI module code. 2023-08-05 v0.0.6 update: link Adapt more llm_api, include online llm api, such ad ERNIE-Bot-Turbo.</description>
     </item>
     
     <item>
       <title>Installation</title>
-      <link>https://github.com/RapidAI/Knowledge-QA-LLM/docs/installation/</link>
+      <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/installation/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://github.com/RapidAI/Knowledge-QA-LLM/docs/installation/</guid>
+      <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/installation/</guid>
       <description>1. Clone the whole repo into local directory. link git clone https://github.com/RapidAI/Knowledge-QA-LLM.git 2. Install the requirements. link cd Knowledge-QA-LLM pip install -r requirements.txt 3. Download models. linkDownload the moka-ai/m3e-small model and put it in the assets/models/m3e-small directory. This model is used to vectorize text content.
 4. Configure the LLM API. linkSeparately configure the interface of chatglm2-6b, interface startup reference: ChatGLM2-6B API. The specific usage method Reference: knowledge_qa_llm/llm/chatglm2_6b.py
 5. Change the config.</description>
@@ -47,19 +47,19 @@
     
     <item>
       <title>Installation</title>
-      <link>https://github.com/RapidAI/Knowledge-QA-LLM/docs/usage/</link>
+      <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/usage/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://github.com/RapidAI/Knowledge-QA-LLM/docs/usage/</guid>
+      <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/usage/</guid>
       <description>1. Run link streamlit run webui.py 2. UI Demo link 3. CLI Demo link python cli.py </description>
     </item>
     
     <item>
       <title>Support LLM</title>
-      <link>https://github.com/RapidAI/Knowledge-QA-LLM/docs/supported_llm/</link>
+      <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/supported_llm/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://github.com/RapidAI/Knowledge-QA-LLM/docs/supported_llm/</guid>
+      <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/supported_llm/</guid>
       <description>Already supported LLM API. linkNow, in the current project, the list of supported models is as follows:
 ChatGLM2-6B BaiChuan-7B Qwen-7B llama2 InternLM-7b Support custom LLM. link TIP linkThis LLM part of the project is independent.
 After independent deployment and implementation, users can simply configure the inferface functions in the knowledge_qa_llm/llm directory and use them normally.

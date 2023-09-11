@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Knowledge-QA-LLM Documentation</title>
-    <link>https://github.com/RapidAI/Knowledge-QA-LLM/categories/</link>
+    <link>https://rapidai.github.io/Knowledge-QA-LLM/categories/</link>
     <description>Recent content in Categories on Knowledge-QA-LLM Documentation</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://github.com/RapidAI/Knowledge-QA-LLM/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://rapidai.github.io/Knowledge-QA-LLM/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
