@@ -3,7 +3,7 @@ weight: 5
 date: "2023-09-11"
 draft: false
 author: "SWHL"
-title: "Installation"
+title: "Usage"
 icon: "data_usage"
 toc: true
 description: ""
