@@ -13,7 +13,7 @@
       <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/overview/</guid>
-      <description>Questions &amp;amp; Answers based on local knowledge base + LLM. Reason: The idea of this project comes from Langchain-Chatchat I have used this project before, but it is not very flexible and deployment is not very friendly. Learn from the ideas in How to build a knowledge question answering system with a large language model, and try to use this as a practice. Advantage: The whole project is modularized and does not depend on the lanchain library, each part can be easily replaced, and the code is simple and easy to understand.</description>
+      <description>🧐 Knowledge QA LLM link Questions &amp;amp; Answers based on local knowledge base + LLM. Reason: The idea of this project comes from Langchain-Chatchat I have used this project before, but it is not very flexible and deployment is not very friendly. Learn from the ideas in How to build a knowledge question answering system with a large language model, and try to use this as a practice. Advantage: The whole project is modularized and does not depend on the lanchain library, each part can be easily replaced, and the code is simple and easy to understand.</description>
     </item>
     
     <item>
@@ -61,9 +61,7 @@
       
       <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/supported_llm/</guid>
       <description>Already supported LLM API. linkNow, in the current project, the list of supported models is as follows:
-ChatGLM2-6B BaiChuan-7B Qwen-7B llama2 InternLM-7b Support custom LLM. link TIP linkThis LLM part of the project is independent.
-After independent deployment and implementation, users can simply configure the inferface functions in the knowledge_qa_llm/llm directory and use them normally.
-{: .block-tip }
+ChatGLM2-6B BaiChuan-7B Qwen-7B llama2 InternLM-7b Support custom LLM. link info This LLM part of the project is independent. After independent deployment and implementation, users can simply configure the inferface functions in the knowledge_qa_llm/llm directory and use them normally.
 Take supporting the InternLM-7b as an example for a brief explanation.
 Download the InternLM model in the Hugging Face.</description>
     </item>

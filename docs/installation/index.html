@@ -256,11 +256,7 @@
       <ul>
         <li>
           <ul>
-            <li><a href="#1-clone-the-whole-repo-into-local-directory">1. Clone the whole repo into local directory.</a></li>
-            <li><a href="#2-install-the-requirements">2. Install the requirements.</a></li>
-            <li><a href="#3-download-models">3. Download models.</a></li>
-            <li><a href="#4-configure-the-llm-api">4. Configure the LLM API.</a></li>
-            <li><a href="#5-change-the-configyaml">5. Change the <code>config.yaml</code>.</a></li>
+            <li></li>
           </ul>
         </li>
       </ul>
@@ -280,11 +276,7 @@
       <ul>
         <li>
           <ul>
-            <li><a href="#1-clone-the-whole-repo-into-local-directory">1. Clone the whole repo into local directory.</a></li>
-            <li><a href="#2-install-the-requirements">2. Install the requirements.</a></li>
-            <li><a href="#3-download-models">3. Download models.</a></li>
-            <li><a href="#4-configure-the-llm-api">4. Configure the LLM API.</a></li>
-            <li><a href="#5-change-the-configyaml">5. Change the <code>config.yaml</code>.</a></li>
+            <li></li>
           </ul>
         </li>
       </ul>
@@ -308,7 +300,7 @@
                                             
     
     <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
-        <h3 id="1-clone-the-whole-repo-into-local-directory">1. Clone the whole repo into local directory. <a href="#1-clone-the-whole-repo-into-local-directory" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+        <h4 id="1-clone-the-whole-repo-into-local-directory">1. Clone the whole repo into local directory. <a href="#1-clone-the-whole-repo-into-local-directory" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
 
 
   
@@ -327,7 +319,7 @@
   <code>git clone https://github.com/RapidAI/Knowledge-QA-LLM.git</code>
   </pre>
   </div>
-<h3 id="2-install-the-requirements">2. Install the requirements. <a href="#2-install-the-requirements" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+<h4 id="2-install-the-requirements">2. Install the requirements. <a href="#2-install-the-requirements" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
 
 
   
@@ -347,9 +339,9 @@
 pip install -r requirements.txt</code>
   </pre>
   </div>
-<h3 id="3-download-models">3. Download models. <a href="#3-download-models" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Download the <a href="https://huggingface.co/moka-ai/m3e-small/tree/main"><code>moka-ai/m3e-small</code></a> model and put it in the <code>assets/models/m3e-small</code> directory. This model is used to vectorize text content.</p>
-<h3 id="4-configure-the-llm-api">4. Configure the LLM API. <a href="#4-configure-the-llm-api" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Separately configure the interface of <code>chatglm2-6b</code>, interface startup reference: <a href="https://github.com/THUDM/ChatGLM2-6B/blob/main/api.py">ChatGLM2-6B API</a>. The specific usage method Reference: <a href="./knowledge_qa_llm/llm/chatglm2_6b.py"><code>knowledge_qa_llm/llm/chatglm2_6b.py</code></a></p>
-<h3 id="5-change-the-configyaml">5. Change the <code>config.yaml</code>. <a href="#5-change-the-configyaml" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Write the deployed <code>llm_api</code> to the <code>llm_api_url</code> field in the configuration file <a href="./knowledge_qa_llm/config.yaml"><code>knowledge_qa_llm/config.yaml</code></a>.</p>
+<h4 id="3-download-models">3. Download models. <a href="#3-download-models" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>Download the <a href="https://huggingface.co/moka-ai/m3e-small/tree/main"><code>moka-ai/m3e-small</code></a> model and put it in the <code>assets/models/m3e-small</code> directory. This model is used to vectorize text content.</p>
+<h4 id="4-configure-the-llm-api">4. Configure the LLM API. <a href="#4-configure-the-llm-api" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>Separately configure the interface of <code>chatglm2-6b</code>, interface startup reference: <a href="https://github.com/THUDM/ChatGLM2-6B/blob/main/api.py">ChatGLM2-6B API</a>. The specific usage method Reference: <a href="./knowledge_qa_llm/llm/chatglm2_6b.py"><code>knowledge_qa_llm/llm/chatglm2_6b.py</code></a></p>
+<h4 id="5-change-the-configyaml">5. Change the <code>config.yaml</code>. <a href="#5-change-the-configyaml" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>Write the deployed <code>llm_api</code> to the <code>llm_api_url</code> field in the configuration file <a href="./knowledge_qa_llm/config.yaml"><code>knowledge_qa_llm/config.yaml</code></a>.</p>
 
     </div>
 
@@ -387,9 +379,9 @@ pip install -r requirements.txt</code>
     <div id="last-modified" class="mt-1">
         <p class="mb-0 fw-semibold">Last updated <span
             id="relativetime"
-            data-authdate="2023-09-11T08:57:11&#43;0800"
-            title="11 Sep 2023, 08:57 &#43;0800">
-            11 Sep 2023, 08:57 &#43;0800
+            data-authdate="2023-09-11T10:05:42&#43;0800"
+            title="11 Sep 2023, 10:05 &#43;0800">
+            11 Sep 2023, 10:05 &#43;0800
         </span>. <span class="material-icons size-20 align-text-bottom opacity-75">history</span>
         </p>
     </div>

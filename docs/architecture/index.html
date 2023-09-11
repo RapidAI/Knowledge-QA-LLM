@@ -256,9 +256,7 @@
       <ul>
         <li>
           <ul>
-            <li><a href="#parse-the-document-and-store-it-in-the-database">Parse the document and store it in the database</a></li>
-            <li><a href="#retrieve-and-answer-questions">Retrieve and answer questions</a></li>
-            <li><a href="#tools-used">Tools Used</a></li>
+            <li></li>
           </ul>
         </li>
       </ul>
@@ -278,9 +276,7 @@
       <ul>
         <li>
           <ul>
-            <li><a href="#parse-the-document-and-store-it-in-the-database">Parse the document and store it in the database</a></li>
-            <li><a href="#retrieve-and-answer-questions">Retrieve and answer questions</a></li>
-            <li><a href="#tools-used">Tools Used</a></li>
+            <li></li>
           </ul>
         </li>
       </ul>
@@ -304,18 +300,18 @@
                                             
     
     <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
-        <h3 id="parse-the-document-and-store-it-in-the-database">Parse the document and store it in the database <a href="#parse-the-document-and-store-it-in-the-database" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><pre class="mermaid">flowchart LR
+        <h4 id="parse-the-document-and-store-it-in-the-database">Parse the document and store it in the database <a href="#parse-the-document-and-store-it-in-the-database" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><pre class="mermaid">flowchart LR
 
 A([Documents]) --ExtractText--&gt; B([sentences])
 B --Embeddings--&gt; C([Embeddings])
 C --Store--&gt; D[(DataBase)]
 </pre>
-<h3 id="retrieve-and-answer-questions">Retrieve and answer questions <a href="#retrieve-and-answer-questions" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><pre class="mermaid">flowchart LR
+<h4 id="retrieve-and-answer-questions">Retrieve and answer questions <a href="#retrieve-and-answer-questions" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><pre class="mermaid">flowchart LR
 E([Query]) --Embedding--&gt; F([Embeddings]) --&gt; H[(Database)] --Search--&gt; G([Context])
 E --&gt; I([Prompt])
 G --&gt; I --&gt; J([LLM]) --&gt; K([Answer])
 </pre>
-<h3 id="tools-used">Tools Used <a href="#tools-used" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
+<h4 id="tools-used">Tools Used <a href="#tools-used" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
 <li>Document analysis: <a href="https://github.com/SWHL/ExtractOfficeContent"><code>extract_office_content</code></a>, <a href="https://github.com/RapidAI/RapidOCRPDF"><code>rapidocr_pdf</code></a>, <a href="https://github.com/RapidAI/RapidOCR"><code>rapidocr_onnxruntime</code></a></li>
 <li>Extract feature vector: <a href="https://huggingface.co/moka-ai/m3e-base"><code>moka-ai/m3e-small</code></a></li>
 <li>Vector storage: <code>sqlite</code></li>
@@ -359,9 +355,9 @@ G --&gt; I --&gt; J([LLM]) --&gt; K([Answer])
     <div id="last-modified" class="mt-1">
         <p class="mb-0 fw-semibold">Last updated <span
             id="relativetime"
-            data-authdate="2023-09-11T08:57:11&#43;0800"
-            title="11 Sep 2023, 08:57 &#43;0800">
-            11 Sep 2023, 08:57 &#43;0800
+            data-authdate="2023-09-11T10:05:42&#43;0800"
+            title="11 Sep 2023, 10:05 &#43;0800">
+            11 Sep 2023, 10:05 &#43;0800
         </span>. <span class="material-icons size-20 align-text-bottom opacity-75">history</span>
         </p>
     </div>
