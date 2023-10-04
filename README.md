@@ -21,7 +21,7 @@
     - Support documents in common formats, including `txt, md, pdf, docx, pptx, excel` etc. Of course, other types of documents can also be customized and supported.
 
 ### Demo
-⚠️ If you have Baidu Account, you can visit the [online demo](https://aistudio.baidu.com/projectdetail/6675380?contributionType=1) based ERNIE Bot.
+⚠️ If you have Baidu Account, you can visit the [online demo](https://aistudio.baidu.com/projectdetail/6675380?contributionType=1) based on ERNIE Bot.
 
 <div align="center">
     <img src="https://github.com/RapidAI/Knowledge-QA-LLM/releases/download/v0.0.1/UIDemo.gif" width="100%" height="100%">
