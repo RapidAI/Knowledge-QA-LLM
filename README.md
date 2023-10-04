@@ -32,7 +32,7 @@ Full documentation can be found on [docs](https://rapidai.github.io/Knowledge-QA
 
 ### Roadmap
 - [ ] Support keyword + vector hybrid search.
-- [ ] UI base vue.
+- [ ] Vue.js based UI .
 
 ### Contributing
 - Pull requests are welcome. For major changes, please open an issue first
