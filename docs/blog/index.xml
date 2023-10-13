@@ -13,10 +13,21 @@
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/blog/supported_llm/</guid>
-      <description>Already supported LLM API. linkNow, in the current project, the list of supported models is as follows:
-ChatGLM2-6B BaiChuan-7B Qwen-7B llama2 InternLM-7b Support custom LLM. link info This LLM part of the project is independent. After independent deployment and implementation, users can simply configure the inferface functions in the knowledge_qa_llm/llm directory and use them normally.
-Take supporting the InternLM-7b as an example for a brief explanation.
-Download the InternLM model in the Hugging Face.</description>
+      <description>已经支持的LLM API. link✔ ChatGLM2-6B
+✔ BaiChuan-7B
+✔ Qwen-7B
+✔ llama2
+✔ InternLM-7b</description>
+    </item>
+    
+    <item>
+      <title>自定义LLM API</title>
+      <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/blog/custom_llm_api/</link>
+      <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/blog/custom_llm_api/</guid>
+      <description>info 该项目的LLM部分是独立的，用户可在**knowledge_qa_llm/llm**自定义配置所需的LLM接口。 下面以自定义支持InterLM-7b大模型为例，说明如何支持的。
+1. 下载InterLM模型到本地，具体如何下载，参见internlm-7b。 link2. 编写模型的推理代码，这一点可以参考ChatGLM&amp;rsquo;s API的实现。只需要替换模型加载部分为InterLM的即可。具体如下： link from fastapi import FastAPI, Request from transformers import AutoTokenizer, AutoModel import uvicorn, json, datetime import torch DEVICE = &amp;#34;cuda&amp;#34; DEVICE_ID = &amp;#34;0&amp;#34; CUDA_DEVICE = f&amp;#34;{DEVICE}:{DEVICE_ID}&amp;#34; if DEVICE_ID else DEVICE def torch_gc(): if torch.cuda.is_available(): with torch.cuda.device(CUDA_DEVICE): torch.cuda.empty_cache() torch.cuda.ipc_collect() app = FastAPI() @app.post(&amp;#34;/&amp;#34;) async def create_item(request: Request): global model, tokenizer json_post_raw = await request.json() json_post = json.dumps(json_post_raw) json_post_list = json.loads(json_post) prompt = json_post_list.</description>
     </item>
     
   </channel>
