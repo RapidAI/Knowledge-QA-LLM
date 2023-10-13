@@ -9,15 +9,14 @@ publishdate: "2023-09-08"
 ---
 
 
-#### Already supported LLM API.
-Now, in the current project, the list of supported models is as follows:
+#### 已经支持的LLM API.
 - [x] [ChatGLM2-6B](https://huggingface.co/THUDM/chatglm2-6b)
 - [x] [BaiChuan-7B](https://huggingface.co/baichuan-inc/Baichuan-7B)
 - [x] [Qwen-7B](https://huggingface.co/Qwen/Qwen-7B)
 - [x] [llama2](https://github.com/facebookresearch/llama)
 - [x] [InternLM-7b](https://huggingface.co/internlm/internlm-7b)
 
-#### Support custom LLM.
+#### 自定义大模型API
 {{% alert context="info" %}}
 This LLM part of the project is independent. After independent deployment and implementation, users can simply configure the inferface functions in the **knowledge_qa_llm/llm** directory and use them normally.
 {{% /alert %}}
@@ -26,7 +25,7 @@ Take supporting the InternLM-7b as an example for a brief explanation.
 1. Download the InternLM model in the Hugging Face. See detais for [internlm-7b](https://huggingface.co/internlm/internlm-7b).
 2. Write API reasoning service interface. For this part, you can refer to [ChatGLM's API](https://github.com/THUDM/ChatGLM-6B/blob/main/api.py) implementation. You just need to replace the model loading part of it with InternLM's. As shown below:
 
-    ```python
+    ```python {linenos=table}
     from fastapi import FastAPI, Request
     from transformers import AutoTokenizer, AutoModel
     import uvicorn, json, datetime
@@ -87,7 +86,7 @@ Take supporting the InternLM-7b as an example for a brief explanation.
 3. Adapt the current project.
     1. Write the `knowledge_qa_llm/llm/internlm_7b.py`
 
-        ```python
+        ```python {linenos=table}
         import json
         from typing import List, Optional
 
@@ -121,7 +120,7 @@ Take supporting the InternLM-7b as an example for a brief explanation.
                     return f"Network error:{e}"
         ```
     2. Import the class in the `knowledge_qa_llm/llm/__init__.py`
-        ```python
+        ```python {linenos=table}
         # -*- encoding: utf-8 -*-
         # @Author: SWHL
         # @Contact: liekkaskono@163.com
