@@ -3,13 +3,10 @@ weight: 200
 date: "2023-09-11"
 draft: false
 author: "SWHL"
-title: "Quickstart"
+title: "快速开始"
 icon: "rocket_launch"
 toc: true
-description: ""
 publishdate: "2023-09-08"
-tags:
-categories:
 ---
 
 

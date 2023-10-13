@@ -8,8 +8,6 @@ icon: "circle"
 toc: true
 description: ""
 publishdate: "2023-09-08"
-tags:
-categories:
 ---
 
 <div align="center">
