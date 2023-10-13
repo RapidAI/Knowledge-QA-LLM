@@ -1,9 +1,8 @@
 <div align="center">
     <div>&nbsp;</div>
     <div align="center">
-        <b><font size="6">🧐 Knowledge QA LLM</font></b>
+      <h1><b>🧐 Knowledge QA LLM</b></h1>
     </div>
-    <div>&nbsp;</div>
      <a href=""><img src="https://img.shields.io/badge/Python->=3.8,<3.12-aff.svg"></a>
      <a href=""><img src="https://img.shields.io/badge/OS-Linux%2C%20Win%2C%20Mac-pink.svg"></a>
      <a href=""><img src="https://img.shields.io/github/v/release/RapidAI/QA-LocalKnowledge-LLM?logo=github"></a>
