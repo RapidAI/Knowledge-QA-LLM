@@ -33,7 +33,7 @@ Write the deployed `llm_api` to the `llm_api_url` field in the configuration fil
 #### 6. 运行
 {{< alert context="info" text="streamlit框架的启动，不可以用`python webui.py`方式启动，必须用以下方式启动。" />}}
 
-{{< tabs tabTotal="2"> }}
+{{< tabs tabTotal="2">}}
 {{% tab tabName="UI Demo" %}}
 
 ```bash {linenos=table}
