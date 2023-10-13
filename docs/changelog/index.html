@@ -20,7 +20,6 @@
     <meta charset="utf-8" />
     <title>Changelog | Knowledge-QA-LLM Documentation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A Modern Documentation Theme for Hugo" />
     <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
     <meta name="author" content="Colin Wilson - Lotus Labs" />
     <meta name="email" content="support@aigis.uk" />
@@ -33,11 +32,25 @@
 <link rel="icon" type="image/png" sizes="32x32" href="https://rapidai.github.io/Knowledge-QA-LLM/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://rapidai.github.io/Knowledge-QA-LLM/favicon-16x16.png">
 <link rel="manifest" crossorigin="use-credentials" href="https://rapidai.github.io/Knowledge-QA-LLM/site.webmanifest">
+<meta property="og:title" content="Changelog" />
+<meta property="og:description" content="2023-09-07 v0.0.9 update: link Add tips when database is empty. 2023-08-29 v0.0.8 update: link Fixed missing embedding_extract Fixed default parameters of LLM 2023-08-11 v0.0.7 update: link Optimize layout, remove the plugin option, and put the extract vector model option on the home page. The tips are translated into English for easy communication. Add project logo:🧐 Update CLI module code. 2023-08-05 v0.0.6 update: link Adapt more llm_api, include online llm api, such ad ERNIE-Bot-Turbo." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rapidai.github.io/Knowledge-QA-LLM/docs/changelog/" /><meta property="og:image" content="https://rapidai.github.io/Knowledge-QA-LLM/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_1741929949451282376.png"/><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2023-09-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-10-12T20:19:34-05:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://rapidai.github.io/Knowledge-QA-LLM/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_1741929949451282376.png"/>
+<meta name="twitter:title" content="Changelog"/>
+<meta name="twitter:description" content="2023-09-07 v0.0.9 update: link Add tips when database is empty. 2023-08-29 v0.0.8 update: link Fixed missing embedding_extract Fixed default parameters of LLM 2023-08-11 v0.0.7 update: link Optimize layout, remove the plugin option, and put the extract vector model option on the home page. The tips are translated into English for easy communication. Add project logo:🧐 Update CLI module code. 2023-08-05 v0.0.6 update: link Adapt more llm_api, include online llm api, such ad ERNIE-Bot-Turbo."/>
 
     
     <script>(()=>{var t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,e=localStorage.getItem("theme");t&&e===null&&(localStorage.setItem("theme","dark"),document.documentElement.setAttribute("data-dark-mode","")),t&&e==="dark"&&document.documentElement.setAttribute("data-dark-mode",""),e==="dark"&&document.documentElement.setAttribute("data-dark-mode","")})()</script>
     
     
+            
+                
+                <script type="text/javascript" src="https://rapidai.github.io/Knowledge-QA-LLM/docs/js/flexsearch.bundle.min.249548594cb6843f3060a3cdd3043799676c59ce8db83358a3fc2e4d20598d05dfa6ce4994805d2835cb33b54dc9b9e7.js" integrity="sha384-JJVIWUy2hD8wYKPN0wQ3mWdsWc6NuDNYo/wuTSBZjQXfps5JlIBdKDXLM7VNybnn" crossorigin="anonymous"></script>
+                
+        
     
     
     
@@ -57,7 +70,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
     <link href="https://fonts.googleapis.com/css?family=Inter:300,400,600,700|Fira+Code:500,700&display=block" rel="stylesheet">
 
-    <link rel="stylesheet" href="/Knowledge-QA-LLM/docs/scss/style.min.b1d7009fcb3a8b0151758684274bb4b0c75d855b2326442acbd933d2e2ce65abb51a3f84c732bb73c35513c6cd1a8bae.css" integrity="sha384-sdcAn8s6iwFRdYaEJ0u0sMddhVsjJkQqy9kz0uLOZau1Gj&#43;ExzK7c8NVE8bNGouu"crossorigin="anonymous">
+    <link rel="stylesheet" href="/Knowledge-QA-LLM/docs/scss/style.min.03d881508d0c712c4936077f67fedccc064065ae7997b6798f919fcfc1be2c928166de0652eac8ae53ad62459d222aa5.css" integrity="sha384-A9iBUI0McSxJNgd/Z/7czAZAZa55l7Z5j5Gfz8G&#43;LJKBZt4GUurIrlOtYkWdIiql"crossorigin="anonymous">
     
     
     
@@ -92,11 +105,31 @@
                     
                         
                         <li class="">
-                            <a class="sidebar-root-link" href="https://rapidai.github.io/Knowledge-QA-LLM/docs/architecture/">
-                                <i class="material-icons me-2">apartment</i>
+                            <a class="sidebar-root-link" href="https://rapidai.github.io/Knowledge-QA-LLM/docs/quickstart/">
+                                <i class="material-icons me-2">rocket_launch</i>
                                 
-                                Architecture
+                                Quickstart
                             </a>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown  ">
+                            <button class="btn">
+                                <i class="material-icons me-2">article</i>
+                                博客
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" "><a class="sidebar-nested-link" href="https://rapidai.github.io/Knowledge-QA-LLM/docs/blog/supported_llm/">支持的LLM</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
                         </li>
                     
                 
@@ -107,39 +140,6 @@
                                 <i class="material-icons me-2">update</i>
                                 
                                 Changelog
-                            </a>
-                        </li>
-                    
-                
-                    
-                        
-                        <li class="">
-                            <a class="sidebar-root-link" href="https://rapidai.github.io/Knowledge-QA-LLM/docs/installation/">
-                                <i class="material-icons me-2">interactive_space</i>
-                                
-                                Installation
-                            </a>
-                        </li>
-                    
-                
-                    
-                        
-                        <li class="">
-                            <a class="sidebar-root-link" href="https://rapidai.github.io/Knowledge-QA-LLM/docs/usage/">
-                                <i class="material-icons me-2">data_usage</i>
-                                
-                                Usage
-                            </a>
-                        </li>
-                    
-                
-                    
-                        
-                        <li class="">
-                            <a class="sidebar-root-link" href="https://rapidai.github.io/Knowledge-QA-LLM/docs/supported_llm/">
-                                <i class="material-icons me-2">support_agent</i>
-                                
-                                Support LLM
                             </a>
                         </li>
                     
@@ -174,9 +174,24 @@
             <button id="close-sidebar" class="btn btn-icon btn-soft">
                 <span class="material-icons size-20 menu-icon align-middle">menu</span>
             </button>
-            <span><div id="docsearch"></div></span>
             
             
+                    
+                    <button id="flexsearch-button" class="ms-3 btn btn-soft" data-bs-toggle="collapse" data-bs-target="#FlexSearchCollapse" aria-expanded="false" aria-controls="FlexSearchCollapse">
+                        <span class="material-icons size-20 menu-icon align-middle">search</span>
+                        <span class="flexsearch-button-placeholder ms-1 me-2 d-none d-sm-block">Search</span>
+                        <div class="d-none d-sm-block">
+                            <span class="flexsearch-button-keys">
+                                <kbd class="flexsearch-button-cmd-key">
+                                    <svg width="44" height="15"><path d="M2.118,11.5A1.519,1.519,0,0,1,1,11.042,1.583,1.583,0,0,1,1,8.815a1.519,1.519,0,0,1,1.113-.458h.715V6.643H2.118A1.519,1.519,0,0,1,1,6.185,1.519,1.519,0,0,1,.547,5.071,1.519,1.519,0,0,1,1,3.958,1.519,1.519,0,0,1,2.118,3.5a1.519,1.519,0,0,1,1.114.458A1.519,1.519,0,0,1,3.69,5.071v.715H5.4V5.071A1.564,1.564,0,0,1,6.976,3.5,1.564,1.564,0,0,1,8.547,5.071,1.564,1.564,0,0,1,6.976,6.643H6.261V8.357h.715a1.575,1.575,0,0,1,1.113,2.685,1.583,1.583,0,0,1-2.227,0A1.519,1.519,0,0,1,5.4,9.929V9.214H3.69v.715a1.519,1.519,0,0,1-.458,1.113A1.519,1.519,0,0,1,2.118,11.5Zm0-.857a.714.714,0,0,0,.715-.714V9.214H2.118a.715.715,0,1,0,0,1.429Zm4.858,0a.715.715,0,1,0,0-1.429H6.261v.715a.714.714,0,0,0,.715.714ZM3.69,8.357H5.4V6.643H3.69ZM2.118,5.786h.715V5.071a.714.714,0,0,0-.715-.714.715.715,0,0,0-.5,1.22A.686.686,0,0,0,2.118,5.786Zm4.143,0h.715a.715.715,0,0,0,.5-1.22.715.715,0,0,0-1.22.5Z" fill="currentColor"></path><path d="M12.4,11.475H11.344l3.879-7.95h1.056Z" fill="currentColor"></path><path d="M25.073,5.384l-.864.576a2.121,2.121,0,0,0-1.786-.923,2.207,2.207,0,0,0-2.266,2.326,2.206,2.206,0,0,0,2.266,2.325,2.1,2.1,0,0,0,1.782-.918l.84.617a3.108,3.108,0,0,1-2.622,1.293,3.217,3.217,0,0,1-3.349-3.317,3.217,3.217,0,0,1,3.349-3.317A3.046,3.046,0,0,1,25.073,5.384Z" fill="currentColor"></path><path d="M30.993,5.142h-2.07v5.419H27.891V5.142h-2.07V4.164h5.172Z" fill="currentColor"></path><path d="M34.67,4.164c1.471,0,2.266.658,2.266,1.851,0,1.087-.832,1.809-2.134,1.855l2.107,2.691h-1.28L33.591,7.87H33.07v2.691H32.038v-6.4Zm-1.6.969v1.8h1.572c.832,0,1.22-.3,1.22-.918s-.411-.882-1.22-.882Z" fill="currentColor"></path><path d="M42.883,10.561H38.31v-6.4h1.033V9.583h3.54Z" fill="currentColor"></path></svg>
+                                </kbd>
+                                <kbd class="flexsearch-button-key">
+                                    <svg width="15" height="15"><path d="M5.926,12.279H4.41L9.073,2.721H10.59Z" fill="currentColor"/></svg>
+                                </kbd>
+                            </span>
+                        </div>
+                    </button>
+                
             </div>
 
         <div class="d-flex align-items-center">
@@ -220,6 +235,35 @@
     </div>
     
     
+            <div class="collapse" id="FlexSearchCollapse">
+                <div class="flexsearch-container">
+                    <div class="flexsearch-keymap">
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow down" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3"></path></g></svg></kbd>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow up" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to navigate</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Enter key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to select</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Escape key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to close</span>
+                        </li>
+                    </div>
+                    <form class="flexsearch position-relative flex-grow-1 ms-2 me-2">
+                        <div class="d-flex flex-row">
+                            <input id="flexsearch" class="form-control" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <button id="hideFlexsearch" type="button" class="ms-2 btn btn-soft">
+                                cancel
+                            </button>
+                        </div>
+                        <div id="suggestions" class="shadow rounded-1 d-none"></div>
+                    </form>
+                </div>
+            </div>
+        
     
     
 </div>
@@ -287,9 +331,7 @@
                                         <div class="mb-0 d-flex">
                                             
                                             <h1 class="content-title mb-0">
-                                                <span class="title-text">
-                                                    Changelog
-                                                </span>
+                                                Changelog
                                                 
                                             </h1>
                                         </div>
@@ -369,9 +411,9 @@
     <div id="last-modified" class="mt-1">
         <p class="mb-0 fw-semibold">Last updated <span
             id="relativetime"
-            data-authdate="2023-09-11T10:05:42&#43;0800"
-            title="11 Sep 2023, 10:05 &#43;0800">
-            11 Sep 2023, 10:05 &#43;0800
+            data-authdate="2023-10-12T20:19:34-0500"
+            title="12 Oct 2023, 20:19 -0500">
+            12 Oct 2023, 20:19 -0500
         </span>. <span class="material-icons size-20 align-text-bottom opacity-75">history</span>
         </p>
     </div>
@@ -387,22 +429,11 @@
 
 	<div class="row flex-xl-nowrap ">
 	<div class="col-sm-6 pt-2 doc-next">
-		<a href="/Knowledge-QA-LLM/docs/architecture/">
+		<a href="/Knowledge-QA-LLM/docs/blog/supported_llm/">
 			<div class="card h-100 my-1">
 				<div class="card-body py-2">
-                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Architecture</p>
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> 支持的LLM</p>
 					<p class="card-text ms-2"></p>
-					
-				</div>
-			</div>
-		</a>
-        </div>
-	<div class="col-sm-6 pt-2 doc-prev">
-		<a class="ms-auto" href="/Knowledge-QA-LLM/docs/installation/">
-			<div class="card h-100 my-1 text-end">
-				<div class="card-body py-2">
-                    <p class="card-title fs-5 fw-semibold lh-base mb-0">Installation <i class="material-icons align-middle">navigate_next</i></p>
-					<p class="card-text me-2"></p>
 					
 				</div>
 			</div>
@@ -444,7 +475,6 @@
     
 
 
-    
 
 
     
@@ -452,7 +482,6 @@
         
     
     
-    
 
 
 
@@ -461,30 +490,279 @@
 
     
 
-    <script src="/Knowledge-QA-LLM/docs/js/bootstrap.e8d9a90c17df6cf9c9b09d70807f24da08765377598f34eeffe9cc9c2b9d53bfdf9628eadd25faa1c9f4cf7c1e9193c8.js" integrity="sha384-6NmpDBffbPnJsJ1wgH8k2gh2U3dZjzTu/&#43;nMnCudU7/flijq3SX6ocn0z3wekZPI"defer></script>
+    <script src="/Knowledge-QA-LLM/docs/js/bootstrap.39e36097440e8ae1bae5fa5b30b62819b701b2b6a0b19a492a1bf309e2a1dcfc02734909ea7951d33c11038d5ac48cd4.js" integrity="sha384-OeNgl0QOiuG65fpbMLYoGbcBsragsZpJKhvzCeKh3PwCc0kJ6nlR0zwRA41axIzU"defer></script>
 
 
-    <script type="text/javascript" src="https://rapidai.github.io/Knowledge-QA-LLM/docs/js/bundle.min.f6f66f0e2808ecb12b892c811fbdefb7353cbd0aa55c1701d3a3315637d1cc08552562c5e73eea2ab7f7da6a325d1347.js" integrity="sha384-9vZvDigI7LEriSyBH73vtzU8vQqlXBcB06MxVjfRzAhVJWLF5z7qKrf32moyXRNH" crossorigin="anonymous" defer></script>
-    <script>
-    window.addEventListener('DOMContentLoaded', function() {
-        
-        docsearch({
-            container: '#docsearch',
-            appId: 'O2QIOCBDAK',
-            apiKey: 'fdc60eee76a72a35d739b54521498b77',
-            indexName: 'dev_lotusdocs.dev',
-            placeholder: 'Search Documentation',
-            translations: {
-                button: {
-                    buttonText: 'Search',
-                    buttonAriaLabel: 'Search',
-                }
-            }
+    <script type="text/javascript" src="https://rapidai.github.io/Knowledge-QA-LLM/docs/js/bundle.min.eb577be45f11720d6b6b9c096b70a2826fe841dc859014e985e87379643da3fa7613e3c602ea697f82086eba7ba9b205.js" integrity="sha384-61d75F8Rcg1ra5wJa3Cigm/oQdyFkBTphehzeWQ9o/p2E&#43;PGAuppf4IIbrp7qbIF" crossorigin="anonymous" defer></script>
+    
+
+    
+    <script type="module">
+    var suggestions = document.getElementById('suggestions');
+    var search = document.getElementById('flexsearch');
+
+    const flexsearchContainer = document.getElementById('FlexSearchCollapse');
+
+    const hideFlexsearchBtn = document.getElementById('hideFlexsearch');
+
+    const configObject = { toggle: false }
+    const flexsearchContainerCollapse = new Collapse(flexsearchContainer, configObject) 
+
+    if (search !== null) {
+        document.addEventListener('keydown', inputFocus);
+        flexsearchContainer.addEventListener('shown.bs.collapse', function () {
+            search.focus();
         });
+        
+        var topHeader = document.getElementById("top-header");
+        document.addEventListener('click', function(elem) {
+            if (!flexsearchContainer.contains(elem.target) && !topHeader.contains(elem.target))
+                flexsearchContainerCollapse.hide();
+        });
+    }
+
+    hideFlexsearchBtn.addEventListener('click', () =>{
+        flexsearchContainerCollapse.hide()
+    })
+
+    function inputFocus(e) {
+        if (e.ctrlKey && e.key === '/') {
+            e.preventDefault();
+            flexsearchContainerCollapse.toggle();
+        }
+        if (e.key === 'Escape' ) {
+            search.blur();
+            
+            flexsearchContainerCollapse.hide();
+        }
+    };
+
+    document.addEventListener('click', function(event) {
+
+    var isClickInsideElement = suggestions.contains(event.target);
+
+    if (!isClickInsideElement) {
+        suggestions.classList.add('d-none');
+    }
+
     });
-</script>
+
+    
+
+
+    document.addEventListener('keydown',suggestionFocus);
+
+    function suggestionFocus(e) {
+    const suggestionsHidden = suggestions.classList.contains('d-none');
+    if (suggestionsHidden) return;
+
+    const focusableSuggestions= [...suggestions.querySelectorAll('a')];
+    if (focusableSuggestions.length === 0) return;
+
+    const index = focusableSuggestions.indexOf(document.activeElement);
+
+    if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const nextIndex = index > 0 ? index - 1 : 0;
+        focusableSuggestions[nextIndex].focus();
+    }
+    else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const nextIndex= index + 1 < focusableSuggestions.length ? index + 1 : index;
+        focusableSuggestions[nextIndex].focus();
+    }
+
+    }
+
+    
+
+
+    (function(){
+
+    var index = new FlexSearch.Document({
+        
+        tokenize: "full",
+        minlength:  1 ,
+        cache:  100 ,
+        optimize:  true ,
+        document: {
+        id: 'id',
+        store: [
+            "href", "title", "description"
+        ],
+        index: ["title", "description", "content"]
+        }
+    });
+
+
+    
+
 
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+
+    
+
+    index.add(
+            {
+                id:  0 ,
+                href: "\/Knowledge-QA-LLM\/docs\/",
+                title: "Documentation",
+                description: "",
+                content: ""
+            }
+        );
+    index.add(
+            {
+                id:  1 ,
+                href: "\/Knowledge-QA-LLM\/docs\/overview\/",
+                title: "Overview",
+                description: "  🧐 Knowledge QA LLM   Introduction link Questions \u0026 Answers based on local knowledge base + LLM. Reason: The idea of this project comes from Langchain-Chatchat I have used this project before, but it is not very flexible and deployment is not very friendly. Learn from the ideas in How to build a knowledge question answering system with a large language model, and try to use this as a practice.",
+                content: " 🧐 Knowledge QA LLM Introduction link Questions \u0026 Answers based on local knowledge base + LLM. Reason: The idea of this project comes from Langchain-Chatchat I have used this project before, but it is not very flexible and deployment is not very friendly. Learn from the ideas in How to build a knowledge question answering system with a large language model, and try to use this as a practice. Advantage: The whole project is modularized and does not depend on the lanchain library, each part can be easily replaced, and the code is simple and easy to understand. In addition to the large language model interface that needs to be deployed separately, other parts can use CPU. Support documents in common formats, including txt, md, pdf, docx, pptx, excel etc. Of course, other types of documents can also be customized and supported. 📣 We’re looking for front-end development engineers interested in Knowledge QA with LLM, who can help us achieve front-end and back-end separation with our current implementation. linkArchitecture linkParse the document and store it in the database linkflowchart LR A([Documents]) --ExtractText--\u003e B([sentences]) B --Embeddings--\u003e C([Embeddings]) C --Store--\u003e D[(DataBase)] Retrieve and answer questions linkflowchart LR E([Query]) --Embedding--\u003e F([Embeddings]) --\u003e H[(Database)] --Search--\u003e G([Context]) E --\u003e I([Prompt]) G --\u003e I --\u003e J([LLM]) --\u003e K([Answer]) Tools Used link Document analysis: extract_office_content, rapidocr_pdf, rapidocr_onnxruntime Extract feature vector: moka-ai/m3e-small Vector storage: sqlite Vector retrieval: faiss UI: streamlit\u003e=1.25.0 "
+            }
+        );
+    index.add(
+            {
+                id:  2 ,
+                href: "\/Knowledge-QA-LLM\/docs\/quickstart\/",
+                title: "Quickstart",
+                description: "1. Clone the whole repo into local directory. link git clone https://github.com/RapidAI/Knowledge-QA-LLM.git 2. Install the requirements. link cd Knowledge-QA-LLM pip install -r requirements.txt 3. Download models. linkDownload the moka-ai/m3e-small model and put it in the assets/models/m3e-small directory. This model is used to vectorize text content.\n4. Configure the LLM API. linkSeparately configure the interface of chatglm2-6b, interface startup reference: ChatGLM2-6B API. The specific usage method Reference: knowledge_qa_llm/llm/chatglm2_6b.py\n5. Change the config.",
+                content: "1. Clone the whole repo into local directory. link git clone https://github.com/RapidAI/Knowledge-QA-LLM.git 2. Install the requirements. link cd Knowledge-QA-LLM pip install -r requirements.txt 3. Download models. linkDownload the moka-ai/m3e-small model and put it in the assets/models/m3e-small directory. This model is used to vectorize text content.\n4. Configure the LLM API. linkSeparately configure the interface of chatglm2-6b, interface startup reference: ChatGLM2-6B API. The specific usage method Reference: knowledge_qa_llm/llm/chatglm2_6b.py\n5. Change the config.yaml. linkWrite the deployed llm_api to the llm_api_url field in the configuration file knowledge_qa_llm/config.yaml.\n6. Run link streamlit run webui.py 7. UI Demo link 8. CLI Demo link python cli.py "
+            }
+        );
+    index.add(
+            {
+                id:  3 ,
+                href: "\/Knowledge-QA-LLM\/docs\/blog\/",
+                title: "博客",
+                description: "",
+                content: ""
+            }
+        );
+    index.add(
+            {
+                id:  4 ,
+                href: "\/Knowledge-QA-LLM\/docs\/blog\/supported_llm\/",
+                title: "支持的LLM",
+                description: "Already supported LLM API. linkNow, in the current project, the list of supported models is as follows:\nChatGLM2-6B BaiChuan-7B Qwen-7B llama2 InternLM-7b Support custom LLM. link info This LLM part of the project is independent. After independent deployment and implementation, users can simply configure the inferface functions in the knowledge_qa_llm/llm directory and use them normally.\nTake supporting the InternLM-7b as an example for a brief explanation.\nDownload the InternLM model in the Hugging Face.",
+                content: "Already supported LLM API. linkNow, in the current project, the list of supported models is as follows:\nChatGLM2-6B BaiChuan-7B Qwen-7B llama2 InternLM-7b Support custom LLM. link info This LLM part of the project is independent. After independent deployment and implementation, users can simply configure the inferface functions in the knowledge_qa_llm/llm directory and use them normally.\nTake supporting the InternLM-7b as an example for a brief explanation.\nDownload the InternLM model in the Hugging Face. See detais for internlm-7b.\nWrite API reasoning service interface. For this part, you can refer to ChatGLM’s API implementation. You just need to replace the model loading part of it with InternLM’s. As shown below:\nfrom fastapi import FastAPI, Request from transformers import AutoTokenizer, AutoModel import uvicorn, json, datetime import torch DEVICE = \"cuda\" DEVICE_ID = \"0\" CUDA_DEVICE = f\"{DEVICE}:{DEVICE_ID}\" if DEVICE_ID else DEVICE def torch_gc(): if torch.cuda.is_available(): with torch.cuda.device(CUDA_DEVICE): torch.cuda.empty_cache() torch.cuda.ipc_collect() app = FastAPI() @app.post(\"/\") async def create_item(request: Request): global model, tokenizer json_post_raw = await request.json() json_post = json.dumps(json_post_raw) json_post_list = json.loads(json_post) prompt = json_post_list.get('prompt') history = json_post_list.get('history') max_length = json_post_list.get('max_length') top_p = json_post_list.get('top_p') temperature = json_post_list.get('temperature') response, history = model.chat(tokenizer, prompt, history=history, max_new_tokens=max_length if max_length else 2048, top_p=top_p if top_p else 0.7, temperature=temperature if temperature else 0.95) now = datetime.datetime.now() time = now.strftime(\"%Y-%m-%d %H:%M:%S\") answer = { \"response\": response, \"history\": history, \"status\": 200, \"time\": time } log = \"[\" + time + \"] \" + '\", prompt:\"' + prompt + '\", response:\"' + repr(response) + '\"' print(log) torch_gc() return answer if __name__ == '__main__': tokenizer = AutoTokenizer.from_pretrained(\"internlm/internlm-chat-7b-v1_1\", trust_remote_code=True) model = AutoModel.from_pretrained(\"internlm/internlm-chat-7b-v1_1\", trust_remote_code=True).half().cuda() model.eval() uvicorn.run(app, host='0.0.0.0', port=8000, workers=1) Adapt the current project.\nWrite the knowledge_qa_llm/llm/internlm_7b.py\nimport json from typing import List, Optional import requests class InternLM_7B: def __init__(self, api_url: str = None): self.api_url = api_url def __call__(self, prompt: str, history: Optional[List] = None, **kwargs): if not history: history = [] data = {\"prompt\": prompt, \"history\": history} if kwargs: temperature = kwargs.get(\"temperature\", 0.1) top_p = kwargs.get(\"top_p\", 0.7) max_length = kwargs.get(\"max_length\", 4096) data.update( {\"temperature\": temperature, \"top_p\": top_p, \"max_length\": max_length} ) req = requests.post(self.api_url, data=json.dumps(data), timeout=60) try: rdata = req.json() if rdata[\"status\"] == 200: return rdata[\"response\"] return \"Network error\" except Exception as e: return f\"Network error:{e}\" Import the class in the knowledge_qa_llm/llm/__init__.py\n# -*- encoding: utf-8 -*- # @Author: SWHL # @Contact: liekkaskono@163.com from .baichuan_7b import BaiChuan7B from .chatglm2_6b import ChatGLM2_6B from .ernie_bot_turbo import ERNIEBotTurbo from .qwen7b_chat import Qwen7B_Chat from .internlm_7b import InternLM_7B __all__ = [\"BaiChuan7B\", \"ChatGLM2_6B\", \"ERNIEBotTurbo\", \"Qwen7B_Chat\", \"InternLM_7B\"] Configure the knowledge_qa_llm/config.yaml.\nLLM_API: InternLM_7B: your_api Qwen7B_Chat: your_api ChatGLM2_6B: your_api BaiChuan7B: your_api Run.\nstreamlit run web_ui.py "
+            }
+        );
+    index.add(
+            {
+                id:  5 ,
+                href: "\/Knowledge-QA-LLM\/docs\/changelog\/",
+                title: "Changelog",
+                description: "2023-09-07 v0.0.9 update: link Add tips when database is empty. 2023-08-29 v0.0.8 update: link Fixed missing embedding_extract Fixed default parameters of LLM 2023-08-11 v0.0.7 update: link Optimize layout, remove the plugin option, and put the extract vector model option on the home page. The tips are translated into English for easy communication. Add project logo:🧐 Update CLI module code. 2023-08-05 v0.0.6 update: link Adapt more llm_api, include online llm api, such ad ERNIE-Bot-Turbo.",
+                content: "2023-09-07 v0.0.9 update: link Add tips when database is empty. 2023-08-29 v0.0.8 update: link Fixed missing embedding_extract Fixed default parameters of LLM 2023-08-11 v0.0.7 update: link Optimize layout, remove the plugin option, and put the extract vector model option on the home page. The tips are translated into English for easy communication. Add project logo:🧐 Update CLI module code. 2023-08-05 v0.0.6 update: link Adapt more llm_api, include online llm api, such ad ERNIE-Bot-Turbo. Add the status of extracting embeddings. 2023-08-04 v0.0.5 update: link Fixed the problem of duplicate data inserted into the database. 2023-07-29 v0.0.4 update: link Reorganize the UI based streamlit==1.25.0 Optimize the code. Record the GIF demo of UI. 2023-07-28 v0.0.3 update: link Finish the file_loader part. 2023-07-25 v0.0.2 update: link Standardize the existing directory structure, more compact, extract some variables into config.yaml Perfect documentation "
+            }
+        );
+    search.addEventListener('input', show_results, true);
+
+    function show_results(){
+        const maxResult =  5 ;
+        const minlength =  1 ;
+        var searchQuery = sanitizeHTML(this.value);
+        var results = index.search(searchQuery, {limit: maxResult, enrich: true});
+
+        
+        const flatResults = new Map(); 
+        for (const result of results.flatMap(r => r.result)) {
+        if (flatResults.has(result.doc.href)) continue;
+        flatResults.set(result.doc.href, result.doc);
+        }
+
+        suggestions.innerHTML = "";
+        suggestions.classList.remove('d-none');
+
+        
+        if (searchQuery.length < minlength) {
+            const minCharMessage = document.createElement('div')
+            minCharMessage.innerHTML = `Please type at least <strong>${minlength}</strong> characters`
+            minCharMessage.classList.add("suggestion__no-results");
+            suggestions.appendChild(minCharMessage);
+            return;
+        } else {
+            
+            if (flatResults.size === 0 && searchQuery) {
+                const noResultsMessage = document.createElement('div')
+                noResultsMessage.innerHTML = "No results for" + ` "<strong>${searchQuery}</strong>"`
+                noResultsMessage.classList.add("suggestion__no-results");
+                suggestions.appendChild(noResultsMessage);
+                return;
+            }
+        }
+
+        
+        for(const [href, doc] of flatResults) {
+            const entry = document.createElement('div');
+            suggestions.appendChild(entry);
+
+            const a = document.createElement('a');
+            a.href = href;
+            entry.appendChild(a);
+
+            const title = document.createElement('span');
+            title.textContent = doc.title;
+            title.classList.add("suggestion__title");
+            a.appendChild(title);
+
+            const description = document.createElement('span');
+            description.textContent = doc.description;
+            description.classList.add("suggestion__description");
+            a.appendChild(description);
+
+            suggestions.appendChild(entry);
+
+            if(suggestions.childElementCount == maxResult) break;
+        }
+    }
+    }());
+</script>
     
 </body></html>

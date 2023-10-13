@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>博客 on Knowledge-QA-LLM Documentation</title>
+    <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/blog/</link>
+    <description>Recent content in 博客 on Knowledge-QA-LLM Documentation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 22 Nov 2022 12:36:15 +0000</lastBuildDate><atom:link href="https://rapidai.github.io/Knowledge-QA-LLM/docs/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>支持的LLM</title>
+      <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/blog/supported_llm/</link>
+      <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/blog/supported_llm/</guid>
+      <description>Already supported LLM API. linkNow, in the current project, the list of supported models is as follows:
+ChatGLM2-6B BaiChuan-7B Qwen-7B llama2 InternLM-7b Support custom LLM. link info This LLM part of the project is independent. After independent deployment and implementation, users can simply configure the inferface functions in the knowledge_qa_llm/llm directory and use them normally.
+Take supporting the InternLM-7b as an example for a brief explanation.
+Download the InternLM model in the Hugging Face.</description>
+    </item>
+    
+  </channel>
+</rss>
