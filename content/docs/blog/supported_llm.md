@@ -1,15 +1,11 @@
 ---
-weight: 6
+weight: 301
 date: "2023-09-11"
-draft: false
 author: "SWHL"
-title: "Support LLM"
+title: "支持的LLM"
 icon: "support_agent"
 toc: true
-description: ""
 publishdate: "2023-09-08"
-tags:
-categories:
 ---
 
 
@@ -146,6 +142,6 @@ Take supporting the InternLM-7b as an example for a brief explanation.
             BaiChuan7B: your_api
         ```
     4. Run.
-        ```bash
+        ```bash {linenos=table}
         streamlit run web_ui.py
         ```

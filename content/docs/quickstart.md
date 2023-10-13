@@ -1,10 +1,10 @@
 ---
-weight: 4
+weight: 200
 date: "2023-09-11"
 draft: false
 author: "SWHL"
-title: "Installation"
-icon: "interactive_space"
+title: "Quickstart"
+icon: "rocket_launch"
 toc: true
 description: ""
 publishdate: "2023-09-08"
@@ -14,11 +14,11 @@ categories:
 
 
 #### 1. Clone the whole repo into local directory.
-```bash
+```bash {linenos=table}
 git clone https://github.com/RapidAI/Knowledge-QA-LLM.git
 ```
 #### 2. Install the requirements.
-```bash
+```bash {linenos=table}
 cd Knowledge-QA-LLM
 pip install -r requirements.txt
 ```
@@ -31,3 +31,22 @@ Separately configure the interface of `chatglm2-6b`, interface startup reference
 
 #### 5. Change the `config.yaml`.
 Write the deployed `llm_api` to the `llm_api_url` field in the configuration file [`knowledge_qa_llm/config.yaml`](./knowledge_qa_llm/config.yaml).
+
+#### 6. Run
+```bash {linenos=table}
+streamlit run webui.py
+```
+
+#### 7. UI Demo
+<div align="center">
+    <img src="https://github.com/RapidAI/Knowledge-QA-LLM/releases/download/v0.0.1/UIDemo.gif" width="100%" height="100%">
+</div>
+
+#### 8. CLI Demo
+```bash {linenos=table}
+python cli.py
+```
+
+<div align="center">
+    <img src="https://github.com/RapidAI/Knowledge-QA-LLM/releases/download/v0.0.1/demo.gif" width="100%" height="100%">
+</div>
