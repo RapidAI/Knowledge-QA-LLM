@@ -8,8 +8,6 @@ toc: true
 publishdate: "2023-09-08"
 ---
 
-
-#### 已经支持的LLM API.
 ✔ [ChatGLM2-6B](https://huggingface.co/THUDM/chatglm2-6b)
 
 ✔ [BaiChuan-7B](https://huggingface.co/baichuan-inc/Baichuan-7B)

@@ -22,6 +22,7 @@ pip install -r requirements.txt
 ```
 
 #### 3. 下载提取向量模型到本地
+本项目目前以摩卡
 Download the [`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-small/tree/main) model and put it in the `assets/models/m3e-small` directory. This model is used to vectorize text content.
 
 #### 4. 配置LLM API接口

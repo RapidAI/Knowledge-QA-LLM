@@ -8,12 +8,19 @@ toc: true
 publishdate: "2023-09-08"
 ---
 
-{{% alert context="info" %}}该项目的LLM部分是独立的，用户可在**knowledge_qa_llm/llm**自定义配置所需的LLM接口。{{% /alert %}} 
+### 引言
+{{% alert context="info" %}}该项目的LLM部分是独立的，用户可在 **knowledge_qa_llm/llm** 自定义配置所需的LLM接口。{{% /alert %}} 
 
-下面以自定义支持InterLM-7b大模型为例，说明如何支持的。
+下面以自定义支持InterLM-7b大模型为例，说明如何支持的。前提是本地满足部署LLM的推理条件。
 
-#### 1. 下载InterLM模型到本地，具体如何下载，参见[internlm-7b](https://huggingface.co/internlm/internlm-7b)。
-#### 2. 编写模型的推理代码，这一点可以参考[ChatGLM's API](https://github.com/THUDM/ChatGLM-6B/blob/main/api.py)的实现。只需要替换模型加载部分为InterLM的即可。具体如下：
+### 步骤如下：
+#### 1. 部署LLM模型到本地
+具体如何下载，参见Hugging Face中[internlm-7b](https://huggingface.co/internlm/internlm-7b)。
+
+#### 2. 编写模型的部署推理代码
+这一点可以参考[ChatGLM](https://github.com/THUDM/ChatGLM-6B/blob/main/api.py)API的实现。只需要替换模型加载部分为InternLM的即可。具体如下：
+
+<details>
 
 ```python {linenos=table}
 from fastapi import FastAPI, Request
@@ -73,8 +80,12 @@ if __name__ == '__main__':
     model.eval()
     uvicorn.run(app, host='0.0.0.0', port=8000, workers=1)
 ```
+</details>
 
-#### 3. 编写`knowledge_qa_llm/llm/internlm_7b.py`
+#### 3. 编写调用接口部分代码
+在以下项目`knowledge_qa_llm/llm/`目录下创建`internlm_7b.py`文件，具体代码如下：
+
+<details>
 
 ```python {linenos=table}
 import json
@@ -109,8 +120,11 @@ class InternLM_7B:
         except Exception as e:
             return f"Network error:{e}"
 ```
+</details>
 
-#### 4. 导入`knowledge_qa_llm/llm/__init__.py`
+#### 4. 添加导入声明
+在`knowledge_qa_llm/llm/__init__.py`中添加对应的`import`部分代码，示例如下：
+
 ```python {linenos=table}
 from .baichuan_7b import BaiChuan7B
 from .chatglm2_6b import ChatGLM2_6B
@@ -121,7 +135,9 @@ from .internlm_7b import InternLM_7B
 __all__ = ["BaiChuan7B", "ChatGLM2_6B", "ERNIEBotTurbo", "Qwen7B_Chat", "InternLM_7B"]
 ```
 
-#### 5. 更改`knowledge_qa_llm/config.yaml`.
+#### 5. 更改配置文件
+更改`knowledge_qa_llm/config.yaml`
+
 ```yaml {linenos=table}
 LLM_API:
     InternLM_7B: your_api
