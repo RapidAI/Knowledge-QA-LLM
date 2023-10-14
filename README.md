@@ -33,7 +33,7 @@
 </div>
 
 ### Documentation
-Full documentation can be found on [docs](https://rapidai.github.io/Knowledge-QA-LLM/), in Chinese.
+Full documentation can be found on [docs](https://rapidai.github.io/Knowledge-QA-LLM/docs/), in Chinese.
 
 ### TODO
 - [ ] Support keyword + vector hybrid search.

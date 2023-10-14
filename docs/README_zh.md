@@ -29,7 +29,7 @@
 </div>
 
 ### 文档
-完整文档请移步：[docs](https://rapidai.github.io/Knowledge-QA-LLM/).
+完整文档请移步：[docs](https://rapidai.github.io/Knowledge-QA-LLM/docs).
 
 ### TODO
 - [ ] Support keyword + vector hybrid search.
