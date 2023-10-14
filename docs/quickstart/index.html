@@ -33,16 +33,16 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://rapidai.github.io/Knowledge-QA-LLM/favicon-16x16.png">
 <link rel="manifest" crossorigin="use-credentials" href="https://rapidai.github.io/Knowledge-QA-LLM/site.webmanifest">
 <meta property="og:title" content="快速开始" />
-<meta property="og:description" content="1. 克隆整个项目到本地 link git clone https://github.com/RapidAI/Knowledge-QA-LLM.git 2. 安装运行环境 link cd Knowledge-QA-LLM pip install -r requirements.txt 3. 下载提取向量模型到本地 linkDownload the moka-ai/m3e-small model and put it in the assets/models/m3e-small directory. This model is used to vectorize text content.
+<meta property="og:description" content="1. 克隆整个项目到本地 link git clone https://github.com/RapidAI/Knowledge-QA-LLM.git 2. 安装运行环境 link cd Knowledge-QA-LLM pip install -r requirements.txt 3. 下载提取向量模型到本地 link本项目目前以摩卡 Download the moka-ai/m3e-small model and put it in the assets/models/m3e-small directory. This model is used to vectorize text content.
 4. 配置LLM API接口 linkSeparately configure the interface of chatglm2-6b, interface startup reference: ChatGLM2-6B API. The specific usage method Reference: knowledge_qa_llm/llm/chatglm2_6b.py
 5. 更改config.yaml配置文件 linkWrite the deployed llm_api to the llm_api_url field in the configuration file knowledge_qa_llm/config." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://rapidai.github.io/Knowledge-QA-LLM/docs/quickstart/" /><meta property="og:image" content="https://rapidai.github.io/Knowledge-QA-LLM/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_5065655367507217122.png"/><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2023-09-08T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-10-12T21:24:34-05:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta property="article:modified_time" content="2023-10-14T14:53:39+08:00" /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://rapidai.github.io/Knowledge-QA-LLM/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_5065655367507217122.png"/>
 <meta name="twitter:title" content="快速开始"/>
-<meta name="twitter:description" content="1. 克隆整个项目到本地 link git clone https://github.com/RapidAI/Knowledge-QA-LLM.git 2. 安装运行环境 link cd Knowledge-QA-LLM pip install -r requirements.txt 3. 下载提取向量模型到本地 linkDownload the moka-ai/m3e-small model and put it in the assets/models/m3e-small directory. This model is used to vectorize text content.
+<meta name="twitter:description" content="1. 克隆整个项目到本地 link git clone https://github.com/RapidAI/Knowledge-QA-LLM.git 2. 安装运行环境 link cd Knowledge-QA-LLM pip install -r requirements.txt 3. 下载提取向量模型到本地 link本项目目前以摩卡 Download the moka-ai/m3e-small model and put it in the assets/models/m3e-small directory. This model is used to vectorize text content.
 4. 配置LLM API接口 linkSeparately configure the interface of chatglm2-6b, interface startup reference: ChatGLM2-6B API. The specific usage method Reference: knowledge_qa_llm/llm/chatglm2_6b.py
 5. 更改config.yaml配置文件 linkWrite the deployed llm_api to the llm_api_url field in the configuration file knowledge_qa_llm/config."/>
 
@@ -407,7 +407,8 @@
 pip install -r requirements.txt</code>
   </pre>
   </div>
-<h4 id="3-下载提取向量模型到本地">3. 下载提取向量模型到本地 <a href="#3-%e4%b8%8b%e8%bd%bd%e6%8f%90%e5%8f%96%e5%90%91%e9%87%8f%e6%a8%a1%e5%9e%8b%e5%88%b0%e6%9c%ac%e5%9c%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>Download the <a href="https://huggingface.co/moka-ai/m3e-small/tree/main" rel="external" target="_blank"><code>moka-ai/m3e-small</code><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a> model and put it in the <code>assets/models/m3e-small</code> directory. This model is used to vectorize text content.</p>
+<h4 id="3-下载提取向量模型到本地">3. 下载提取向量模型到本地 <a href="#3-%e4%b8%8b%e8%bd%bd%e6%8f%90%e5%8f%96%e5%90%91%e9%87%8f%e6%a8%a1%e5%9e%8b%e5%88%b0%e6%9c%ac%e5%9c%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>本项目目前以摩卡
+Download the <a href="https://huggingface.co/moka-ai/m3e-small/tree/main" rel="external" target="_blank"><code>moka-ai/m3e-small</code><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a> model and put it in the <code>assets/models/m3e-small</code> directory. This model is used to vectorize text content.</p>
 <h4 id="4-配置llm-api接口">4. 配置LLM API接口 <a href="#4-%e9%85%8d%e7%bd%aellm-api%e6%8e%a5%e5%8f%a3" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>Separately configure the interface of <code>chatglm2-6b</code>, interface startup reference: <a href="https://github.com/THUDM/ChatGLM2-6B/blob/main/api.py" rel="external" target="_blank">ChatGLM2-6B API<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a>. The specific usage method Reference: <a href="./knowledge_qa_llm/llm/chatglm2_6b.py"><code>knowledge_qa_llm/llm/chatglm2_6b.py</code></a></p>
 <h4 id="5-更改configyaml配置文件">5. 更改<code>config.yaml</code>配置文件 <a href="#5-%e6%9b%b4%e6%94%b9configyaml%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>Write the deployed <code>llm_api</code> to the <code>llm_api_url</code> field in the configuration file <a href="./knowledge_qa_llm/config.yaml"><code>knowledge_qa_llm/config.yaml</code></a>.</p>
 <h4 id="6-运行">6. 运行 <a href="#6-%e8%bf%90%e8%a1%8c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
@@ -432,14 +433,14 @@ pip install -r requirements.txt</code>
 		
 
 		<a class="nav-link  active"
-		   id="dfbaecTab" data-bs-toggle="tab" data-bs-target="#dfbaec"
-		   type="button" role="tab" aria-controls="dfbaec" aria-selected="true">UI Demo</a>
+		   id="bdeacfTab" data-bs-toggle="tab" data-bs-target="#bdeacf"
+		   type="button" role="tab" aria-controls="bdeacf" aria-selected="true">UI Demo</a>
 
 		
 
 		<a class="nav-link "
-		   id="fbcadeTab" data-bs-toggle="tab" data-bs-target="#fbcade"
-		   type="button" role="tab" aria-controls="fbcade" aria-selected="true">CLI Demo</a>
+		   id="bfadceTab" data-bs-toggle="tab" data-bs-target="#bfadce"
+		   type="button" role="tab" aria-controls="bfadce" aria-selected="true">CLI Demo</a>
 
 		
 
@@ -455,7 +456,7 @@ pip install -r requirements.txt</code>
 
 
 
-<div class="tab-pane fade show active" id="dfbaec" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="bdeacf" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -491,7 +492,7 @@ pip install -r requirements.txt</code>
 
 
 
-<div class="tab-pane fade" id="fbcade" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="bfadce" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -561,9 +562,9 @@ pip install -r requirements.txt</code>
     <div id="last-modified" class="mt-1">
         <p class="mb-0 fw-semibold">Last updated <span
             id="relativetime"
-            data-authdate="2023-10-12T21:24:34-0500"
-            title="12 Oct 2023, 21:24 -0500">
-            12 Oct 2023, 21:24 -0500
+            data-authdate="2023-10-14T14:53:39&#43;0800"
+            title="14 Oct 2023, 14:53 &#43;0800">
+            14 Oct 2023, 14:53 &#43;0800
         </span>. <span class="material-icons size-20 align-text-bottom opacity-75">history</span>
         </p>
     </div>
@@ -846,8 +847,8 @@ pip install -r requirements.txt</code>
                 id:  2 ,
                 href: "\/Knowledge-QA-LLM\/docs\/quickstart\/",
                 title: "快速开始",
-                description: "1. 克隆整个项目到本地 link git clone https://github.com/RapidAI/Knowledge-QA-LLM.git 2. 安装运行环境 link cd Knowledge-QA-LLM pip install -r requirements.txt 3. 下载提取向量模型到本地 linkDownload the moka-ai/m3e-small model and put it in the assets/models/m3e-small directory. This model is used to vectorize text content.\n4. 配置LLM API接口 linkSeparately configure the interface of chatglm2-6b, interface startup reference: ChatGLM2-6B API. The specific usage method Reference: knowledge_qa_llm/llm/chatglm2_6b.py\n5. 更改config.yaml配置文件 linkWrite the deployed llm_api to the llm_api_url field in the configuration file knowledge_qa_llm/config.",
-                content: "1. 克隆整个项目到本地 link git clone https://github.com/RapidAI/Knowledge-QA-LLM.git 2. 安装运行环境 link cd Knowledge-QA-LLM pip install -r requirements.txt 3. 下载提取向量模型到本地 linkDownload the moka-ai/m3e-small model and put it in the assets/models/m3e-small directory. This model is used to vectorize text content.\n4. 配置LLM API接口 linkSeparately configure the interface of chatglm2-6b, interface startup reference: ChatGLM2-6B API. The specific usage method Reference: knowledge_qa_llm/llm/chatglm2_6b.py\n5. 更改config.yaml配置文件 linkWrite the deployed llm_api to the llm_api_url field in the configuration file knowledge_qa_llm/config.yaml.\n6. 运行 link info streamlit框架的启动，不可以用python webui.py方式启动，必须用以下方式启动。 UI Demo CLI Demo streamlit run webui.py python cli.py "
+                description: "1. 克隆整个项目到本地 link git clone https://github.com/RapidAI/Knowledge-QA-LLM.git 2. 安装运行环境 link cd Knowledge-QA-LLM pip install -r requirements.txt 3. 下载提取向量模型到本地 link本项目目前以摩卡 Download the moka-ai/m3e-small model and put it in the assets/models/m3e-small directory. This model is used to vectorize text content.\n4. 配置LLM API接口 linkSeparately configure the interface of chatglm2-6b, interface startup reference: ChatGLM2-6B API. The specific usage method Reference: knowledge_qa_llm/llm/chatglm2_6b.py\n5. 更改config.yaml配置文件 linkWrite the deployed llm_api to the llm_api_url field in the configuration file knowledge_qa_llm/config.",
+                content: "1. 克隆整个项目到本地 link git clone https://github.com/RapidAI/Knowledge-QA-LLM.git 2. 安装运行环境 link cd Knowledge-QA-LLM pip install -r requirements.txt 3. 下载提取向量模型到本地 link本项目目前以摩卡 Download the moka-ai/m3e-small model and put it in the assets/models/m3e-small directory. This model is used to vectorize text content.\n4. 配置LLM API接口 linkSeparately configure the interface of chatglm2-6b, interface startup reference: ChatGLM2-6B API. The specific usage method Reference: knowledge_qa_llm/llm/chatglm2_6b.py\n5. 更改config.yaml配置文件 linkWrite the deployed llm_api to the llm_api_url field in the configuration file knowledge_qa_llm/config.yaml.\n6. 运行 link info streamlit框架的启动，不可以用python webui.py方式启动，必须用以下方式启动。 UI Demo CLI Demo streamlit run webui.py python cli.py "
             }
         );
     index.add(
@@ -864,8 +865,8 @@ pip install -r requirements.txt</code>
                 id:  4 ,
                 href: "\/Knowledge-QA-LLM\/docs\/blog\/supported_llm\/",
                 title: "支持的LLM",
-                description: "已经支持的LLM API. link✔ ChatGLM2-6B\n✔ BaiChuan-7B\n✔ Qwen-7B\n✔ llama2\n✔ InternLM-7b",
-                content: "已经支持的LLM API. link✔ ChatGLM2-6B\n✔ BaiChuan-7B\n✔ Qwen-7B\n✔ llama2\n✔ InternLM-7b\n"
+                description: "✔ ChatGLM2-6B\n✔ BaiChuan-7B\n✔ Qwen-7B\n✔ llama2\n✔ InternLM-7b",
+                content: "✔ ChatGLM2-6B\n✔ BaiChuan-7B\n✔ Qwen-7B\n✔ llama2\n✔ InternLM-7b\n"
             }
         );
     index.add(
@@ -873,8 +874,8 @@ pip install -r requirements.txt</code>
                 id:  5 ,
                 href: "\/Knowledge-QA-LLM\/docs\/blog\/custom_llm_api\/",
                 title: "自定义LLM API",
-                description: "info 该项目的LLM部分是独立的，用户可在**knowledge_qa_llm/llm**自定义配置所需的LLM接口。 下面以自定义支持InterLM-7b大模型为例，说明如何支持的。\n1. 下载InterLM模型到本地，具体如何下载，参见internlm-7b。 link2. 编写模型的推理代码，这一点可以参考ChatGLM’s API的实现。只需要替换模型加载部分为InterLM的即可。具体如下： link from fastapi import FastAPI, Request from transformers import AutoTokenizer, AutoModel import uvicorn, json, datetime import torch DEVICE = \"cuda\" DEVICE_ID = \"0\" CUDA_DEVICE = f\"{DEVICE}:{DEVICE_ID}\" if DEVICE_ID else DEVICE def torch_gc(): if torch.cuda.is_available(): with torch.cuda.device(CUDA_DEVICE): torch.cuda.empty_cache() torch.cuda.ipc_collect() app = FastAPI() @app.post(\"/\") async def create_item(request: Request): global model, tokenizer json_post_raw = await request.json() json_post = json.dumps(json_post_raw) json_post_list = json.loads(json_post) prompt = json_post_list.",
-                content: " info 该项目的LLM部分是独立的，用户可在**knowledge_qa_llm/llm**自定义配置所需的LLM接口。 下面以自定义支持InterLM-7b大模型为例，说明如何支持的。\n1. 下载InterLM模型到本地，具体如何下载，参见internlm-7b。 link2. 编写模型的推理代码，这一点可以参考ChatGLM’s API的实现。只需要替换模型加载部分为InterLM的即可。具体如下： link from fastapi import FastAPI, Request from transformers import AutoTokenizer, AutoModel import uvicorn, json, datetime import torch DEVICE = \"cuda\" DEVICE_ID = \"0\" CUDA_DEVICE = f\"{DEVICE}:{DEVICE_ID}\" if DEVICE_ID else DEVICE def torch_gc(): if torch.cuda.is_available(): with torch.cuda.device(CUDA_DEVICE): torch.cuda.empty_cache() torch.cuda.ipc_collect() app = FastAPI() @app.post(\"/\") async def create_item(request: Request): global model, tokenizer json_post_raw = await request.json() json_post = json.dumps(json_post_raw) json_post_list = json.loads(json_post) prompt = json_post_list.get('prompt') history = json_post_list.get('history') max_length = json_post_list.get('max_length') top_p = json_post_list.get('top_p') temperature = json_post_list.get('temperature') response, history = model.chat(tokenizer, prompt, history=history, max_new_tokens=max_length if max_length else 2048, top_p=top_p if top_p else 0.7, temperature=temperature if temperature else 0.95) now = datetime.datetime.now() time = now.strftime(\"%Y-%m-%d %H:%M:%S\") answer = { \"response\": response, \"history\": history, \"status\": 200, \"time\": time } log = \"[\" + time + \"] \" + '\", prompt:\"' + prompt + '\", response:\"' + repr(response) + '\"' print(log) torch_gc() return answer if __name__ == '__main__': tokenizer = AutoTokenizer.from_pretrained(\"internlm/internlm-chat-7b-v1_1\", trust_remote_code=True) model = AutoModel.from_pretrained(\"internlm/internlm-chat-7b-v1_1\", trust_remote_code=True).half().cuda() model.eval() uvicorn.run(app, host='0.0.0.0', port=8000, workers=1) 3. 编写knowledge_qa_llm/llm/internlm_7b.py link import json from typing import List, Optional import requests class InternLM_7B: def __init__(self, api_url: str = None): self.api_url = api_url def __call__(self, prompt: str, history: Optional[List] = None, **kwargs): if not history: history = [] data = {\"prompt\": prompt, \"history\": history} if kwargs: temperature = kwargs.get(\"temperature\", 0.1) top_p = kwargs.get(\"top_p\", 0.7) max_length = kwargs.get(\"max_length\", 4096) data.update( {\"temperature\": temperature, \"top_p\": top_p, \"max_length\": max_length} ) req = requests.post(self.api_url, data=json.dumps(data), timeout=60) try: rdata = req.json() if rdata[\"status\"] == 200: return rdata[\"response\"] return \"Network error\" except Exception as e: return f\"Network error:{e}\" 4. 导入knowledge_qa_llm/llm/__init__.py link from .baichuan_7b import BaiChuan7B from .chatglm2_6b import ChatGLM2_6B from .ernie_bot_turbo import ERNIEBotTurbo from .qwen7b_chat import Qwen7B_Chat from .internlm_7b import InternLM_7B __all__ = [\"BaiChuan7B\", \"ChatGLM2_6B\", \"ERNIEBotTurbo\", \"Qwen7B_Chat\", \"InternLM_7B\"] 5. 更改knowledge_qa_llm/config.yaml. link LLM_API: InternLM_7B: your_api Qwen7B_Chat: your_api ChatGLM2_6B: your_api BaiChuan7B: your_api 6. 启动 link streamlit run web_ui.py "
+                description: "引言 link info 该项目的LLM部分是独立的，用户可在 **knowledge_qa_llm/llm** 自定义配置所需的LLM接口。 下面以自定义支持InterLM-7b大模型为例，说明如何支持的。前提是本地满足部署LLM的推理条件。\n步骤如下： link1. 部署LLM模型到本地 link具体如何下载，参见Hugging Face中internlm-7b。\n2. 编写模型的部署推理代码 link这一点可以参考ChatGLMAPI的实现。只需要替换模型加载部分为InternLM的即可。具体如下：\nfrom fastapi import FastAPI, Request from transformers import AutoTokenizer, AutoModel import uvicorn, json, datetime import torch DEVICE = \"cuda\" DEVICE_ID = \"0\" CUDA_DEVICE = f\"{DEVICE}:{DEVICE_ID}\" if DEVICE_ID else DEVICE def torch_gc(): if torch.cuda.is_available(): with torch.cuda.device(CUDA_DEVICE): torch.cuda.empty_cache() torch.cuda.ipc_collect() app = FastAPI() @app.post(\"/\") async def create_item(request: Request): global model, tokenizer json_post_raw = await request.json() json_post = json.dumps(json_post_raw) json_post_list = json.",
+                content: "引言 link info 该项目的LLM部分是独立的，用户可在 **knowledge_qa_llm/llm** 自定义配置所需的LLM接口。 下面以自定义支持InterLM-7b大模型为例，说明如何支持的。前提是本地满足部署LLM的推理条件。\n步骤如下： link1. 部署LLM模型到本地 link具体如何下载，参见Hugging Face中internlm-7b。\n2. 编写模型的部署推理代码 link这一点可以参考ChatGLMAPI的实现。只需要替换模型加载部分为InternLM的即可。具体如下：\nfrom fastapi import FastAPI, Request from transformers import AutoTokenizer, AutoModel import uvicorn, json, datetime import torch DEVICE = \"cuda\" DEVICE_ID = \"0\" CUDA_DEVICE = f\"{DEVICE}:{DEVICE_ID}\" if DEVICE_ID else DEVICE def torch_gc(): if torch.cuda.is_available(): with torch.cuda.device(CUDA_DEVICE): torch.cuda.empty_cache() torch.cuda.ipc_collect() app = FastAPI() @app.post(\"/\") async def create_item(request: Request): global model, tokenizer json_post_raw = await request.json() json_post = json.dumps(json_post_raw) json_post_list = json.loads(json_post) prompt = json_post_list.get('prompt') history = json_post_list.get('history') max_length = json_post_list.get('max_length') top_p = json_post_list.get('top_p') temperature = json_post_list.get('temperature') response, history = model.chat(tokenizer, prompt, history=history, max_new_tokens=max_length if max_length else 2048, top_p=top_p if top_p else 0.7, temperature=temperature if temperature else 0.95) now = datetime.datetime.now() time = now.strftime(\"%Y-%m-%d %H:%M:%S\") answer = { \"response\": response, \"history\": history, \"status\": 200, \"time\": time } log = \"[\" + time + \"] \" + '\", prompt:\"' + prompt + '\", response:\"' + repr(response) + '\"' print(log) torch_gc() return answer if __name__ == '__main__': tokenizer = AutoTokenizer.from_pretrained(\"internlm/internlm-chat-7b-v1_1\", trust_remote_code=True) model = AutoModel.from_pretrained(\"internlm/internlm-chat-7b-v1_1\", trust_remote_code=True).half().cuda() model.eval() uvicorn.run(app, host='0.0.0.0', port=8000, workers=1) 3. 编写调用接口部分代码 link在以下项目knowledge_qa_llm/llm/目录下创建internlm_7b.py文件，具体代码如下：\nimport json from typing import List, Optional import requests class InternLM_7B: def __init__(self, api_url: str = None): self.api_url = api_url def __call__(self, prompt: str, history: Optional[List] = None, **kwargs): if not history: history = [] data = {\"prompt\": prompt, \"history\": history} if kwargs: temperature = kwargs.get(\"temperature\", 0.1) top_p = kwargs.get(\"top_p\", 0.7) max_length = kwargs.get(\"max_length\", 4096) data.update( {\"temperature\": temperature, \"top_p\": top_p, \"max_length\": max_length} ) req = requests.post(self.api_url, data=json.dumps(data), timeout=60) try: rdata = req.json() if rdata[\"status\"] == 200: return rdata[\"response\"] return \"Network error\" except Exception as e: return f\"Network error:{e}\" 4. 添加导入声明 link在knowledge_qa_llm/llm/__init__.py中添加对应的import部分代码，示例如下：\nfrom .baichuan_7b import BaiChuan7B from .chatglm2_6b import ChatGLM2_6B from .ernie_bot_turbo import ERNIEBotTurbo from .qwen7b_chat import Qwen7B_Chat from .internlm_7b import InternLM_7B __all__ = [\"BaiChuan7B\", \"ChatGLM2_6B\", \"ERNIEBotTurbo\", \"Qwen7B_Chat\", \"InternLM_7B\"] 5. 更改配置文件 link更改knowledge_qa_llm/config.yaml\nLLM_API: InternLM_7B: your_api Qwen7B_Chat: your_api ChatGLM2_6B: your_api BaiChuan7B: your_api 6. 启动 link streamlit run web_ui.py "
             }
         );
     index.add(

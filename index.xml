@@ -22,7 +22,7 @@
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/quickstart/</guid>
-      <description>1. 克隆整个项目到本地 link git clone https://github.com/RapidAI/Knowledge-QA-LLM.git 2. 安装运行环境 link cd Knowledge-QA-LLM pip install -r requirements.txt 3. 下载提取向量模型到本地 linkDownload the moka-ai/m3e-small model and put it in the assets/models/m3e-small directory. This model is used to vectorize text content.
+      <description>1. 克隆整个项目到本地 link git clone https://github.com/RapidAI/Knowledge-QA-LLM.git 2. 安装运行环境 link cd Knowledge-QA-LLM pip install -r requirements.txt 3. 下载提取向量模型到本地 link本项目目前以摩卡 Download the moka-ai/m3e-small model and put it in the assets/models/m3e-small directory. This model is used to vectorize text content.
 4. 配置LLM API接口 linkSeparately configure the interface of chatglm2-6b, interface startup reference: ChatGLM2-6B API. The specific usage method Reference: knowledge_qa_llm/llm/chatglm2_6b.py
 5. 更改config.yaml配置文件 linkWrite the deployed llm_api to the llm_api_url field in the configuration file knowledge_qa_llm/config.</description>
     </item>
@@ -33,7 +33,7 @@
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/blog/supported_llm/</guid>
-      <description>已经支持的LLM API. link✔ ChatGLM2-6B
+      <description>✔ ChatGLM2-6B
 ✔ BaiChuan-7B
 ✔ Qwen-7B
 ✔ llama2
@@ -46,8 +46,10 @@
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/blog/custom_llm_api/</guid>
-      <description>info 该项目的LLM部分是独立的，用户可在**knowledge_qa_llm/llm**自定义配置所需的LLM接口。 下面以自定义支持InterLM-7b大模型为例，说明如何支持的。
-1. 下载InterLM模型到本地，具体如何下载，参见internlm-7b。 link2. 编写模型的推理代码，这一点可以参考ChatGLM&amp;rsquo;s API的实现。只需要替换模型加载部分为InterLM的即可。具体如下： link from fastapi import FastAPI, Request from transformers import AutoTokenizer, AutoModel import uvicorn, json, datetime import torch DEVICE = &amp;#34;cuda&amp;#34; DEVICE_ID = &amp;#34;0&amp;#34; CUDA_DEVICE = f&amp;#34;{DEVICE}:{DEVICE_ID}&amp;#34; if DEVICE_ID else DEVICE def torch_gc(): if torch.cuda.is_available(): with torch.cuda.device(CUDA_DEVICE): torch.cuda.empty_cache() torch.cuda.ipc_collect() app = FastAPI() @app.post(&amp;#34;/&amp;#34;) async def create_item(request: Request): global model, tokenizer json_post_raw = await request.json() json_post = json.dumps(json_post_raw) json_post_list = json.loads(json_post) prompt = json_post_list.</description>
+      <description>引言 link info 该项目的LLM部分是独立的，用户可在 **knowledge_qa_llm/llm** 自定义配置所需的LLM接口。 下面以自定义支持InterLM-7b大模型为例，说明如何支持的。前提是本地满足部署LLM的推理条件。
+步骤如下： link1. 部署LLM模型到本地 link具体如何下载，参见Hugging Face中internlm-7b。
+2. 编写模型的部署推理代码 link这一点可以参考ChatGLMAPI的实现。只需要替换模型加载部分为InternLM的即可。具体如下：
+from fastapi import FastAPI, Request from transformers import AutoTokenizer, AutoModel import uvicorn, json, datetime import torch DEVICE = &amp;#34;cuda&amp;#34; DEVICE_ID = &amp;#34;0&amp;#34; CUDA_DEVICE = f&amp;#34;{DEVICE}:{DEVICE_ID}&amp;#34; if DEVICE_ID else DEVICE def torch_gc(): if torch.cuda.is_available(): with torch.cuda.device(CUDA_DEVICE): torch.cuda.empty_cache() torch.cuda.ipc_collect() app = FastAPI() @app.post(&amp;#34;/&amp;#34;) async def create_item(request: Request): global model, tokenizer json_post_raw = await request.json() json_post = json.dumps(json_post_raw) json_post_list = json.</description>
     </item>
     
     <item>
