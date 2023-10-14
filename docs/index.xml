@@ -32,6 +32,18 @@ LLM_API: ChatGLM2_6B: your_api 6. 运行 link info streamlit框架的启动，�
     </item>
     
     <item>
+      <title>在线demo</title>
+      <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/online_demo/</link>
+      <pubDate>Sat, 14 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/online_demo/</guid>
+      <description>简介 link在线demo是基于百度的AI Studio平台搭建，基于文心一言大模型的接口搭建。
+因为该项目核心在于利用大模型的总结和提取能力，主打离线私有部署，但是一直没有一个在线demo供大家查看效果。因此有了基于文心一言版的 🧐 Knowledge QA LLM。
+Demo源码 link文心一言版的源码与Github仓库代码，有些许初入，后续会同步。 地址：https://aistudio.baidu.com/projectdetail/6675380?contributionType=1
+在线Demo link notifications 该Demo主要侧重查看效果，至于工程化则差一些。 Knowledge-QA-LLM：https://aistudio.baidu.com/application/detail/7580</description>
+    </item>
+    
+    <item>
       <title>给作者加油</title>
       <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/sponsor/</link>
       <pubDate>Fri, 07 Oct 2022 00:00:00 +0000</pubDate>

@@ -120,6 +120,17 @@ from fastapi import FastAPI, Request from transformers import AutoTokenizer, Aut
                     
                 
                     
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="https://rapidai.github.io/Knowledge-QA-LLM/docs/online_demo/">
+                                <i class="material-icons me-2">rocket_launch</i>
+                                
+                                在线demo
+                            </a>
+                        </li>
+                    
+                
+                    
                     
                         <li class="sidebar-dropdown  current active">
                             <button class="btn">
@@ -891,6 +902,13 @@ __all__ = [&#34;BaiChuan7B&#34;, &#34;ChatGLM2_6B&#34;, &#34;ERNIEBotTurbo&#34;,
     
     
     
+    
+    
+    
+    
+    
+    
+    
 
 
     
@@ -927,6 +945,15 @@ __all__ = [&#34;BaiChuan7B&#34;, &#34;ChatGLM2_6B&#34;, &#34;ERNIEBotTurbo&#34;,
     index.add(
             {
                 id:  3 ,
+                href: "\/Knowledge-QA-LLM\/docs\/online_demo\/",
+                title: "在线demo",
+                description: "简介 link在线demo是基于百度的AI Studio平台搭建，基于文心一言大模型的接口搭建。\n因为该项目核心在于利用大模型的总结和提取能力，主打离线私有部署，但是一直没有一个在线demo供大家查看效果。因此有了基于文心一言版的 🧐 Knowledge QA LLM。\nDemo源码 link文心一言版的源码与Github仓库代码，有些许初入，后续会同步。 地址：https://aistudio.baidu.com/projectdetail/6675380?contributionType=1\n在线Demo link notifications 该Demo主要侧重查看效果，至于工程化则差一些。 Knowledge-QA-LLM：https://aistudio.baidu.com/application/detail/7580",
+                content: "简介 link在线demo是基于百度的AI Studio平台搭建，基于文心一言大模型的接口搭建。\n因为该项目核心在于利用大模型的总结和提取能力，主打离线私有部署，但是一直没有一个在线demo供大家查看效果。因此有了基于文心一言版的 🧐 Knowledge QA LLM。\nDemo源码 link文心一言版的源码与Github仓库代码，有些许初入，后续会同步。 地址：https://aistudio.baidu.com/projectdetail/6675380?contributionType=1\n在线Demo link notifications 该Demo主要侧重查看效果，至于工程化则差一些。 Knowledge-QA-LLM：https://aistudio.baidu.com/application/detail/7580\n"
+            }
+        );
+    index.add(
+            {
+                id:  4 ,
                 href: "\/Knowledge-QA-LLM\/docs\/blog\/",
                 title: "博客",
                 description: "",
@@ -935,7 +962,7 @@ __all__ = [&#34;BaiChuan7B&#34;, &#34;ChatGLM2_6B&#34;, &#34;ERNIEBotTurbo&#34;,
         );
     index.add(
             {
-                id:  4 ,
+                id:  5 ,
                 href: "\/Knowledge-QA-LLM\/docs\/blog\/supported_llm\/",
                 title: "支持的LLM",
                 description: "✔ ChatGLM2-6B\n✔ BaiChuan-7B\n✔ Qwen-7B\n✔ llama2\n✔ InternLM-7b",
@@ -944,7 +971,7 @@ __all__ = [&#34;BaiChuan7B&#34;, &#34;ChatGLM2_6B&#34;, &#34;ERNIEBotTurbo&#34;,
         );
     index.add(
             {
-                id:  5 ,
+                id:  6 ,
                 href: "\/Knowledge-QA-LLM\/docs\/blog\/custom_llm_api\/",
                 title: "自定义LLM API",
                 description: "引言 link info 该项目的LLM部分是独立的，用户可在 **knowledge_qa_llm/llm** 自定义配置所需的LLM接口。 下面以自定义支持InterLM-7b大模型为例，说明如何支持的。前提是本地满足部署LLM的推理条件。\n步骤如下： link1. 部署LLM模型到本地 link具体如何下载，参见Hugging Face中internlm-7b。\n2. 编写模型的部署推理代码 link这一点可以参考ChatGLMAPI的实现。只需要替换模型加载部分为InternLM的即可。具体如下：\nfrom fastapi import FastAPI, Request from transformers import AutoTokenizer, AutoModel import uvicorn, json, datetime import torch DEVICE = \"cuda\" DEVICE_ID = \"0\" CUDA_DEVICE = f\"{DEVICE}:{DEVICE_ID}\" if DEVICE_ID else DEVICE def torch_gc(): if torch.cuda.is_available(): with torch.cuda.device(CUDA_DEVICE): torch.cuda.empty_cache() torch.cuda.ipc_collect() app = FastAPI() @app.post(\"/\") async def create_item(request: Request): global model, tokenizer json_post_raw = await request.json() json_post = json.dumps(json_post_raw) json_post_list = json.",
@@ -953,7 +980,7 @@ __all__ = [&#34;BaiChuan7B&#34;, &#34;ChatGLM2_6B&#34;, &#34;ERNIEBotTurbo&#34;,
         );
     index.add(
             {
-                id:  6 ,
+                id:  7 ,
                 href: "\/Knowledge-QA-LLM\/docs\/sponsor\/",
                 title: "给作者加油",
                 description: "写在前面 linkI like open source and AI technology because I think open source and AI will bring convenience and help to people in need, and will also make the world a better place. By donating to these projects, you can join me in making AI bring warmth and beauty to more people.\n我喜欢开源，喜欢AI技术，因为我认为开源和AI会为有需要的人带来方便和帮助，也会让这个世界变得更好。通过对这些项目的捐赠，您可以和我一道让AI为更多人带来温暖和美好。\n知识星球RapidAI私享群 link这里的提问会优先得到回答和支持，也会享受到RapidAI组织后续持续优质的服务，欢迎大家的加入。\n支付宝或微信打赏 (Alipay reward or WeChat reward) link通过支付宝或者微信给作者打赏，请写好备注。 Give the author a reward through Alipay or WeChat.",
@@ -962,7 +989,7 @@ __all__ = [&#34;BaiChuan7B&#34;, &#34;ChatGLM2_6B&#34;, &#34;ERNIEBotTurbo&#34;,
         );
     index.add(
             {
-                id:  7 ,
+                id:  8 ,
                 href: "\/Knowledge-QA-LLM\/docs\/changelog\/",
                 title: "更新日志",
                 description: "2023-09-07 v0.0.9 update: link Add tips when database is empty. 2023-08-29 v0.0.8 update: link Fixed missing embedding_extract Fixed default parameters of LLM 2023-08-11 v0.0.7 update: link Optimize layout, remove the plugin option, and put the extract vector model option on the home page. The tips are translated into English for easy communication. Add project logo:🧐 Update CLI module code. 2023-08-05 v0.0.6 update: link Adapt more llm_api, include online llm api, such ad ERNIE-Bot-Turbo.",

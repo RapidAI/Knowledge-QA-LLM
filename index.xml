@@ -6,7 +6,7 @@
     <description>Recent content on Knowledge-QA-LLM Documentation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rapidai.github.io/Knowledge-QA-LLM/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 14 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rapidai.github.io/Knowledge-QA-LLM/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>概览</title>
       <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/overview/</link>
@@ -29,6 +29,18 @@
 如果自己使用的LLM，没有该文件，可自行实现，保证输入和输出与现有的一致即可。
 5. 更改config.yaml配置文件 link将调用ChatGLM-6B的llm_api的url写到knowledge_qa_llm/config.yaml配置文件中
 LLM_API: ChatGLM2_6B: your_api 6. 运行 link info streamlit框架的启动，不可以用python webui.py方式启动，必须用以下方式启动。 UI Demo CLI Demo streamlit run webui.py python cli.py </description>
+    </item>
+    
+    <item>
+      <title>在线demo</title>
+      <link>https://rapidai.github.io/Knowledge-QA-LLM/docs/online_demo/</link>
+      <pubDate>Sat, 14 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rapidai.github.io/Knowledge-QA-LLM/docs/online_demo/</guid>
+      <description>简介 link在线demo是基于百度的AI Studio平台搭建，基于文心一言大模型的接口搭建。
+因为该项目核心在于利用大模型的总结和提取能力，主打离线私有部署，但是一直没有一个在线demo供大家查看效果。因此有了基于文心一言版的 🧐 Knowledge QA LLM。
+Demo源码 link文心一言版的源码与Github仓库代码，有些许初入，后续会同步。 地址：https://aistudio.baidu.com/projectdetail/6675380?contributionType=1
+在线Demo link notifications 该Demo主要侧重查看效果，至于工程化则差一些。 Knowledge-QA-LLM：https://aistudio.baidu.com/application/detail/7580</description>
     </item>
     
     <item>
