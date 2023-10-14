@@ -13,7 +13,7 @@ publishdate: "2023-09-08"
 <div align="center">
     <div>&nbsp;</div>
     <div align="center">
-        <b><font size="6"><i>🧐 Knowledge QA LLM</i></font></b>
+        <b><font size="6">🧐 Knowledge QA LLM</font></b>
     </div>
     <div>&nbsp;</div>
      <a href=""><img src="https://img.shields.io/badge/Python->=3.8,<3.12-aff.svg"></a>

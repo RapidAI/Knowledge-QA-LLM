@@ -4,7 +4,7 @@ date: "2023-10-14"
 draft: false
 author: "SWHL"
 title: "在线demo"
-icon: "rocket_launch"
+icon: "language"
 toc: true
 publishdate: "2023-09-08"
 ---
@@ -21,4 +21,8 @@ publishdate: "2023-09-08"
 #### 在线Demo
 {{< alert text="该Demo主要侧重查看效果，至于工程化则差一些。" />}}
 
-Knowledge-QA-LLM：https://aistudio.baidu.com/application/detail/7580
+Knowledge-QA-LLM: https://aistudio.baidu.com/application/detail/7580
+
+<div align="center">
+    <img src="https://github.com/RapidAI/Knowledge-QA-LLM/releases/download/v0.0.1/UIDemo.gif" width="100%" height="100%">
+</div>
