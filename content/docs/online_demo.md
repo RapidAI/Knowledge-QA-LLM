@@ -16,7 +16,7 @@ publishdate: "2023-09-08"
 
 #### Demo源码
 文心一言版的源码与Github仓库代码，有些许初入，后续会同步。
-地址：https://aistudio.baidu.com/projectdetail/6675380?contributionType=1
+地址： https://aistudio.baidu.com/projectdetail/6675380?contributionType=1
 
 #### 在线Demo
 {{< alert text="该Demo主要侧重查看效果，至于工程化则差一些。" />}}
