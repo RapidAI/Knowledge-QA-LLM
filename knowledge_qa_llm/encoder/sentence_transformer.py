@@ -9,7 +9,7 @@ from sentence_transformers import SentenceTransformer
 class EncodeText:
     def __init__(self, model_path: Optional[str] = None) -> None:
         if model_path is None:
-            raise EncoderTextError("model_path is None.")
+            raise EncodeTextError("model_path is None.")
         self.model = SentenceTransformer(model_path)
 
     def __call__(self, sentences: List[str]):
@@ -18,5 +18,5 @@ class EncodeText:
         return self.model.encode(sentences)
 
 
-class EncoderTextError(Exception):
+class EncodeTextError(Exception):
     pass

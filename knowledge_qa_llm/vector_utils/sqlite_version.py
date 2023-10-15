@@ -49,16 +49,18 @@ class DBUtils:
         con = sqlite3.connect(self.db_path, detect_types=sqlite3.PARSE_DECLTYPES)
         cur = con.cursor()
         cur.execute(
-            f"create table if not exists {self.table_name} (id integer primary key autoincrement, file_name TEXT, embeddings array UNIQUE, texts TEXT)"
+            f"create table if not exists {self.table_name} (id integer primary key autoincrement, file_name TEXT, embeddings array UNIQUE, texts TEXT, uids TEXT)"
         )
         return cur, con
 
-    def load_vectors(
-        self,
-    ):
+    def load_vectors(self, uid: Optional[str] = None):
         cur, _ = self.connect_db()
 
-        cur.execute(f"select file_name, embeddings, texts from {self.table_name}")
+        search_sql = f"select file_name, embeddings, texts from {self.table_name}"
+        if uid:
+            search_sql = f'select file_name, embeddings, texts from {self.table_name} where uids="{uid}"'
+
+        cur.execute(search_sql)
         all_vectors = cur.fetchall()
 
         self.file_names = np.vstack([v[0] for v in all_vectors]).squeeze()
@@ -82,6 +84,7 @@ class DBUtils:
         self,
         embedding_query: np.ndarray,
         top_k: int = 5,
+        uid: Optional[str] = None,
     ) -> Optional[Dict[str, List[str]]]:
         s = time.perf_counter()
 
@@ -90,7 +93,7 @@ class DBUtils:
             return None, 0
 
         if cur_vector_nums != self.vector_nums:
-            self.load_vectors()
+            self.load_vectors(uid)
 
         _, I = self.search_index.search(embedding_query, top_k)
         top_index = I.squeeze().tolist()
@@ -106,38 +109,47 @@ class DBUtils:
         elapse = time.perf_counter() - s
         return search_res, elapse
 
-    def insert(self, file_name: str, embeddings: np.ndarray, texts: List):
+    def insert(
+        self, file_name: str, embeddings: np.ndarray, texts: List[str], uid: str
+    ):
         cur, con = self.connect_db()
 
         file_names = [file_name] * len(embeddings)
+        uids = [uid] * len(embeddings)
 
         t1 = time.perf_counter()
-        insert_sql = f"insert or ignore into {self.table_name} (file_name, embeddings, texts) values (?, ?, ?)"
-        cur.executemany(insert_sql, list(zip(file_names, embeddings, texts)))
+        insert_sql = f"insert or ignore into {self.table_name} (file_name, embeddings, texts, uids) values (?, ?, ?, ?)"
+        cur.executemany(insert_sql, list(zip(file_names, embeddings, texts, uids)))
         elapse = time.perf_counter() - t1
         logger.info(
             f"Insert {len(embeddings)} data, total is {len(embeddings)}, cost: {elapse:4f}s"
         )
         con.commit()
 
-    def get_files(self):
+    def get_files(self, uid: Optional[str] = None):
         cur, _ = self.connect_db()
 
-        search_sql = f"select distinct file_name from {self.table_name}"
+        if not uid:
+            return None
+
+        search_sql = (
+            f'select distinct file_name from {self.table_name} where uids="{uid}"'
+        )
         cur.execute(search_sql)
         search_res = cur.fetchall()
         search_res = [v[0] for v in search_res]
         return search_res
 
-    def clear_db(self,):
+    def clear_db(
+        self,
+    ):
         cur, con = self.connect_db()
 
-        run_sql = f'delete from {self.table_name}'
+        run_sql = f"delete from {self.table_name}"
         cur.execute(run_sql)
 
         con.commit()
         self.connect_db()
-
 
     def __enter__(self):
         return self

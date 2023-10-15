@@ -2,16 +2,17 @@ title: 🧐 Knowledge QA LLM
 version: 0.0.9
 
 LLM_API:
-  Qwen7B_Chat: your_api
-  ChatGLM2_6B: your_api
-  BaiChuan7B: your_api
-  InternLM_7B: your_api
-
-OnlineLLMAPI:
-  ERNIEBotTurbo:
-    api_url: https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token=
-    api_key: your_api_key
-    secret_key: your_secret_key
+  ERNIEBot:
+    api_type: aistudio
+    access_token: your_token
+  Qwen7B_Chat:
+    api_url: your_api
+  ChatGLM2_6B:
+    api_url: your_api
+  BaiChuan7B:
+    api_url: your_api
+  InternLM_7B:
+    api_url: your_api
 
 DEFAULT_PROMPT: 问题是：$query，从下面文章里，找出能回答以上问题的答案。如果文中没有答案，回答“没找到答案”。 文章：$context\n
 
@@ -20,9 +21,11 @@ vector_db_path: assets/db/DefaultVector.db
 
 encoder_batch_size: 32
 Encoder:
-  m3e-small: assets/models/m3e-small
-  # m3e-base: assets/models/m3e-base
-  # bge-small-zh: assets/models/bge-small-zh
+  m3e-small:
+    model_path: assets/models/m3e-small
+  erniebot:
+    api_type: aistudio
+    access_token: your_token
 
 # text splitter
 SENTENCE_SIZE: 200
@@ -35,16 +38,16 @@ Parameter:
     max_value: 4096
     default: 1024
     step: 1
-    tip: The longest length of input_ids
+    tip: 生成结果时的最大token数
   top_p:
     min_value: 0.0
     max_value: 1.0
     default: 0.7
     step: 0.01
-    tip: Limit the model to only consider the most likely first p markers.
+    tip: 用于控制模型生成文本时，选择下一个单词的概率分布的范围。
   temperature:
     min_value: 0.01
     max_value: 1.0
     default: 0.01
     step: 0.01
-    tip: Control the randomness of the model output. The smaller the value, the more standardized it is, and vice versa, the more creative it is.
+    tip: 用于调整模型生成文本时的创造性程度，较高的temperature将使模型更有可能生成新颖、独特的文本，而较低的温度则更有可能生成常见或常规的文本
