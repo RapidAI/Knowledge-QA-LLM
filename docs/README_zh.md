@@ -38,7 +38,7 @@
 ### 贡献者
 <p align="left">
   <a href="https://github.com/RapidAI/Knowledge-QA-LLM/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=RapidAI/Knowledge-QA-LLM" width="10%"/>
+    <img src="https://contrib.rocks/image?repo=RapidAI/Knowledge-QA-LLM" width="15%"/>
   </a>
 </p>
 

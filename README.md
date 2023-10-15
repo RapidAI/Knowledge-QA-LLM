@@ -42,7 +42,7 @@ Full documentation can be found on [docs](https://rapidai.github.io/Knowledge-QA
 ### Code Contributors
 <p align="left">
   <a href="https://github.com/RapidAI/Knowledge-QA-LLM/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=RapidAI/Knowledge-QA-LLM" width="10%"/>
+    <img src="https://contrib.rocks/image?repo=RapidAI/Knowledge-QA-LLM" width="15%"/>
   </a>
 </p>
 
