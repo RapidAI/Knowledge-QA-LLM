@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 # @Author: SWHL
 # @Contact: liekkaskono@163.com
+import random
+import time
 from typing import List
 
 import erniebot
@@ -16,6 +18,7 @@ class ErnieEncodeText:
         if not isinstance(sentences, List):
             sentences = [sentences]
 
+        time.sleep(random.randint(3, 10))
         response = erniebot.Embedding.create(
             model="ernie-text-embedding",
             input=sentences,

@@ -93,10 +93,9 @@ def init_ui_db():
             all_doc_contents = file_loader(doc_dir)
 
         pro_text = "提取语义向量..."
-        batch_size = config.get("encoder_batch_size", 32)
+        batch_size = config.get("encoder_batch_size", 16)
         uid = str(uuid.uuid1())
         st.session_state["connect_id"] = uid
-        max_content_len = 300
         for file_path, one_doc_contents in all_doc_contents.items():
             my_bar = st.sidebar.progress(0, text=pro_text)
             content_nums = len(one_doc_contents)
@@ -108,27 +107,38 @@ def init_ui_db():
 
                 cur_contents = one_doc_contents[start_idx:end_idx]
                 # 超过384，就会报错，这里按步长为384，分批次送入
-                for one_content in cur_contents:
-                    len_content = len(one_content)
+                if not cur_contents:
+                    continue
 
-                    if len_content <= max_content_len:
-                        embeddings = embedding_extract(one_content)
-                        if embeddings is None or embeddings.size == 0:
-                            continue
-                        all_embeddings.append(embeddings)
-                    else:
-                        for j in range(0, len_content, max_content_len):
-                            s_content = j
-                            e_content = s_content + max_content_len
-                            e_content = (
-                                len_content if e_content > len_content else e_content
-                            )
+                print(cur_contents)
+                print("-----")
+                embeddings = embedding_extract(cur_contents)
+                if embeddings is None or embeddings.size == 0:
+                    continue
+                all_embeddings.append(embeddings)
+                # for one_content in cur_contents:
+                #     len_content = len(one_content)
+                #     import pdb
 
-                            part_content = one_content[s_content:e_content]
-                            embeddings = embedding_extract(part_content)
-                            if embeddings is None or embeddings.size == 0:
-                                continue
-                            all_embeddings.append(embeddings)
+                #     pdb.set_trace()
+                #     if len_content <= max_content_len:
+                #         embeddings = embedding_extract(one_content)
+                #         if embeddings is None or embeddings.size == 0:
+                #             continue
+                #         all_embeddings.append(embeddings)
+                #     else:
+                #         for j in range(0, len_content, max_content_len):
+                #             s_content = j
+                #             e_content = s_content + max_content_len
+                #             e_content = (
+                #                 len_content if e_content > len_content else e_content
+                #             )
+
+                #             part_content = one_content[s_content:e_content]
+                #             embeddings = embedding_extract(part_content)
+                #             if embeddings is None or embeddings.size == 0:
+                #                 continue
+                #             all_embeddings.append(embeddings)
 
                 my_bar.progress(
                     end_idx / content_nums,

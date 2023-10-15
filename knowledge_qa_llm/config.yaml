@@ -19,13 +19,13 @@ DEFAULT_PROMPT: 问题是：$query，从下面文章里，找出能回答以上�
 upload_dir: assets/raw_upload_files
 vector_db_path: assets/db/DefaultVector.db
 
-encoder_batch_size: 32
+encoder_batch_size: 16
 Encoder:
-  m3e-small:
-    model_path: assets/models/m3e-small
   ERNIEBot:
     api_type: aistudio
     access_token: your_token
+  m3e-small:
+    model_path: assets/models/m3e-small
 
 # text splitter
 SENTENCE_SIZE: 200
