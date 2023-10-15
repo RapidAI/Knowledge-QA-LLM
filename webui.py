@@ -6,6 +6,7 @@ import shutil
 import time
 import uuid
 from pathlib import Path
+from typing import Dict
 
 import numpy as np
 import streamlit as st
@@ -162,7 +163,7 @@ def init_ui_db():
 
 @st.cache_resource
 def init_encoder(encoder_name: str, **kwargs):
-    if "ernie" in encoder_name:
+    if "ERNIEBot" in encoder_name:
         return ErnieEncodeText(**kwargs)
     return EncodeText(**kwargs)
 
@@ -242,35 +243,71 @@ if __name__ == "__main__":
     db_tools = DBUtils(db_path)
 
     llm_module = importlib.import_module("knowledge_qa_llm.llm")
-    MODEL_OPTIONS = {
-        name: getattr(llm_module, name)(**params)
-        for name, params in config.get("LLM_API").items()
-    }
-
-    TOP_OPTIONS = [5, 10, 15]
-    ENCODER_OPTIONS = config.get("Encoder")
+    llm_params: Dict[str, Dict] = config.get("LLM_API")
 
     menu_col1, menu_col2, menu_col3 = st.columns([1, 1, 1])
-    select_model = menu_col1.selectbox("🎨LLM:", MODEL_OPTIONS.keys())
-    select_encoder = menu_col2.selectbox("🧬提取向量模型:", ENCODER_OPTIONS.keys())
-    search_top = menu_col3.selectbox("🔍搜索 Top_K:", TOP_OPTIONS)
+    select_model = menu_col1.selectbox("🎨LLM:", llm_params.keys())
+    if "ERNIEBot" in select_model:
+        with st.expander("LLM ErnieBot", expanded=True):
+            opt_col1, opt_col2 = st.columns([1, 1])
+            api_type = opt_col1.selectbox(
+                "API Type(必选)",
+                options=["aistudio", "qianfan", "yinian"],
+                help="提供对话能力的后端平台",
+            )
+            access_token = opt_col2.text_input(
+                "Access Token(必填) &nbsp;[如何获得？](https://github.com/PaddlePaddle/ERNIE-Bot-SDK/blob/develop/docs/authentication.md)",
+                "",
+                help="用于访问后端平台的access token（参考使用说明获取），如果设置了AK、SK则无需设置此参数",
+            )
+            llm_params[select_model]["api_type"] = api_type
 
-    embedding_extract = init_encoder(select_encoder, **ENCODER_OPTIONS[select_encoder])
+            if access_token:
+                llm_params[select_model]["access_token"] = access_token
+
+    MODEL_OPTIONS = {
+        name: getattr(llm_module, name)(**params) for name, params in llm_params.items()
+    }
+
+    encoder_params = config.get("Encoder")
+    select_encoder = menu_col2.selectbox("🧬提取向量模型:", encoder_params.keys())
+    if "ERNIEBot" in select_encoder:
+        with st.expander("提取语义向量 ErnieBot", expanded=True):
+            opt_col1, opt_col2 = st.columns([1, 1])
+            extract_api_type = opt_col1.selectbox(
+                "API Type(必选)",
+                options=["aistudio", "qianfan", "yinian"],
+                help="提供对话能力的后端平台",
+                key="Extract_type",
+            )
+            encoder_params[select_encoder]["api_type"] = extract_api_type
+
+            extract_access_token = opt_col2.text_input(
+                "Access Token(必填) &nbsp;[如何获得？](https://github.com/PaddlePaddle/ERNIE-Bot-SDK/blob/develop/docs/authentication.md)",
+                "",
+                help="用于访问后端平台的access token（参考使用说明获取），如果设置了AK、SK则无需设置此参数",
+                key="Extract_token",
+            )
+            if extract_access_token:
+                encoder_params[select_encoder]["access_token"] = extract_access_token
+
+    embedding_extract = init_encoder(select_encoder, **encoder_params[select_encoder])
+
+    TOP_OPTIONS = [5, 10, 15]
+    search_top = menu_col3.selectbox("🔍搜索 Top_K:", TOP_OPTIONS)
 
     init_ui_db()
 
-    input_prompt_container = st.container()
-    with input_prompt_container:
-        with st.expander("💡Prompt", expanded=False):
-            text_area = st.empty()
-            input_prompt = text_area.text_area(
-                label="Input",
-                max_chars=500,
-                height=200,
-                label_visibility="hidden",
-                value=config.get("DEFAULT_PROMPT"),
-                key="input_prompt",
-            )
+    with st.expander("💡Prompt", expanded=False):
+        text_area = st.empty()
+        input_prompt = text_area.text_area(
+            label="Input",
+            max_chars=500,
+            height=200,
+            label_visibility="hidden",
+            value=config.get("DEFAULT_PROMPT"),
+            key="input_prompt",
+        )
 
     input_txt = st.chat_input("问点啥吧！")
     if input_txt:
