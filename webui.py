@@ -106,40 +106,14 @@ def init_ui_db():
                 end_idx = content_nums if end_idx > content_nums else end_idx
 
                 cur_contents = one_doc_contents[start_idx:end_idx]
-                # 超过384，就会报错，这里按步长为384，分批次送入
                 if not cur_contents:
                     continue
 
-                print(cur_contents)
-                print("-----")
                 embeddings = embedding_extract(cur_contents)
                 if embeddings is None or embeddings.size == 0:
                     continue
+
                 all_embeddings.append(embeddings)
-                # for one_content in cur_contents:
-                #     len_content = len(one_content)
-                #     import pdb
-
-                #     pdb.set_trace()
-                #     if len_content <= max_content_len:
-                #         embeddings = embedding_extract(one_content)
-                #         if embeddings is None or embeddings.size == 0:
-                #             continue
-                #         all_embeddings.append(embeddings)
-                #     else:
-                #         for j in range(0, len_content, max_content_len):
-                #             s_content = j
-                #             e_content = s_content + max_content_len
-                #             e_content = (
-                #                 len_content if e_content > len_content else e_content
-                #             )
-
-                #             part_content = one_content[s_content:e_content]
-                #             embeddings = embedding_extract(part_content)
-                #             if embeddings is None or embeddings.size == 0:
-                #                 continue
-                #             all_embeddings.append(embeddings)
-
                 my_bar.progress(
                     end_idx / content_nums,
                     f"Extract {file_path} datas: [{end_idx}/{content_nums}]",
