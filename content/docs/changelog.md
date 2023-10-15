@@ -10,35 +10,29 @@ description: ""
 publishdate: "2023-09-08"
 ---
 
-
+#### 2023-10-15 v0.0.10 update:
+- 当不能从文档中搜索到任何有效信息时，会直接调用模型本身的能力。
+- 完善文档，添加超参数的解释
+- 基于erniebot库，统一文心一言版本和仓库主分支版本
 #### 2023-09-07 v0.0.9 update:
-- Add tips when database is empty.
-
-#### 2023-08-29 v0.0.8 update:
-- Fixed missing `embedding_extract`
-- Fixed default parameters of LLM
-
+- 解决多人上传的文档，会被其他人搜到的问题
+- 优化UI界面
 #### 2023-08-11 v0.0.7 update:
-- Optimize layout, remove the plugin option, and put the extract vector model option on the home page.
-- The tips are translated into English for easy communication.
-- Add project logo:🧐
-- Update CLI module code.
-
+  - 优化布局，去掉插件选项，将提取向量模型选项放到主页部分
+  - 将提示语英语化，便于交流使用。
+  - 添加项目logo: 🧐
+  - 更新CLI使用代码
 #### 2023-08-05 v0.0.6 update:
-- Adapt more llm_api, include online llm api, such ad ERNIE-Bot-Turbo.
-- Add the status of extracting embeddings.
-
+- 适配更多模型接口，包括在线大模型接口，例如文心一言
+- 添加提取特征向量的状态提示
 #### 2023-08-04 v0.0.5 update:
-- Fixed the problem of duplicate data inserted into the database.
-
+- 修复了插入数据库数据重复的问题。
 #### 2023-07-29 v0.0.4 update:
-- Reorganize the UI based `streamlit==1.25.0`
-- Optimize the code.
-- Record the GIF demo of UI.
-
+- 基于`streamlit==1.25.0`优化UI
+- 优化代码
+- 录制UI GIF demo
 #### 2023-07-28 v0.0.3 update:
-- Finish the file_loader part.
-
+- 完成文件解析部分
 #### 2023-07-25 v0.0.2 update:
-- Standardize the existing directory structure, more compact, extract some variables into `config.yaml`
-- Perfect documentation
+- 规范现有目录结构，更加紧凑，提取部分变量到`config.yaml`中
+- 完善说明文档

@@ -26,21 +26,18 @@ publishdate: "2023-09-08"
 
 </div>
 
-### Introduction
-- Questions & Answers based on local knowledge base + LLM.
-- Reason:
-    - The idea of this project comes from [Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat)
-    - I have used this project before, but it is not very flexible and deployment is not very friendly.
-    - Learn from the ideas in [How to build a knowledge question answering system with a large language model](https://mp.weixin.qq.com/s/movaNCWjJGBaes6KxhpYpg), and try to use this as a practice.
-- Advantage:
-    - The whole project is modularized and does not depend on the `lanchain` library, each part can be easily replaced, and the code is simple and easy to understand.
-    - In addition to the large language model interface that needs to be deployed separately, other parts can use CPU.
-    - Support documents in common formats, including `txt, md, pdf, docx, pptx, excel` etc. Of course, other types of documents can also be customized and supported.
+### 简介
+基于本地知识库+LLM的问答系统。该项目的思路是由[langchain-ChatGLM](https://github.com/imClumsyPanda/langchain-ChatGLM)启发而来。
+- 缘由：
+  - 之前使用过这个项目，感觉不是太灵活，部署不太友好。
+  - 借鉴[如何用大语言模型构建一个知识问答系统](https://mp.weixin.qq.com/s/movaNCWjJGBaes6KxhpYpg)中思路，尝试以此作为实践。
+- 优势：
+    - 整个项目为模块化配置，不依赖`lanchain`库，各部分可轻易替换，代码简单易懂。
+    - 除需要单独部署大模型接口外，其他部分用CPU即可。
+    - 支持常见格式文档，包括txt、md、pdf, docx, pptx, excel等等。当然，也可自定义支持其他类型文档。
 
-### 📣 We're looking for front-end development engineers interested in Knowledge QA with LLM, who can help us achieve front-end and back-end separation with our current implementation.
-
-### Architecture
-#### Parse the document and store it in the database
+### 整体流程
+#### 解析文档并存储在数据库
 ```mermaid
 flowchart LR
 
@@ -49,7 +46,7 @@ B --Embeddings--> C([Embeddings])
 C --Store--> D[(DataBase)]
 ```
 
-#### Retrieve and answer questions
+#### 检索并回答问题
 ```mermaid
 flowchart LR
 E([Query]) --Embedding--> F([Embeddings]) --> H[(Database)] --Search--> G([Context])
@@ -57,9 +54,9 @@ E --> I([Prompt])
 G --> I --> J([LLM]) --> K([Answer])
 ```
 
-#### Tools Used
-- Document analysis: [`extract_office_content`](https://github.com/SWHL/ExtractOfficeContent), [`rapidocr_pdf`](https://github.com/RapidAI/RapidOCRPDF), [`rapidocr_onnxruntime`](https://github.com/RapidAI/RapidOCR)
-- Extract feature vector: [`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-base)
-- Vector storage: `sqlite`
-- Vector retrieval: [`faiss`](https://github.com/facebookresearch/faiss)
-- UI: [`streamlit>=1.25.0`](https://github.com/streamlit/streamlit)
+### 使用的工具
+- 文档分析: [`extract_office_content`](https://github.com/SWHL/ExtractOfficeContent), [`rapidocr_pdf`](https://github.com/RapidAI/RapidOCRPDF), [`rapidocr_onnxruntime`](https://github.com/RapidAI/RapidOCR)
+- 提取语义向量: [`moka-ai/m3e-small`](https://huggingface.co/moka-ai/m3e-base)
+- 向量存储: `sqlite`
+- 向量检索: [`faiss`](https://github.com/facebookresearch/faiss)
+- UI搭建: [`streamlit>=1.25.0`](https://github.com/streamlit/streamlit)
