@@ -8,3 +8,4 @@ sentence_transformers
 rapidocr_onnxruntime
 rapidocr_pdf>=0.0.5
 loguru
+erniebot
