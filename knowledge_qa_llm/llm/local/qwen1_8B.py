@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 # @Author: SWHL
 # @Contact: liekkaskono@163.com
-from modelscope import AutoModelForCausalLM, AutoTokenizer, GenerationConfig
+from modelscope import AutoModelForCausalLM, AutoTokenizer
 
 
 class Qwen1_8B:
@@ -16,3 +16,4 @@ class Qwen1_8B:
 
     def __call__(self, text):
         response, history = self.model.chat(self.tokenizer, text, history=None)
+        return response
