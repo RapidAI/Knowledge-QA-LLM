@@ -6,7 +6,7 @@ from pathlib import Path
 
 from knowledge_qa_llm.encoder import EncodeText
 from knowledge_qa_llm.file_loader import FileLoader
-from knowledge_qa_llm.llm import ERNIEBot
+from knowledge_qa_llm.llm.local import Qwen1_8B
 from knowledge_qa_llm.utils import make_prompt, read_yaml
 from knowledge_qa_llm.vector_utils import DBUtils
 
@@ -29,8 +29,7 @@ db_tools = DBUtils(config.get("vector_db_path"))
 uid = str(uuid.uuid1())
 db_tools.insert(file_path, embeddings, sentences, uid=uid)
 
-params = config.get("LLM_API")["ERNIEBot"]
-llm_engine = ERNIEBot(**params)
+llm_engine = Qwen1_8B()
 
 print("欢迎使用 🧐 Knowledge QA LLM，输入“stop”终止程序 ")
 while True:
