@@ -63,9 +63,9 @@ class DBUtils:
         cur.execute(search_sql)
         all_vectors = cur.fetchall()
 
-        self.file_names = np.vstack([v[0] for v in all_vectors]).squeeze()
-        all_embeddings = np.vstack([v[1] for v in all_vectors])
-        self.all_texts = np.vstack([v[2] for v in all_vectors]).squeeze()
+        self.file_names = np.array([v[0] for v in all_vectors])
+        all_embeddings = np.array([v[1] for v in all_vectors])
+        self.all_texts = np.array([v[2] for v in all_vectors])
 
         self.search_index = faiss.IndexFlatL2(all_embeddings.shape[1])
         self.search_index.add(all_embeddings)
@@ -89,14 +89,20 @@ class DBUtils:
         s = time.perf_counter()
 
         cur_vector_nums = self.count_vectors()
-        if cur_vector_nums <= 1:
+        if cur_vector_nums == 0:
             return None, 0
 
         if cur_vector_nums != self.vector_nums:
             self.load_vectors(uid)
 
-        _, I = self.search_index.search(embedding_query, top_k)
+        # cur_vector_nums 小于 top_k 时，返回 cur_vector_nums 个结果
+        _, I = self.search_index.search(embedding_query, min(top_k, cur_vector_nums))
         top_index = I.squeeze().tolist()
+        
+        # 处理只有一个结果的情况
+        if isinstance(top_index, int):
+            top_index = [top_index]
+            
         search_contents = self.all_texts[top_index]
         file_names = [self.file_names[idx] for idx in top_index]
         dup_file_names = list(set(file_names))
