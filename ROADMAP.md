@@ -4,6 +4,8 @@
 
 Before proceeding with feature development and strategy optimization, we need a standard evaluation process to ensure all the features and strategies we introduce are effective.
 
+Create testsets using any dataset with advanced models and Ragas, then validate solution effectiveness using basic models.
+
 ### Feature Development and Strategy Optimization
 
 1. BM25 Keyword Search
