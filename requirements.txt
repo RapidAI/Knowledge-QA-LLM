@@ -11,3 +11,4 @@ loguru
 erniebot
 openai>=1.58.1
 ollama>=0.4.5
+ragas>=0.2.9
