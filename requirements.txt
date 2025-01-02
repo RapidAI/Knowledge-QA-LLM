@@ -10,3 +10,4 @@ rapidocr_pdf>=0.0.5
 loguru
 erniebot
 openai>=1.58.1
+ollama>=0.4.5
