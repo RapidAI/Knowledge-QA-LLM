@@ -1,6 +1,6 @@
 numpy>=1.21.6
 streamlit>=1.25.0
-transformers>=4.27.0.dev0
+transformers>=4.27.0.dev0,<4.47.0
 faiss-cpu
 filetype
 extract-office-content>=0.0.6
@@ -9,3 +9,6 @@ rapidocr_onnxruntime
 rapidocr_pdf>=0.0.5
 loguru
 erniebot
+openai>=1.58.1
+ollama>=0.4.5
+ragas>=0.2.9
