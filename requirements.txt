@@ -1,6 +1,6 @@
 numpy>=1.21.6
 streamlit>=1.25.0
-transformers>=4.27.0.dev0
+transformers>=4.27.0.dev0,<4.47.0
 faiss-cpu
 filetype
 extract-office-content>=0.0.6
