@@ -9,3 +9,4 @@ rapidocr_onnxruntime
 rapidocr_pdf>=0.0.5
 loguru
 erniebot
+openai>=1.58.1
