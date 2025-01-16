@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 # @Author: SWHL
 # @Contact: liekkaskono@163.com
-from knowledge_qa_llm.file_loader.main import FileLoader
+from rapid_rag.file_loader.main import FileLoader
 
 loader = FileLoader()
 

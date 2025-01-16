@@ -1,6 +1,7 @@
 *.db
 assets/models/m3e-small
 assets/raw_upload_files
+log/
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template

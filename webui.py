@@ -11,10 +11,10 @@ from typing import Dict
 import numpy as np
 import streamlit as st
 
-from knowledge_qa_llm.encoder import EncodeText, ErnieEncodeText
-from knowledge_qa_llm.file_loader import FileLoader
-from knowledge_qa_llm.utils import get_timestamp, logger, make_prompt, mkdir, read_yaml
-from knowledge_qa_llm.vector_utils import DBUtils
+from rapid_rag.encoder import EncodeText, ErnieEncodeText
+from rapid_rag.file_loader import FileLoader
+from rapid_rag.utils import get_timestamp, logger, make_prompt, mkdir, read_yaml
+from rapid_rag.vector_utils import DBUtils
 
 config = read_yaml("knowledge_qa_llm/config.yaml")
 

@@ -11,7 +11,7 @@ class Ollama:
         self.host = host
         self.model = model
         self.client = ollama.Client(host=self.host)
-    
+
     def __call__(self, prompt: str, history: Optional[List] = None, **kwargs):
         if not history:
             history = []
@@ -25,5 +25,5 @@ class Ollama:
             ],
             model=self.model,
         )
-        result = response['message']['content']
+        result = response["message"]["content"]
         return result

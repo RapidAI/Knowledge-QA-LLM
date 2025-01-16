@@ -8,8 +8,8 @@ cur_dir = Path(__file__).resolve().parent
 root_dir = cur_dir.parent
 sys.path.append(str(root_dir))
 
-from knowledge_qa_llm.llm import ChatGLM2_6B
-from knowledge_qa_llm.utils import read_yaml
+from rapid_rag.llm import ChatGLM2_6B
+from rapid_rag.utils import read_yaml
 
 config_path = root_dir / "knowledge_qa_llm" / "config.yaml"
 config = read_yaml(config_path)

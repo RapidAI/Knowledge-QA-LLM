@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 # @Author: SWHL
 # @Contact: liekkaskono@163.com
-from knowledge_qa_llm.file_loader import FileLoader
-from knowledge_qa_llm.utils import read_yaml
-from knowledge_qa_llm.vector_utils import DBUtils, EncodeText
+from rapid_rag.file_loader import FileLoader
+from rapid_rag.utils import read_yaml
+from rapid_rag.vector_utils import DBUtils, EncodeText
 
 config = read_yaml("knowledge_qa_llm/config.yaml")
 

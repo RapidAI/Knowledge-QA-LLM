@@ -10,7 +10,7 @@ sys.path.append(str(root_dir))
 
 import pytest
 
-from knowledge_qa_llm.file_loader.office_loader import ExtractOfficeLoader
+from rapid_rag.file_loader.office_loader import ExtractOfficeLoader
 
 extracter_office = ExtractOfficeLoader()
 

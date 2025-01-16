@@ -4,11 +4,11 @@
 import uuid
 from pathlib import Path
 
-from knowledge_qa_llm.encoder import EncodeText
-from knowledge_qa_llm.file_loader import FileLoader
-from knowledge_qa_llm.llm import ERNIEBot
-from knowledge_qa_llm.utils import make_prompt, read_yaml
-from knowledge_qa_llm.vector_utils import DBUtils
+from rapid_rag.encoder import EncodeText
+from rapid_rag.file_loader import FileLoader
+from rapid_rag.llm import ERNIEBot
+from rapid_rag.utils import make_prompt, read_yaml
+from rapid_rag.vector_utils import DBUtils
 
 config = read_yaml("knowledge_qa_llm/config.yaml")
 

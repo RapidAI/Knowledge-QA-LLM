@@ -98,11 +98,11 @@ class DBUtils:
         # cur_vector_nums 小于 top_k 时，返回 cur_vector_nums 个结果
         _, I = self.search_index.search(embedding_query, min(top_k, cur_vector_nums))
         top_index = I.squeeze().tolist()
-        
+
         # 处理只有一个结果的情况
         if isinstance(top_index, int):
             top_index = [top_index]
-            
+
         search_contents = self.all_texts[top_index]
         file_names = [self.file_names[idx] for idx in top_index]
         dup_file_names = list(set(file_names))

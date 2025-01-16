@@ -8,8 +8,8 @@ cur_dir = Path(__file__).resolve().parent
 root_dir = cur_dir.parent
 sys.path.append(str(root_dir))
 
-from knowledge_qa_llm.utils import read_yaml
-from knowledge_qa_llm.vector_utils import EncodeText
+from rapid_rag.utils import read_yaml
+from rapid_rag.vector_utils import EncodeText
 
 config_path = root_dir / "config.yaml"
 config = read_yaml(config_path)

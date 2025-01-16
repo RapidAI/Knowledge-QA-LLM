@@ -5,8 +5,8 @@ from pathlib import Path
 
 cur_dir = Path(__file__).resolve().parent
 
-from knowledge_qa_llm.utils import read_yaml
-from knowledge_qa_llm.vector_utils import DBUtils, EncodeText
+from rapid_rag.utils import read_yaml
+from rapid_rag.vector_utils import DBUtils, EncodeText
 
 config_path = Path("knowledge_qa_llm") / "config.yaml"
 config = read_yaml(config_path)

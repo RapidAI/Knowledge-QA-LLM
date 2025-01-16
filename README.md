@@ -1,20 +1,21 @@
 <div align="center">
   <div align="center">
-    <h1><b>🧐 Knowledge QA LLM</b></h1>
+    <h1><b>🧐 Rapid RAG</b></h1>
   </div>
   <a href=""><img src="https://img.shields.io/badge/Python->=3.8,<3.12-aff.svg"></a>
   <a href=""><img src="https://img.shields.io/badge/OS-Linux%2C%20Win%2C%20Mac-pink.svg"></a>
   <a href=""><img src="https://img.shields.io/github/v/release/RapidAI/QA-LocalKnowledge-LLM?logo=github"></a>
   <a href="https://semver.org/"><img alt="SemVer2.0" src="https://img.shields.io/badge/SemVer-2.0-brightgreen"></a>
   <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
-  <a href="https://choosealicense.com/licenses/apache-2.0/"><img alt="GitHub" src="https://img.shields.io/github/license/RapidAI/Knowledge-QA-LLM"></a>
+  <a href="https://choosealicense.com/licenses/apache-2.0/"><img alt="GitHub" src="https://img.shields.io/github/license/RapidAI/RapidRAG"></a>
 
   [简体中文](./docs/README_zh.md) | English
 </div>
 
-### 📣 We're looking for front-end development engineers interested in Knowledge QA with LLM, who can help us achieve front-end and back-end separation with our current implementation.
+### 📣 We're looking for front-end development engineers interested in Knowledge QA with LLM, who can help us achieve front-end and back-end separation with our current implementation
 
 ### Introduction
+
 - Questions & Answers based on local knowledge base + LLM.
 - Reason:
     - The idea of this project comes from [Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat).
@@ -26,31 +27,35 @@
     - Support documents in common formats, including `txt, md, pdf, docx, pptx, excel` etc. Of course, other types of documents can also be customized and supported.
 
 ### Demo
+
 ⚠️ If you have Baidu Account, you can visit the [online demo](https://aistudio.baidu.com/projectdetail/6675380?contributionType=1) based on ERNIE Bot.
 
 <div align="center">
-    <img src="https://github.com/RapidAI/Knowledge-QA-LLM/releases/download/v0.0.1/UIDemo.gif" width="100%" height="100%">
+    <img src="https://github.com/RapidAI/RapidRAG/releases/download/v0.0.1/UIDemo.gif" width="100%" height="100%">
 </div>
 
 ### Documentation
-Full documentation can be found on [docs](https://rapidai.github.io/Knowledge-QA-LLM/docs/), in Chinese.
+
+Full documentation can be found on [docs](https://rapidai.github.io/RapidRAG/docs/), in Chinese.
 
 ### TODO
+
 - [ ] Support keyword + vector hybrid search.
 - [ ] Vue.js based UI .
 
 ### Code Contributors
+
 <p align="left">
-  <a href="https://github.com/RapidAI/Knowledge-QA-LLM/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=RapidAI/Knowledge-QA-LLM" width="15%"/>
+  <a href="https://github.com/RapidAI/RapidRAG/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=RapidAI/RapidRAG" width="15%"/>
   </a>
 </p>
 
 ### Contributing
+
 - Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 - Please make sure to update tests as appropriate.
-
 
 ### [Sponsor](https://swhl.github.io/RapidVideOCR/docs/sponsor/)
 
@@ -61,4 +66,5 @@ If you want to sponsor the project, you can directly click the **Buy me a coffee
 </div>
 
 ### License
+
 [Apache 2.0](https://choosealicense.com/licenses/apache-2.0/)

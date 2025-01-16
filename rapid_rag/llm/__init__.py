@@ -9,4 +9,12 @@ from .qwen7b_chat import Qwen7B_Chat
 from .openai import OpenAI
 from .ollama import Ollama
 
-__all__ = ["BaiChuan7B", "ChatGLM2_6B", "ERNIEBot", "Qwen7B_Chat", "InternLM_7B", "OpenAI", "Ollama"]
+__all__ = [
+    "BaiChuan7B",
+    "ChatGLM2_6B",
+    "ERNIEBot",
+    "Qwen7B_Chat",
+    "InternLM_7B",
+    "OpenAI",
+    "Ollama",
+]
